@@ -1606,6 +1606,155 @@
               </div>
             </div>
 
+            
+            <!-- THANH ĐIỀU KHIỂN MẪU HỢP ĐỒNG BỘ XÂY DỰNG CHO VĂN BẢN SỐ 7 (MÀU XANH NGỌC BÍCH) -->
+            <div id="contractTemplateBar" style="display:none; margin-bottom: 12px; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 2px solid #059669; border-radius: 10px; padding: 10px 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="background: #059669; color: #ffffff; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 2px 4px rgba(5,150,105,0.3);">
+                  📑
+                </div>
+                <div>
+                  <div style="font-weight: 800; color: #065f46; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.3px;">
+                    MẪU HỢP ĐỒNG BỘ XÂY DỰNG (NGHỊ ĐỊNH SỐ 210/2026/NĐ-CP)
+                  </div>
+                  <div style="font-size: 0.8rem; color: #047857; font-weight: 500;">
+                    Toàn bộ 4 Phần: Thông tin giao kết, Căn cứ pháp lý, Điều kiện chung &amp; Điều kiện cụ thể
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                <button type="button" class="btn btn-sm" id="btnContractXayDung" onclick="setContractTemplate('xay_lap')" style="padding: 6px 14px; border-radius: 6px; border: 1.5px solid #1b365d; font-weight: 700; cursor: pointer; transition: all 0.2s; background: #ffffff; color: #1e293b;">
+                  🏗️ Mẫu 1: Thi Công Xây Dựng (+ Thiết Bị)
+                </button>
+                <button type="button" class="btn btn-sm" id="btnContractTuVan" onclick="setContractTemplate('tu_van')" style="padding: 6px 14px; border-radius: 6px; border: 1.5px solid #059669; font-weight: 700; cursor: pointer; transition: all 0.2s; background: #ffffff; color: #1e293b;">
+                  🔍 Mẫu 2: Tư Vấn Giám Sát (Gói Tư Vấn)
+                </button>
+                <button type="button" class="btn btn-sm" id="btnContractAuto" onclick="setContractTemplate('auto')" title="Tự động nhận diện mẫu phù hợp theo tên gói thầu" style="padding: 6px 14px; border-radius: 6px; border: 1.5px solid #0284c7; background: #e0f2fe; color: #0369a1; font-weight: 700; cursor: pointer; transition: all 0.2s;">
+                  ⚡ Tự Động Theo Gói
+                </button>
+                <button type="button" class="btn btn-sm" id="btnToggleContractSettings" onclick="toggleContractSettings()" style="padding: 6px 14px; border-radius: 6px; border: 1.5px solid #d97706; background: #fef3c7; color: #b45309; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px;">
+                  ⚙️ Tùy Chỉnh Thông Tin HĐ
+                </button>
+              </div>
+            </div>
+
+            <!-- BẢNG TÙY CHỌN CHỈNH SỬA THÔNG TIN & ĐIỀU KHOẢN HỢP ĐỒNG (COLLAPSIBLE PANEL) -->
+            <div id="contractSettingsPanel" style="display:none; margin-bottom: 14px; background: #ffffff; border: 1.5px solid #f59e0b; border-radius: 10px; padding: 14px 18px; box-shadow: 0 4px 12px rgba(245,158,11,0.15);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px;">
+                <div style="font-weight: 700; color: #b45309; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                  <span>⚙️</span> TÙY CHỈNH CÁC THÔNG SỐ VÀ ĐIỀU KHOẢN HỢP ĐỒNG (TỰ ĐỘNG CẬP NHẬT VÀO VĂN BẢN VÀ FILE WORD):
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button type="button" onclick="resetContractSettings()" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 3px 8px;">
+                    🔄 Khôi phục mặc định chuẩn BXD
+                  </button>
+                  <button type="button" onclick="toggleContractSettings()" class="btn btn-sm" style="background:#e2e8f0; color:#334155; font-size:0.8rem; padding:3px 8px; border-radius:4px;">
+                    ✕ Đóng bảng
+                  </button>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; font-size: 0.85rem;">
+                <!-- Ô 1: Số hiệu hợp đồng -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Số hiệu Hợp đồng:</label>
+                  <input type="text" id="settingContractNo" class="form-control" style="font-size: 0.85rem; padding: 4px 8px; font-weight: 700; color: #0369a1;" placeholder="Để trống sẽ tự động lấy theo số VB" oninput="onContractSettingChange('contractNo', this.value)">
+                </div>
+
+                <!-- Ô 2: Địa điểm ký kết -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Địa điểm ký kết:</label>
+                  <input type="text" id="settingSignLocation" class="form-control" style="font-size: 0.85rem; padding: 4px 8px;" placeholder="Tại Văn phòng Ban QLDA..." oninput="onContractSettingChange('signLocation', this.value)">
+                </div>
+
+                <!-- Ô 3: Tỷ lệ bảo đảm thực hiện hợp đồng (%) -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Bảo đảm thực hiện HĐ (%):</label>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <input type="number" id="settingBaoDamTyLe" class="form-control" style="font-size: 0.85rem; padding: 4px 8px; width: 80px; text-align: center; font-weight: 700;" value="5" min="1" max="30" oninput="onContractSettingChange('baoDamTyLe', this.value)">
+                    <span style="color: #64748b;">% giá trị hợp đồng (Bảo lãnh NH)</span>
+                  </div>
+                </div>
+
+                <!-- Ô 4: Tỷ lệ tạm ứng hợp đồng (%) -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Tỷ lệ tạm ứng HĐ (%):</label>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <input type="number" id="settingTamUngTyLe" class="form-control" style="font-size: 0.85rem; padding: 4px 8px; width: 80px; text-align: center; font-weight: 700;" value="30" min="0" max="70" oninput="onContractSettingChange('tamUngTyLe', this.value)">
+                    <span style="color: #64748b;">% (Thi công thường 30%, TVGS 20%)</span>
+                  </div>
+                </div>
+
+                <!-- Ô 5: Thời gian bảo hành công trình -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Thời gian bảo hành (tháng):</label>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <input type="number" id="settingBaoHanhThang" class="form-control" style="font-size: 0.85rem; padding: 4px 8px; width: 80px; text-align: center; font-weight: 700;" value="18" min="0" max="60" oninput="onContractSettingChange('baoHanhThang', this.value)">
+                    <span style="color: #64748b;">tháng kể từ ngày nghiệm thu</span>
+                  </div>
+                </div>
+
+                <!-- Ô 6: Tỷ lệ giữ lại bảo hành (%) -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Giữ lại bảo hành khi thanh toán:</label>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <input type="number" id="settingGiuLaiBaoHanhTyLe" class="form-control" style="font-size: 0.85rem; padding: 4px 8px; width: 80px; text-align: center; font-weight: 700;" value="5" min="0" max="10" oninput="onContractSettingChange('giuLaiBaoHanhTyLe', this.value)">
+                    <span style="color: #64748b;">% giá trị hợp đồng</span>
+                  </div>
+                </div>
+
+                <!-- Ô 7: Mức phạt chậm tiến độ (%/ngày) -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Phạt trễ tiến độ (% mỗi ngày):</label>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <input type="number" id="settingPhatChamTienDo" class="form-control" style="font-size: 0.85rem; padding: 4px 8px; width: 80px; text-align: center; font-weight: 700;" value="0.05" step="0.01" min="0" max="1" oninput="onContractSettingChange('phatChamTienDo', this.value)">
+                    <span style="color: #64748b;">%/ngày (tối đa phạt 12%)</span>
+                  </div>
+                </div>
+
+                <!-- Ô 8: Số bộ hồ sơ bàn giao / báo cáo -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Số bộ hồ sơ bàn giao / báo cáo:</label>
+                  <div style="display: flex; align-items: center; gap: 5px;">
+                    <input type="number" id="settingSoBoHoSo" class="form-control" style="font-size: 0.85rem; padding: 4px 8px; width: 80px; text-align: center; font-weight: 700;" value="6" min="1" max="20" oninput="onContractSettingChange('soBoHoSo', this.value)">
+                    <span style="color: #64748b;">bộ (TVGS: 06 bộ, TCXD: 05 bộ hoàn công)</span>
+                  </div>
+                </div>
+
+                <!-- Ô 9: Cán bộ giám sát / phụ trách kỹ thuật Bên A -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Cán bộ phụ trách hiện trường Bên A:</label>
+                  <input type="text" id="settingCanBoA" class="form-control" style="font-size: 0.85rem; padding: 4px 8px;" placeholder="Tổ Quản lý dự án / Cán bộ kỹ thuật" oninput="onContractSettingChange('canBoA', this.value)">
+                </div>
+
+                <!-- Ô 10: Chỉ huy trưởng / Cán bộ chủ trì Bên B -->
+                <div>
+                  <label style="font-weight: 600; color: #334155; display: block; margin-bottom: 3px;">Chỉ huy trưởng / Cán bộ chủ trì Bên B:</label>
+                  <input type="text" id="settingCanBoB" class="form-control" style="font-size: 0.85rem; padding: 4px 8px;" placeholder="Chỉ huy trưởng / Giám sát trưởng" oninput="onContractSettingChange('canBoB', this.value)">
+                </div>
+              </div>
+
+              <!-- Chi tiết các đợt thanh toán -->
+              <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e2e8f0;">
+                <label style="font-weight: 700; color: #065f46; display: block; margin-bottom: 4px;">Kế hoạch giải ngân &amp; Các đợt thanh toán hợp đồng:</label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+                  <div>
+                    <span style="font-size: 0.78rem; font-weight: 600; color: #0369a1;">Đợt 1 (Tạm ứng & Khối lượng đợt 1):</span>
+                    <input type="text" id="settingThanhToanDot1" class="form-control" style="font-size: 0.82rem; padding: 3px 6px;" oninput="onContractSettingChange('thanhToanDot1', this.value)">
+                  </div>
+                  <div>
+                    <span style="font-size: 0.78rem; font-weight: 600; color: #0369a1;">Đợt 2 (Khối lượng hoàn thành tiếp theo):</span>
+                    <input type="text" id="settingThanhToanDot2" class="form-control" style="font-size: 0.82rem; padding: 3px 6px;" oninput="onContractSettingChange('thanhToanDot2', this.value)">
+                  </div>
+                  <div>
+                    <span style="font-size: 0.78rem; font-weight: 600; color: #0369a1;">Đợt 3 / Quyết toán (Nghiệm thu bàn giao):</span>
+                    <input type="text" id="settingThanhToanDot3" class="form-control" style="font-size: 0.82rem; padding: 3px 6px;" oninput="onContractSettingChange('thanhToanDot3', this.value)">
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Paper Sheet with Zoom Scaling Wrapper -->
             <div class="paper-container" id="paperContainer">
               <div class="a4-wrapper" id="paperWrapper">
@@ -2154,11 +2303,57 @@
       "07_Hop_dong_kinh_te_Bo_Xay_Dung"
     ];
 
+    // =========================================================================
+    // QUẢN LÝ MẪU VÀ TÙY CHỌN HỢP ĐỒNG BỘ XÂY DỰNG (NGHỊ ĐỊNH 210/2026/NĐ-CP)
+    // =========================================================================
     let currentContractMode = 'auto'; // 'auto', 'xay_lap', 'tu_van'
+    let contractCustomSettings = {
+      contractNo: "",
+      signLocation: "Xã Tân Phú, tỉnh Tây Ninh",
+      baoDamTyLe: 5,
+      tamUngTyLe: 30,
+      baoHanhThang: 18,
+      giuLaiBaoHanhTyLe: 5,
+      phatChamTienDo: 0.05,
+      phatToiDa: 12,
+      soBoHoSo: 6,
+      canBoA: "Nguyễn Ngọc Nguyên - Giám đốc",
+      canBoB: "Chỉ huy trưởng công trình",
+      thanhToanDot1: "50% - 60% giá trị hợp đồng khi hoàn thành khối lượng tương ứng",
+      thanhToanDot2: "75% - 80% giá trị hợp đồng khi đạt khối lượng",
+      thanhToanDot3: "100% giá trị hợp đồng (hoặc 95% và giữ lại 5% bảo hành)",
+      phatVangMatNT: 0.5
+    };
 
     function setContractTemplate(mode) {
       currentContractMode = mode;
+      
+      // Tự động điều chỉnh các thông số tương ứng theo loại hợp đồng
+      const d = getFormData();
+      const isAutoTuVan = (d.packageType === "tu_van") || 
+                          (d.packageName && (d.packageName.toLowerCase().includes("tư vấn") || d.packageName.toLowerCase().includes("giám sát")));
+      const effectiveMode = (mode === 'auto') ? (isAutoTuVan ? 'tu_van' : 'xay_lap') : mode;
+
+      if (effectiveMode === 'tu_van') {
+        if (contractCustomSettings.tamUngTyLe === 30) contractCustomSettings.tamUngTyLe = 20;
+        contractCustomSettings.baoHanhThang = 0; // Hợp đồng tư vấn theo tiến độ thi công
+        contractCustomSettings.soBoHoSo = 6;
+        contractCustomSettings.canBoB = "Giám sát trưởng";
+        contractCustomSettings.thanhToanDot1 = "60% giá trị hợp đồng khi gói thi công đạt 50% khối lượng";
+        contractCustomSettings.thanhToanDot2 = "Thanh toán đến 100% giá trị hợp đồng khi công trình hoàn thành bàn giao và quyết toán";
+        contractCustomSettings.thanhToanDot3 = "Thanh lý hợp đồng";
+      } else {
+        if (contractCustomSettings.tamUngTyLe === 20) contractCustomSettings.tamUngTyLe = 30;
+        contractCustomSettings.baoHanhThang = 18;
+        contractCustomSettings.soBoHoSo = 5;
+        contractCustomSettings.canBoB = "Chỉ huy trưởng công trình";
+        contractCustomSettings.thanhToanDot1 = "50% - 60% giá trị hợp đồng khi hoàn thành khối lượng tương ứng";
+        contractCustomSettings.thanhToanDot2 = "75% - 80% giá trị hợp đồng khi đạt khối lượng";
+        contractCustomSettings.thanhToanDot3 = "100% giá trị hợp đồng (hoặc 95% và giữ lại 5% bảo hành)";
+      }
+
       updateContractTemplateButtons();
+      syncContractSettingsInputs();
       renderCurrentDoc();
     }
 
@@ -2170,7 +2365,7 @@
 
       const d = getFormData();
       const isAutoTuVan = (d.packageType === "tu_van") || 
-                         (d.packageName && (d.packageName.toLowerCase().includes("tư vấn") || d.packageName.toLowerCase().includes("giám sát")));
+                          (d.packageName && (d.packageName.toLowerCase().includes("tư vấn") || d.packageName.toLowerCase().includes("giám sát")));
       
       const effectiveMode = (currentContractMode === 'auto') ? (isAutoTuVan ? 'tu_van' : 'xay_lap') : currentContractMode;
 
@@ -2190,10 +2385,92 @@
         btnAuto.style.fontWeight = "bold";
         btnAuto.style.borderColor = "#0284c7";
         btnAuto.style.background = "#e0f2fe";
+        btnAuto.style.color = "#0369a1";
       } else {
         btnAuto.style.fontWeight = "normal";
         btnAuto.style.borderColor = "#cbd5e1";
         btnAuto.style.background = "#ffffff";
+        btnAuto.style.color = "#64748b";
+      }
+    }
+
+    function toggleContractSettings() {
+      const panel = document.getElementById("contractSettingsPanel");
+      const btn = document.getElementById("btnToggleContractSettings");
+      if (!panel) return;
+      if (panel.style.display === "none" || panel.style.display === "") {
+        panel.style.display = "block";
+        if (btn) {
+          btn.style.background = "#b45309";
+          btn.style.color = "#ffffff";
+        }
+        syncContractSettingsInputs();
+      } else {
+        panel.style.display = "none";
+        if (btn) {
+          btn.style.background = "#fef3c7";
+          btn.style.color = "#b45309";
+        }
+      }
+    }
+
+    function onContractSettingChange(field, val) {
+      if (typeof contractCustomSettings[field] === "number") {
+        contractCustomSettings[field] = parseFloat(val) || 0;
+      } else {
+        contractCustomSettings[field] = val;
+      }
+      renderCurrentDoc();
+    }
+
+    function resetContractSettings() {
+      const d = getFormData();
+      const isAutoTuVan = (d.packageType === "tu_van") || 
+                          (d.packageName && (d.packageName.toLowerCase().includes("tư vấn") || d.packageName.toLowerCase().includes("giám sát")));
+      const effectiveMode = (currentContractMode === 'auto') ? (isAutoTuVan ? 'tu_van' : 'xay_lap') : currentContractMode;
+
+      contractCustomSettings = {
+        contractNo: "",
+        signLocation: d.docLocation || "Xã Tân Phú, tỉnh Tây Ninh",
+        baoDamTyLe: 5,
+        tamUngTyLe: (effectiveMode === 'tu_van' ? 20 : 30),
+        baoHanhThang: (effectiveMode === 'tu_van' ? 0 : 18),
+        giuLaiBaoHanhTyLe: 5,
+        phatChamTienDo: 0.05,
+        phatToiDa: 12,
+        soBoHoSo: (effectiveMode === 'tu_van' ? 6 : 5),
+        canBoA: `${d.signerName || "Nguyễn Ngọc Nguyên"} - Giám đốc`,
+        canBoB: (effectiveMode === 'tu_van' ? "Giám sát trưởng" : "Chỉ huy trưởng công trình"),
+        thanhToanDot1: (effectiveMode === 'tu_van' ? "60% giá trị hợp đồng khi gói thi công đạt 50% khối lượng" : "50% - 60% giá trị hợp đồng khi hoàn thành khối lượng tương ứng"),
+        thanhToanDot2: (effectiveMode === 'tu_van' ? "Thanh toán đến 100% khi công trình hoàn thành bàn giao và quyết toán" : "75% - 80% giá trị hợp đồng khi đạt khối lượng"),
+        thanhToanDot3: (effectiveMode === 'tu_van' ? "Thanh lý hợp đồng" : "100% giá trị hợp đồng (hoặc 95% và giữ lại 5% bảo hành)"),
+        phatVangMatNT: 0.5
+      };
+
+      syncContractSettingsInputs();
+      renderCurrentDoc();
+    }
+
+    function syncContractSettingsInputs() {
+      const map = {
+        settingContractNo: contractCustomSettings.contractNo,
+        settingSignLocation: contractCustomSettings.signLocation,
+        settingBaoDamTyLe: contractCustomSettings.baoDamTyLe,
+        settingTamUngTyLe: contractCustomSettings.tamUngTyLe,
+        settingBaoHanhThang: contractCustomSettings.baoHanhThang,
+        settingGiuLaiBaoHanhTyLe: contractCustomSettings.giuLaiBaoHanhTyLe,
+        settingPhatChamTienDo: contractCustomSettings.phatChamTienDo,
+        settingSoBoHoSo: contractCustomSettings.soBoHoSo,
+        settingCanBoA: contractCustomSettings.canBoA,
+        settingCanBoB: contractCustomSettings.canBoB,
+        settingThanhToanDot1: contractCustomSettings.thanhToanDot1,
+        settingThanhToanDot2: contractCustomSettings.thanhToanDot2,
+        settingThanhToanDot3: contractCustomSettings.thanhToanDot3
+      };
+
+      for (const [id, val] of Object.entries(map)) {
+        const el = document.getElementById(id);
+        if (el) el.value = (val !== undefined && val !== null) ? val : "";
       }
     }
 
@@ -2206,12 +2483,15 @@
       syncMetaToolbarToActiveDoc();
 
       const contractBar = document.getElementById('contractTemplateBar');
+      const contractSettings = document.getElementById('contractSettingsPanel');
       if (contractBar) {
         if (idx === 6) {
           contractBar.style.display = 'flex';
           updateContractTemplateButtons();
+          syncContractSettingsInputs();
         } else {
           contractBar.style.display = 'none';
+          if (contractSettings) contractSettings.style.display = 'none';
         }
       }
 
@@ -3721,10 +4001,383 @@
     // =========================================================================
     // HÀM ĐIỀU PHỐI GENERATEDOC7: TỰ ĐỘNG HOẶC THEO LỰA CHỌN CỦA NGƯỜI DÙNG
     // =========================================================================
+    // =========================================================================
+    // MẪU 1: HỢP ĐỒNG THI CÔNG XÂY DỰNG DỰ ÁN (NGHỊ ĐỊNH 210/2026/NĐ-CP - 64 TRANG BXD)
+    // =========================================================================
+    function generateDoc7_HopDongThiCongXD(d) {
+      const meta = docCustomMeta[6];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const year = (meta.date ? meta.date.split("-")[0] : new Date().getFullYear());
+      const qdResultMeta = docCustomMeta[5];
+      const qdResultNo = qdResultMeta.number ? qdResultMeta.number : ".....";
+      const qdResultShortDate = formatDateShort(qdResultMeta.date);
+
+      const cfg = contractCustomSettings;
+      const contractNoStr = cfg.contractNo ? cfg.contractNo : `${docNoStr}/${year}/HĐ-${d.ownerSign}`;
+      const signLocationStr = cfg.signLocation || `${d.docLocation || "Xã Tân Phú"}, tỉnh Tây Ninh`;
+
+      const priceVal = d.estimatedPrice || 0;
+      const priceText = docSoThanhChu(priceVal);
+      const baoDamVal = Math.round(priceVal * (cfg.baoDamTyLe / 100));
+      const baoDamText = docSoThanhChu(baoDamVal);
+      const tamUngVal = Math.round(priceVal * (cfg.tamUngTyLe / 100));
+      const tamUngText = docSoThanhChu(tamUngVal);
+
+      return `
+        <table class="doc-header-table">
+          <tr>
+            <td class="col-left" style="width: 100%; text-align: center;">
+              <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+              <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
+              <div class="line-tieu-ngu" style="width: 35%; margin-top: 4px; margin-bottom: 6px;"></div>
+              <div class="dia-danh-ngay" style="margin-top: 4px;">${signLocationStr}, ${dateStr}</div>
+            </td>
+          </tr>
+        </table>
+
+        <div class="doc-main-title" style="margin-top: 15px; margin-bottom: 18px;">
+          <h3 style="font-size: 1.25rem; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 6px;">HỢP ĐỒNG THI CÔNG XÂY DỰNG DỰ ÁN</h3>
+          <p style="font-style: italic; margin-bottom: 4px;">(Theo mẫu quy định tại Nghị định số 210/2026/NĐ-CP của Chính phủ)</p>
+          <p style="font-weight: 700; margin-bottom: 2px;">Số: ${contractNoStr}</p>
+          <p style="font-weight: 700; color: #1e293b;">Dự án: ${d.projectName}</p>
+          <p style="font-weight: 600;">Gói thầu: ${d.packageName}</p>
+        </div>
+
+        <div class="doc-content" style="line-height: 1.6; text-align: justify;">
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 14px; margin-bottom: 8px; text-transform: uppercase; color: #0f172a; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 1. THÔNG TIN GIAO DỊCH
+          </div>
+          <p>Hôm nay, ${dateStr}, tại ${signLocationStr}, chúng tôi gồm các bên dưới đây:</p>
+          
+          <p><strong>1. BÊN GIAO THẦU (CHỦ ĐẦU TƯ - GỌI TẮT LÀ BÊN A):</strong></p>
+          <p>- Tên đơn vị: <strong>${d.ownerOrg}</strong></p>
+          <p>- Đại diện là: Ông/Bà <strong>${d.signerName}</strong> &nbsp;&nbsp;&nbsp;&nbsp; Chức vụ: Giám đốc</p>
+          <p>- Địa chỉ trụ sở: ${d.docLocation}, Tỉnh Tây Ninh</p>
+          <p>- Ký hiệu cơ quan: ${d.ownerSign}</p>
+          <p>- Cán bộ phụ trách quản lý dự án & hiện trường: ${cfg.canBoA}</p>
+
+          <p><strong>2. BÊN NHẬN THẦU (NHÀ THẦU THI CÔNG - GỌI TẮT LÀ BÊN B):</strong></p>
+          <p>- Tên doanh nghiệp: <strong>${d.contractorName}</strong></p>
+          <p>- Đại diện là: Ông/Bà <strong>${d.contractorRep}</strong> &nbsp;&nbsp;&nbsp;&nbsp; Chức vụ: ${d.contractorPosition}</p>
+          <p>- Mã số doanh nghiệp/Mã số thuế: ${d.contractorTax}</p>
+          <p>- Địa chỉ trụ sở chính: ${d.contractorAddress}</p>
+          <p>- Tài khoản ngân hàng: ${d.contractorBankAcc || "Đang cập nhật"}</p>
+          <p>- Điện thoại liên hệ: ${d.contractorPhone || "Đang cập nhật"} &nbsp;&nbsp;&nbsp;&nbsp; Email: ${d.contractorEmail || "Đang cập nhật"}</p>
+          <p>- Chỉ huy trưởng công trình: ${cfg.canBoB}</p>
+
+          <p>Hai bên cùng nhau thống nhất ký kết Hợp đồng thi công xây dựng đối với <strong>${d.packageName}</strong> thuộc dự án <strong>${d.projectName}</strong> với các nội dung chi tiết sau đây:</p>
+
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; color: #0f172a; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 2. CÁC CĂN CỨ GIAO KẾT HỢP ĐỒNG
+          </div>
+          <p>- Căn cứ Bộ luật Dân sự số 91/2015/QH13 ngày 24 tháng 11 năm 2015 của Quốc hội;</p>
+          <p>- Căn cứ Luật Xây dựng số 135/2025/QH15 ngày 10 tháng 12 năm 2025 của Quốc hội;</p>
+          <p>- Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23 tháng 6 năm 2023 của Quốc hội;</p>
+          <p>- Căn cứ Nghị định số 254/2025/NĐ-CP của Chính phủ quy định chi tiết một số điều của Luật Đấu thầu về lựa chọn nhà thầu;</p>
+          <p>- Căn cứ Nghị định số 193/2026/NĐ-CP của Chính phủ về lập kế hoạch lựa chọn nhà thầu trong hoạt động xây dựng;</p>
+          <p>- Căn cứ Nghị định số 206/2026/NĐ-CP của Chính phủ quy định chi tiết về quản lý chi phí đầu tư xây dựng;</p>
+          <p>- Căn cứ Nghị định số 207/2026/NĐ-CP của Chính phủ về quản lý chất lượng, thi công xây dựng và bảo trì công trình xây dựng;</p>
+          <p>- Căn cứ Nghị định số 210/2026/NĐ-CP ngày 15 tháng 6 năm 2026 của Chính phủ quy định chi tiết và hướng dẫn thi hành một số điều của Luật Xây dựng về hợp đồng xây dựng;</p>
+          <p>- Căn cứ Nghị định số 217/2026/NĐ-CP của Chính phủ về quản lý hoạt động đầu tư xây dựng;</p>
+          <p>- Căn cứ Quyết định số ${qdResultNo}/QĐ-${d.ownerSign} ngày ${qdResultShortDate} của Giám đốc ${d.ownerOrg} về việc phê duyệt kết quả chỉ định thầu gói thầu: ${d.packageName};</p>
+          <p>- Căn cứ Biên bản hoàn thiện và thương thảo hợp đồng đã được hai bên ký kết.</p>
+
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; color: #0f172a; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 3. ĐIỀU KIỆN CHUNG CỦA HỢP ĐỒNG (27 ĐIỀU CHUẨN BỘ XÂY DỰNG)
+          </div>
+
+          <p><strong>Điều 1. Giải thích từ ngữ:</strong> Trong hợp đồng này, các từ ngữ "Chủ đầu tư", "Nhà thầu", "Hợp đồng", "Công trường", "Bảo đảm thực hiện hợp đồng", "Tạm ứng", "Nghiệm thu", "Bất khả kháng" được hiểu và giải thích thống nhất theo quy định của pháp luật xây dựng hiện hành.</p>
+          
+          <p><strong>Điều 2. Hồ sơ hợp đồng và thứ tự ưu tiên:</strong> Hồ sơ hợp đồng bao gồm: Văn bản hợp đồng; Biên bản hoàn thiện thương thảo hợp đồng; Quyết định phê duyệt kết quả chỉ định thầu; Hồ sơ yêu cầu/dự thảo hợp đồng; Hồ sơ đề xuất của nhà thầu; Bản vẽ thiết kế và dự toán được duyệt; Các phụ lục và tài liệu bổ sung hợp pháp khác. Khi có sự mâu thuẫn, thứ tự ưu tiên áp dụng theo thứ tự liệt kê trên.</p>
+
+          <p><strong>Điều 3. Luật áp dụng và ngôn ngữ sử dụng:</strong> Hợp đồng chịu sự điều chỉnh của hệ thống pháp luật nước Cộng hòa xã hội chủ nghĩa Việt Nam. Ngôn ngữ chính thức sử dụng là Tiếng Việt.</p>
+
+          <p><strong>Điều 4. Trao đổi thông báo:</strong> Mọi thông báo, yêu cầu hoặc văn bản trao đổi giữa hai bên phải được lập thành văn bản và chuyển giao trực tiếp, qua đường bưu điện hoặc gửi qua thư điện tử chính thức được đăng ký tại Phần 1.</p>
+
+          <p><strong>Điều 5. Bảo đảm thực hiện hợp đồng và bảo lãnh tạm ứng:</strong> Nhà thầu phải nộp cho Chủ đầu tư Bảo đảm thực hiện hợp đồng với giá trị và thời hạn theo quy định tại Điều kiện cụ thể. Trường hợp nhận tạm ứng, Nhà thầu phải nộp thư bảo lãnh tạm ứng hợp đồng của tổ chức tín dụng hợp pháp.</p>
+
+          <p><strong>Điều 6. Nội dung và phạm vi khối lượng công việc:</strong> Nhà thầu nhận thực hiện toàn bộ các hạng mục công việc xây dựng, cung cấp vật tư thiết bị (nếu có) của gói thầu ${d.packageName} theo đúng hồ sơ thiết kế kỹ thuật, bản vẽ thi công và tiêu chuẩn quy chuẩn xây dựng hiện hành.</p>
+
+          <p><strong>Điều 7. Yêu cầu về chất lượng, kỹ thuật và kiểm tra, giám sát:</strong> Toàn bộ vật liệu đưa vào công trình phải có đầy đủ chứng chỉ chất lượng, nguồn gốc xuất xứ và được lấy mẫu thí nghiệm kiểm tra theo quy định. Chủ đầu tư và Tư vấn giám sát có quyền kiểm tra, thử nghiệm bất kỳ hạng mục nào trên công trường.</p>
+
+          <p><strong>Điều 8. Thời gian và tiến độ thực hiện hợp đồng:</strong> Nhà thầu cam kết thi công hoàn thành toàn bộ khối lượng công trình đúng thời hạn ${d.executionTime} ngày kể từ ngày nhận bàn giao mặt bằng và có lệnh khởi công của Chủ đầu tư.</p>
+
+          <p><strong>Điều 9. Giá hợp đồng, tạm ứng và thanh toán:</strong> Giá hợp đồng áp dụng hình thức hợp đồng ${d.contractType}. Việc tạm ứng và các giai đoạn thanh toán được thực hiện chi tiết theo quy định tại Điều kiện cụ thể của Hợp đồng.</p>
+
+          <p><strong>Điều 10. Sửa đổi, bổ sung hợp đồng:</strong> Mọi sửa đổi, bổ sung khối lượng, chi phí hoặc thời gian thực hiện chỉ có giá trị khi được lập thành Phụ lục hợp đồng bằng văn bản do đại diện có thẩm quyền của hai bên ký kết.</p>
+
+          <p><strong>Điều 11. Quyền và nghĩa vụ của Chủ đầu tư:</strong> Chủ đầu tư có nghĩa vụ bàn giao mặt bằng thi công đúng tiến độ; cử cán bộ giám sát thường trực; thanh toán đúng thời hạn cho Nhà thầu; có quyền đình chỉ thi công nếu phát hiện Nhà thầu vi phạm chất lượng, an toàn lao động.</p>
+
+          <p><strong>Điều 12. Quyền và nghĩa vụ của Nhà thầu:</strong> Nhà thầu có nghĩa vụ tập kết máy móc thiết bị, nhân lực đúng cam kết; lập biện pháp thi công và biện pháp an toàn; chịu hoàn toàn trách nhiệm về chất lượng và tiến độ công trình; có quyền yêu cầu Chủ đầu tư thanh toán theo đúng thỏa thuận hợp đồng.</p>
+
+          <p><strong>Điều 13. Phối hợp với Đơn vị Tư vấn giám sát:</strong> Nhà thầu có trách nhiệm phối hợp chặt chẽ, tạo điều kiện thuận lợi và chấp hành các yêu cầu kỹ thuật hợp pháp của Đơn vị Tư vấn giám sát do Chủ đầu tư chỉ định.</p>
+
+          <p><strong>Điều 14. Tổng thầu và liên danh:</strong> Trường hợp nhà thầu liên danh, các thành viên liên danh phải chịu trách nhiệm liên đới và riêng rẽ đối với toàn bộ các nghĩa vụ quy định trong hợp đồng này.</p>
+
+          <p><strong>Điều 15. Nhà thầu phụ:</strong> Nhà thầu không được chuyển nhượng toàn bộ hợp đồng cho nhà thầu khác. Việc sử dụng nhà thầu phụ (nếu có) phải tuân thủ nghiêm ngặt quy định của pháp luật đấu thầu và phải được Chủ đầu tư chấp thuận trước bằng văn bản.</p>
+
+          <p><strong>Điều 16. An toàn lao động, bảo vệ môi trường và phòng chống cháy nổ:</strong> Nhà thầu phải trang bị đầy đủ phương tiện bảo hộ lao động cho công nhân; bố trí rào chắn, biển cảnh báo; đảm bảo vệ sinh môi trường, thu gom phế thải xây dựng và chấp hành nghiêm các quy định PCCC trên công trường.</p>
+
+          <p><strong>Điều 17. Điện, nước và an ninh công trường:</strong> Nhà thầu tự chịu chi phí lắp đặt, đấu nối và sử dụng điện, nước phục vụ thi công; tự bảo quản vật tư, thiết bị và giữ gìn trật tự an ninh trong phạm vi công trường.</p>
+
+          <p><strong>Điều 18. Tạm dừng hợp đồng:</strong> Hợp đồng có thể bị tạm dừng theo quyết định của cơ quan nhà nước có thẩm quyền hoặc khi một bên vi phạm nghiêm trọng nghĩa vụ đã cam kết mà không khắc phục trong thời hạn quy định.</p>
+
+          <p><strong>Điều 19. Chấm dứt hợp đồng:</strong> Một bên có quyền chấm dứt hợp đồng nếu bên kia lâm vào tình trạng phá sản, giải thể hoặc vi phạm nghiêm trọng điều khoản cơ bản của hợp đồng mà không khắc phục sau 30 ngày kể từ ngày nhận được thông báo bằng văn bản.</p>
+
+          <p><strong>Điều 20. Bảo hiểm và bảo hành công trình:</strong> Nhà thầu có trách nhiệm mua bảo hiểm cho người lao động trên công trường; thực hiện đầy đủ nghĩa vụ bảo hành công trình theo đúng thời hạn quy định tại Điều kiện cụ thể.</p>
+
+          <p><strong>Điều 21. Rủi ro và sự kiện bất khả kháng:</strong> Khi xảy ra thiên tai, bão lũ lớn, dịch bệnh, chiến tranh làm ảnh hưởng đến việc thực hiện hợp đồng, bên bị ảnh hưởng phải thông báo ngay cho bên kia trong vòng 03 ngày để cùng nhau lập biên bản xác nhận và thống nhất biện pháp khắc phục.</p>
+
+          <p><strong>Điều 22. Sự kiện bồi thường:</strong> Bên nào có lỗi gây thiệt hại cho bên kia hoặc bên thứ ba trong quá trình thực hiện hợp đồng thì phải bồi thường toàn bộ thiệt hại thực tế theo quy định của pháp luật dân sự.</p>
+
+          <p><strong>Điều 23. Thưởng và phạt vi phạm hợp đồng:</strong> Nếu Nhà thầu chậm tiến độ không do lỗi của Chủ đầu tư hoặc lý do bất khả kháng, Nhà thầu sẽ bị phạt theo tỷ lệ quy định tại Điều kiện cụ thể (mức phạt tối đa không vượt quá 12% giá trị phần hợp đồng bị vi phạm).</p>
+
+          <p><strong>Điều 24. Khiếu nại và giải quyết tranh chấp:</strong> Mọi tranh chấp phát sinh trước hết phải được giải quyết thông qua thương lượng, hòa giải. Nếu không giải quyết được bằng hòa giải, tranh chấp sẽ được đưa ra Tòa án nhân dân có thẩm quyền để giải quyết.</p>
+
+          <p><strong>Điều 25. Quyết toán và thanh lý hợp đồng:</strong> Trong vòng 30 ngày kể từ ngày nghiệm thu hoàn thành đưa công trình vào sử dụng, Nhà thầu có trách nhiệm lập và gửi hồ sơ quyết toán hợp đồng cho Chủ đầu tư để thực hiện quyết toán vốn đầu tư theo quy định.</p>
+
+          <p><strong>Điều 26. Phòng chống tham nhũng, tiêu cực và lãng phí:</strong> Hai bên cam kết tuân thủ nghiêm ngặt các quy định của pháp luật về phòng chống tham nhũng, thực hành tiết kiệm, chống lãng phí; không thực hiện bất kỳ hành vi tiêu cực, móc ngoặc, đưa - nhận hối lộ nào.</p>
+
+          <p><strong>Điều 27. Điều khoản chung:</strong> Hợp đồng có hiệu lực kể từ ngày ký và Nhà thầu nộp đầy đủ bảo đảm thực hiện hợp đồng hợp lệ. Hợp đồng tự động hết hiệu lực sau khi hai bên hoàn thành toàn bộ nghĩa vụ quyết toán và ký biên bản thanh lý hợp đồng.</p>
+
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; color: #0f172a; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 4. ĐIỀU KIỆN CỤ THỂ CỦA HỢP ĐỒNG THI CÔNG
+          </div>
+
+          <p><strong>1. Giá hợp đồng và hình thức hợp đồng:</strong></p>
+          <p>- Giá hợp đồng: <strong>${formatNumber(priceVal)} đồng</strong></p>
+          <p>- Bằng chữ: <em>${priceText} đồng.</em></p>
+          <p>- Hình thức hợp đồng: <strong>${d.contractType}</strong>. Giá hợp đồng đã bao gồm toàn bộ thuế VAT, chi phí vật tư, nhân công, máy thi công, chi phí trực tiếp phí, lán trại tạm và các khoản chi phí cần thiết khác để hoàn thành công trình.</p>
+
+          <p><strong>2. Bảo đảm thực hiện hợp đồng:</strong></p>
+          <p>- Tỷ lệ bảo đảm: <strong>${cfg.baoDamTyLe}%</strong> trên giá trị hợp đồng, tương đương: <strong>${formatNumber(baoDamVal)} đồng</strong> (<em>${baoDamText} đồng</em>).</p>
+          <p>- Hình thức nộp: Thư bảo lãnh của tổ chức tín dụng hoặc nộp tiền vào tài khoản tiền gửi của Ban Quản lý dự án trong vòng 07 ngày kể từ ngày ký hợp đồng.</p>
+
+          <p><strong>3. Tạm ứng hợp đồng:</strong></p>
+          <p>- Tỷ lệ tạm ứng: <strong>${cfg.tamUngTyLe}%</strong> giá trị hợp đồng, tương đương: <strong>${formatNumber(tamUngVal)} đồng</strong> (<em>${tamUngText} đồng</em>).</p>
+          <p>- Điều kiện tạm ứng: Chủ đầu tư chuyển tiền tạm ứng trong vòng 07 ngày làm việc sau khi hợp đồng có hiệu lực, Nhà thầu nộp bảo lãnh tạm ứng và công trình được bố trí kế hoạch vốn.</p>
+
+          <p><strong>4. Kế hoạch và các đợt thanh toán:</strong></p>
+          <p>- <strong>Đợt 1:</strong> ${cfg.thanhToanDot1};</p>
+          <p>- <strong>Đợt 2:</strong> ${cfg.thanhToanDot2};</p>
+          <p>- <strong>Đợt 3 (Quyết toán hoàn thành):</strong> ${cfg.thanhToanDot3}; Chủ đầu tư giữ lại <strong>${cfg.giuLaiBaoHanhTyLe}%</strong> giá trị hợp đồng vào tài khoản tiền gửi của Chủ đầu tư tại Kho bạc/Ngân hàng để bảo hành công trình (hoặc Nhà thầu nộp Thư bảo lãnh bảo hành 5% có giá trị tương ứng).</p>
+          <p>- Thời hạn thanh toán: Trong vòng 07 ngày làm việc kể từ ngày nhận đủ hồ sơ đề nghị thanh toán hợp lệ của Nhà thầu.</p>
+
+          <p><strong>5. Thời gian thực hiện và bảo hành công trình:</strong></p>
+          <p>- Thời gian thi công hoàn thành toàn bộ công việc: <strong>${d.executionTime} ngày</strong> kể từ ngày khởi công.</p>
+          <p>- Thời gian bảo hành công trình: <strong>${cfg.baoHanhThang} tháng</strong> kể từ ngày Chủ đầu tư ký Biên bản nghiệm thu bàn giao đưa công trình vào khai thác sử dụng.</p>
+
+          <p><strong>6. Phạt vi phạm tiến độ và chế tài:</strong></p>
+          <p>- Trường hợp Nhà thầu chậm hoàn thành tiến độ so với cam kết mà không có lý do chính đáng được Chủ đầu tư chấp thuận, mức phạt là <strong>${cfg.phatChamTienDo}%</strong> giá trị phần việc chậm trễ cho mỗi ngày quá hạn. Tổng mức phạt tối đa không vượt quá <strong>${cfg.phatToiDa}%</strong> giá trị hợp đồng.</p>
+
+          <p><strong>7. Hồ sơ hoàn công và bàn giao:</strong></p>
+          <p>- Khi hoàn thành, Nhà thầu có trách nhiệm bàn giao cho Chủ đầu tư <strong>${cfg.soBoHoSo} bộ hồ sơ hoàn công</strong> đầy đủ theo đúng quy định của Nghị định 207/2026/NĐ-CP.</p>
+
+          <p>Hợp đồng này được lập thành 06 bản có giá trị pháp lý như nhau, Bên A giữ 04 bản, Bên B giữ 02 bản để cùng theo dõi thực hiện./.</p>
+        </div>
+
+        <table class="doc-footer-table" style="margin-top: 30px;">
+          <tr>
+            <td class="col-signer">
+              <div class="signer-title">ĐẠI DIỆN BÊN NHẬN THẦU</div>
+              <div class="signer-dept" style="font-size: 0.85rem; color: #475569;">(GIÁM ĐỐC NHÀ THẦU - KÝ TÊN, ĐÓNG DẤU)</div>
+              <div class="signature-space" style="height: 75px;"></div>
+              <div class="signer-name" style="font-weight: 700; font-size: 1.05rem;">${d.contractorRep}</div>
+            </td>
+            <td class="col-signer">
+              <div class="signer-title">ĐẠI DIỆN BÊN GIAO THẦU</div>
+              <div class="signer-dept" style="font-size: 0.85rem; color: #475569;">(GIÁM ĐỐC BAN QLDA - KÝ TÊN, ĐÓNG DẤU)</div>
+              <div class="signature-space" style="height: 75px;"></div>
+              <div class="signer-name" style="font-weight: 700; font-size: 1.05rem;">${d.signerName}</div>
+            </td>
+          </tr>
+        </table>
+      `;
+    }
+
+    // =========================================================================
+    // MẪU 2: HỢP ĐỒNG TƯ VẤN GIÁM SÁT THI CÔNG XÂY DỰNG (NGHỊ ĐỊNH 210/2026/NĐ-CP - 34 TRANG BXD)
+    // =========================================================================
+    function generateDoc7_HopDongTuVanGiamSat(d) {
+      const meta = docCustomMeta[6];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const year = (meta.date ? meta.date.split("-")[0] : new Date().getFullYear());
+      const qdResultMeta = docCustomMeta[5];
+      const qdResultNo = qdResultMeta.number ? qdResultMeta.number : ".....";
+      const qdResultShortDate = formatDateShort(qdResultMeta.date);
+
+      const cfg = contractCustomSettings;
+      const contractNoStr = cfg.contractNo ? cfg.contractNo : `${docNoStr}/${year}/HĐ-TVGS`;
+      const signLocationStr = cfg.signLocation || `${d.docLocation || "Xã Tân Phú"}, tỉnh Tây Ninh`;
+
+      const priceVal = d.estimatedPrice || 0;
+      const priceText = docSoThanhChu(priceVal);
+      const tamUngVal = Math.round(priceVal * (cfg.tamUngTyLe / 100));
+      const tamUngText = docSoThanhChu(tamUngVal);
+
+      return `
+        <table class="doc-header-table">
+          <tr>
+            <td class="col-left" style="width: 100%; text-align: center;">
+              <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+              <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
+              <div class="line-tieu-ngu" style="width: 35%; margin-top: 4px; margin-bottom: 6px;"></div>
+              <div class="dia-danh-ngay" style="margin-top: 4px;">${signLocationStr}, ${dateStr}</div>
+            </td>
+          </tr>
+        </table>
+
+        <div class="doc-main-title" style="margin-top: 15px; margin-bottom: 18px;">
+          <h3 style="font-size: 1.25rem; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 6px;">HỢP ĐỒNG TƯ VẤN GIÁM SÁT THI CÔNG XÂY DỰNG</h3>
+          <p style="font-style: italic; margin-bottom: 4px;">(Theo mẫu quy định tại Nghị định số 210/2026/NĐ-CP của Chính phủ về hợp đồng xây dựng)</p>
+          <p style="font-weight: 700; margin-bottom: 2px;">Số: ${contractNoStr}</p>
+          <p style="font-weight: 700; color: #1e293b;">Dự án: ${d.projectName}</p>
+          <p style="font-weight: 600;">Gói thầu: ${d.packageName}</p>
+        </div>
+
+        <div class="doc-content" style="line-height: 1.6; text-align: justify;">
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 14px; margin-bottom: 8px; text-transform: uppercase; color: #065f46; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 1. THÔNG TIN GIAO DỊCH
+          </div>
+          <p>Hôm nay, ${dateStr}, tại ${signLocationStr}, chúng tôi gồm các bên dưới đây:</p>
+          
+          <p><strong>1. BÊN GIAO THẦU (CHỦ ĐẦU TƯ - GỌI TẮT LÀ BÊN A):</strong></p>
+          <p>- Tên đơn vị: <strong>${d.ownerOrg}</strong></p>
+          <p>- Đại diện là: Ông/Bà <strong>${d.signerName}</strong> &nbsp;&nbsp;&nbsp;&nbsp; Chức vụ: Giám đốc</p>
+          <p>- Địa chỉ: ${d.docLocation}, Tỉnh Tây Ninh</p>
+          <p>- Ký hiệu cơ quan: ${d.ownerSign}</p>
+          <p>- Cán bộ phụ trách giám sát của Bên A: ${cfg.canBoA}</p>
+
+          <p><strong>2. BÊN NHẬN THẦU (NHÀ THẦU TƯ VẤN GIÁM SÁT - GỌI TẮT LÀ BÊN B):</strong></p>
+          <p>- Tên doanh nghiệp: <strong>${d.contractorName}</strong></p>
+          <p>- Đại diện là: Ông/Bà <strong>${d.contractorRep}</strong> &nbsp;&nbsp;&nbsp;&nbsp; Chức vụ: ${d.contractorPosition}</p>
+          <p>- Mã số doanh nghiệp/Mã số thuế: ${d.contractorTax}</p>
+          <p>- Địa chỉ trụ sở: ${d.contractorAddress}</p>
+          <p>- Tài khoản ngân hàng: ${d.contractorBankAcc || "Đang cập nhật"}</p>
+          <p>- Điện thoại liên hệ: ${d.contractorPhone || "Đang cập nhật"} &nbsp;&nbsp;&nbsp;&nbsp; Email: ${d.contractorEmail || "Đang cập nhật"}</p>
+          <p>- Giám sát trưởng Bên B: ${cfg.canBoB}</p>
+
+          <p>Hai bên cùng nhau thống nhất ký kết Hợp đồng tư vấn giám sát thi công xây dựng (và lắp đặt thiết bị nếu có) thuộc dự án <strong>${d.projectName}</strong> với các điều khoản cụ thể sau đây:</p>
+
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; color: #065f46; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 2. CÁC CĂN CỨ GIAO KẾT HỢP ĐỒNG
+          </div>
+          <p>- Căn cứ Bộ luật Dân sự số 91/2015/QH13 ngày 24 tháng 11 năm 2015 của Quốc hội;</p>
+          <p>- Căn cứ Luật Xây dựng số 135/2025/QH15 ngày 10 tháng 12 năm 2025 của Quốc hội;</p>
+          <p>- Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23 tháng 6 năm 2023 của Quốc hội;</p>
+          <p>- Căn cứ Nghị định số 210/2026/NĐ-CP ngày 15 tháng 6 năm 2026 của Chính phủ quy định chi tiết và hướng dẫn thi hành một số điều của Luật Xây dựng về hợp đồng xây dựng;</p>
+          <p>- Căn cứ Nghị định số 207/2026/NĐ-CP ngày 15 tháng 6 năm 2026 của Chính phủ quy định chi tiết một số nội dung về quản lý chất lượng, thi công xây dựng và bảo trì công trình xây dựng;</p>
+          <p>- Căn cứ Nghị định số 217/2026/NĐ-CP ngày 19 tháng 6 năm 2026 của Chính phủ quy định chi tiết một số điều của Luật Xây dựng về quản lý hoạt động xây dựng;</p>
+          <p>- Căn cứ Nghị định số 206/2026/NĐ-CP ngày 15 tháng 6 năm 2026 của Chính phủ quy định chi tiết về quản lý chi phí đầu tư xây dựng;</p>
+          <p>- Căn cứ Nghị định số 212/2026/NĐ-CP ngày 17 tháng 6 năm 2026 của Chính phủ quy định về điều kiện năng lực hoạt động xây dựng;</p>
+          <p>- Căn cứ Quyết định số ${qdResultNo}/QĐ-${d.ownerSign} ngày ${qdResultShortDate} của Giám đốc ${d.ownerOrg} về việc phê duyệt kết quả chỉ định thầu gói thầu: ${d.packageName};</p>
+          <p>- Căn cứ Biên bản hoàn thiện và thương thảo hợp đồng đã được hai bên ký kết.</p>
+
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; color: #065f46; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 3. ĐIỀU KIỆN CHUNG CỦA HỢP ĐỒNG TƯ VẤN (21 ĐIỀU CHUẨN BỘ XÂY DỰNG)
+          </div>
+
+          <p><strong>Điều 1. Giải thích từ ngữ:</strong> Các thuật ngữ chuyên ngành tư vấn giám sát, chủ đầu tư, sản phẩm tư vấn được định nghĩa thống nhất theo quy định của Luật Xây dựng số 135/2025/QH15 và Nghị định 207/2026/NĐ-CP.</p>
+
+          <p><strong>Điều 2. Hồ sơ hợp đồng và thứ tự ưu tiên:</strong> Hồ sơ hợp đồng là tài liệu không thể tách rời, bao gồm Hợp đồng này, Đề cương giám sát được duyệt, Quyết định chỉ định thầu, Biên bản thương thảo và các văn bản thỏa thuận bổ sung.</p>
+
+          <p><strong>Điều 3. Sử dụng tài liệu, bảo mật và bản quyền:</strong> Bên B có trách nhiệm bảo mật tuyệt đối các thông tin, tài liệu liên quan đến dự án và không được chuyển giao cho bất kỳ bên thứ ba nào nếu không có sự chấp thuận bằng văn bản của Bên A.</p>
+
+          <p><strong>Điều 4. Trao đổi thông tin:</strong> Mọi ý kiến phản ánh kỹ thuật, báo cáo giám sát, biên bản xử lý hiện trường phải được lập bằng văn bản gửi cho Chủ đầu tư và các đơn vị liên quan.</p>
+
+          <p><strong>Điều 5. Luật áp dụng và ngôn ngữ:</strong> Hợp đồng chịu sự điều chỉnh của pháp luật Việt Nam. Ngôn ngữ giao dịch là Tiếng Việt.</p>
+
+          <p><strong>Điều 6. Nội dung và phạm vi công việc tư vấn giám sát:</strong> Bên B thực hiện giám sát độc lập, thường xuyên, liên tục chất lượng, khối lượng, tiến độ thi công xây dựng và an toàn lao động, vệ sinh môi trường trên công trường theo đúng hồ sơ thiết kế, quy chuẩn, tiêu chuẩn kỹ thuật hiện hành.</p>
+
+          <p><strong>Điều 7. Yêu cầu về chất lượng và sản phẩm dịch vụ tư vấn:</strong> Bên B cam kết bố trí nhân sự có đủ chứng chỉ hành nghề giám sát theo đúng quy định tại Nghị định số 212/2026/NĐ-CP; chịu trách nhiệm trước Bên A và trước pháp luật về tính chính xác, khách quan của các kết quả giám sát, nghiệm thu.</p>
+
+          <p><strong>Điều 8. Thời gian và tiến độ thực hiện:</strong> Thời gian thực hiện dịch vụ tư vấn giám sát bám sát theo tiến độ thi công xây dựng thực tế của công trình; tự động được kéo dài tương ứng trong trường hợp gói thầu thi công xây dựng được cấp có thẩm quyền cho phép gia hạn tiến độ.</p>
+
+          <p><strong>Điều 9. Giá hợp đồng, tạm ứng và thanh toán:</strong> Hợp đồng áp dụng hình thức hợp đồng ${d.contractType}. Phương thức thanh toán theo các giai đoạn hoàn thành công việc theo thỏa thuận tại Điều kiện cụ thể.</p>
+
+          <p><strong>Điều 10. Nghiệm thu sản phẩm tư vấn:</strong> Việc nghiệm thu sản phẩm tư vấn giám sát được thực hiện thông qua các Báo cáo định kỳ tháng, Báo cáo hoàn thành công tác giám sát và Biên bản nghiệm thu hoàn thành công trình đưa vào sử dụng.</p>
+
+          <p><strong>Điều 11. Quyền, nghĩa vụ và trách nhiệm nghề nghiệp của Bên B:</strong>
+          <br>- Có quyền yêu cầu Nhà thầu thi công tuân thủ đúng thiết kế và đình chỉ thi công tạm thời nếu phát hiện nguy cơ mất an toàn nghiêm trọng;
+          <br>- Chịu trách nhiệm bồi thường thiệt hại nếu xác nhận sai khối lượng, bỏ sót lỗi thi công dẫn đến hư hỏng công trình hoặc làm thất thoát vốn đầu tư.</p>
+
+          <p><strong>Điều 12. Quyền và nghĩa vụ của Bên A (Chủ đầu tư):</strong> Có quyền kiểm tra đột xuất sự có mặt của nhân sự Bên B trên công trường; cung cấp kịp thời hồ sơ bản vẽ thiết kế được duyệt; thanh toán chi phí tư vấn theo đúng tiến độ cam kết.</p>
+
+          <p><strong>Điều 13. Giải quyết khiếu nại và tranh chấp:</strong> Tranh chấp được giải quyết trước hết bằng thương lượng. Trường hợp không hòa giải được sẽ đưa ra Tòa án nhân dân có thẩm quyền phán quyết.</p>
+
+          <p><strong>Điều 14. Rủi ro và sự kiện bất khả kháng:</strong> Khi xảy ra thiên tai, dịch bệnh ảnh hưởng đến tiến độ, hai bên phối hợp lập biên bản hiện trường để ghi nhận và điều chỉnh thời gian thực hiện thích hợp.</p>
+
+          <p><strong>Điều 15. Nhà thầu phụ:</strong> Gói thầu tư vấn giám sát không áp dụng nhà thầu phụ. Bên B phải trực tiếp thực hiện 100% nhiệm vụ giám sát theo hợp đồng.</p>
+
+          <p><strong>Điều 16. Nhân lực và chứng chỉ năng lực:</strong> Bên B chỉ được thay đổi Giám sát trưởng hoặc kỹ sư giám sát sau khi được Bên A chấp thuận trước bằng văn bản; nhân sự thay thế phải có năng lực và chứng chỉ hành nghề tương đương hoặc cao hơn.</p>
+
+          <p><strong>Điều 17. Sửa đổi, bổ sung hợp đồng:</strong> Khi có thay đổi về quy mô dự án hoặc kéo dài tiến độ thi công xây dựng làm phát sinh nhiệm vụ giám sát, hai bên ký kết Phụ lục hợp đồng theo quy định của pháp luật xây dựng.</p>
+
+          <p><strong>Điều 18. Tạm dừng và chấm dứt hợp đồng:</strong> Một bên có quyền đơn phương chấm dứt hợp đồng nếu bên kia vi phạm nghiêm trọng nghĩa vụ nghề nghiệp mà không khắc phục sau khi nhận được thông báo văn bản 15 ngày.</p>
+
+          <p><strong>Điều 19. Quyết toán và thanh lý hợp đồng:</strong> Hồ sơ quyết toán được lập trong vòng 20 ngày kể từ ngày công trình được nghiệm thu bàn giao và hoàn tất kiểm toán/thẩm tra quyết toán.</p>
+
+          <p><strong>Điều 20. Thưởng và phạt hợp đồng:</strong> Áp dụng chế tài phạt nghiêm khắc đối với các hành vi vắng mặt tại buổi nghiệm thu không lý do hoặc báo cáo chậm trễ theo quy định tại Điều kiện cụ thể.</p>
+
+          <p><strong>Điều 21. Điều khoản chung:</strong> Hợp đồng có hiệu lực kể từ ngày ký và tự động kết thúc sau khi hai bên ký biên bản thanh lý hợp đồng tư vấn.</p>
+
+          <div style="font-weight: 700; font-size: 1.05rem; margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; color: #065f46; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+            PHẦN 4. ĐIỀU KIỆN CỤ THỂ CỦA HỢP ĐỒNG TƯ VẤN GIÁM SÁT
+          </div>
+
+          <p><strong>1. Giá hợp đồng:</strong></p>
+          <p>- Giá hợp đồng: <strong>${formatNumber(priceVal)} đồng</strong></p>
+          <p>- Bằng chữ: <em>${priceText} đồng.</em></p>
+          <p>- Hình thức hợp đồng: <strong>${d.contractType}</strong>. Giá hợp đồng đã bao gồm toàn bộ thuế VAT, chi phí ăn ở, đi lại, văn phòng phẩm, trang thiết bị kiểm tra đo đạc phục vụ công tác giám sát.</p>
+
+          <p><strong>2. Sản phẩm bàn giao của dịch vụ tư vấn:</strong></p>
+          <p>- Bên B nộp cho Bên A <strong>${cfg.soBoHoSo} bộ hồ sơ</strong> bao gồm: Báo cáo giám sát định kỳ hàng tháng; Nhật ký giám sát; Báo cáo kết quả kiểm tra thí nghiệm vật liệu; Báo cáo nghiệm thu hoàn thành công tác giám sát thi công xây dựng.</p>
+
+          <p><strong>3. Thời gian thực hiện:</strong></p>
+          <p>- Thời gian thực hiện hợp đồng tư vấn giám sát: Phù hợp và bám sát theo toàn bộ tiến độ thi công xây dựng của gói thầu xây lắp công trình (tự động gia hạn theo thời gian thi công thực tế được cấp thẩm quyền cho phép).</p>
+
+          <p><strong>4. Tạm ứng và các đợt thanh toán:</strong></p>
+          <p>- <strong>Tạm ứng:</strong> <strong>${cfg.tamUngTyLe}%</strong> giá trị hợp đồng, tương đương: <strong>${formatNumber(tamUngVal)} đồng</strong> (<em>${tamUngText} đồng</em>) sau khi ký hợp đồng và có kế hoạch vốn.</p>
+          <p>- <strong>Đợt 1:</strong> ${cfg.thanhToanDot1};</p>
+          <p>- <strong>Đợt 2 (Hoàn thành nghiệm thu đưa vào sử dụng):</strong> ${cfg.thanhToanDot2};</p>
+          <p>- <strong>Đợt 3:</strong> ${cfg.thanhToanDot3};</p>
+          <p>- Thời hạn thanh toán: Trong vòng 07 ngày làm việc kể từ ngày Bên A nhận đủ hồ sơ thanh toán hợp lệ của Bên B.</p>
+
+          <p><strong>5. Chế tài xử phạt đặc thù dịch vụ tư vấn giám sát:</strong></p>
+          <p>- Trường hợp cán bộ giám sát của Bên B vắng mặt không lý do chính đáng tại buổi nghiệm thu giai đoạn hoặc nghiệm thu hoàn thành làm chậm trễ tiến độ thi công, Bên B bị phạt <strong>${cfg.phatVangMatNT}%</strong> giá trị hợp đồng cho mỗi lần vắng mặt.</p>
+          <p>- Trường hợp Nhà thầu tư vấn giám sát xác nhận sai khối lượng hoặc bỏ sót các lỗi vi phạm kỹ thuật gây lãng phí, thất thoát vốn đầu tư, Bên B chịu trách nhiệm bồi hoàn toàn bộ chi phí thiệt hại thực tế theo quy định của pháp luật.</p>
+
+          <p>Hợp đồng này được lập thành 06 bản có giá trị pháp lý như nhau, Bên A giữ 04 bản, Bên B giữ 02 bản để thực hiện./.</p>
+        </div>
+
+        <table class="doc-footer-table" style="margin-top: 30px;">
+          <tr>
+            <td class="col-signer">
+              <div class="signer-title">ĐẠI DIỆN BÊN NHẬN THẦU</div>
+              <div class="signer-dept" style="font-size: 0.85rem; color: #475569;">(GIÁM ĐỐC NHÀ THẦU TƯ VẤN - KÝ TÊN, ĐÓNG DẤU)</div>
+              <div class="signature-space" style="height: 75px;"></div>
+              <div class="signer-name" style="font-weight: 700; font-size: 1.05rem;">${d.contractorRep}</div>
+            </td>
+            <td class="col-signer">
+              <div class="signer-title">ĐẠI DIỆN BÊN GIAO THẦU</div>
+              <div class="signer-dept" style="font-size: 0.85rem; color: #475569;">(GIÁM ĐỐC BAN QLDA - KÝ TÊN, ĐÓNG DẤU)</div>
+              <div class="signature-space" style="height: 75px;"></div>
+              <div class="signer-name" style="font-weight: 700; font-size: 1.05rem;">${d.signerName}</div>
+            </td>
+          </tr>
+        </table>
+      `;
+    }
+
+    // =========================================================================
+    // HÀM ĐIỀU PHỐI MẪU HỢP ĐỒNG BỘ XÂY DỰNG CHO VĂN BẢN SỐ 7
+    // =========================================================================
     function generateDoc7_HopDongBoXayDung(d) {
       const isAutoTuVan = (d.packageType === "tu_van") || 
-                         (d.packageName && (d.packageName.toLowerCase().includes("tư vấn") || d.packageName.toLowerCase().includes("giám sát")));
-      
+                          (d.packageName && (d.packageName.toLowerCase().includes("tư vấn") || d.packageName.toLowerCase().includes("giám sát")));
+
       const effectiveMode = (currentContractMode === 'auto') ? (isAutoTuVan ? 'tu_van' : 'xay_lap') : currentContractMode;
 
       if (effectiveMode === 'tu_van') {
