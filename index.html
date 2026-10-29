@@ -465,10 +465,20 @@
     .tieu-ngu {
       font-size: 12.5pt;
       font-weight: bold;
-      display: inline-block;
-      border-bottom: 1.5px solid #000;
-      padding-bottom: 2px;
-      margin-bottom: 6px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .line-co-quan {
+      width: 40%;
+      height: 1.2px;
+      background-color: #000000;
+      margin: 3px auto 5px auto;
+    }
+    .line-tieu-ngu {
+      width: 75%;
+      height: 1.2px;
+      background-color: #000000;
+      margin: 3px auto 6px auto;
     }
     .dia-danh-ngay { font-size: 12.5pt; font-style: italic; }
 
@@ -1260,6 +1270,37 @@
               </div>
             </div>
 
+            
+            <!-- THANH THIẾT LẬP SỐ VĂN BẢN VÀ NGÀY THÁNG PHÁT HÀNH (MỤC SỐ 2 & SỐ 3) -->
+            <div class="doc-meta-editor-bar" style="background:#f8fafc; border:1.5px solid #0284c7; padding:0.65rem 0.9rem; border-radius:8px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.6rem; box-shadow: var(--shadow-sm); margin-bottom: 0.75rem;">
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <span style="font-weight:700; color:#0369a1; font-size:0.9rem; display:flex; align-items:center; gap:5px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  ĐIỀU CHỈNH SỐ & NGÀY BAN HÀNH (VĂN BẢN SỐ <span id="currentDocNumBadge" style="background:#0284c7; color:#fff; padding:1px 6px; border-radius:4px;">1</span>):
+                </span>
+                
+                <!-- MỤC 2: ĐIỀN SỐ VĂN BẢN -->
+                <div style="display:flex; align-items:center; gap:4px; background:#ffffff; padding:3px 8px; border-radius:6px; border:1px solid #cbd5e1;">
+                  <label for="currentDocNumber" style="font-weight:700; font-size:0.85rem; color:#1e293b; margin:0;">Số VB:</label>
+                  <input type="text" id="currentDocNumber" class="form-control" style="width:75px; height:28px; padding:2px 6px; font-weight:700; text-align:center; font-size:0.9rem; border-color:#0284c7;" placeholder="378" oninput="onDocNumberChange(this.value)">
+                  <span id="currentDocSignSuffix" style="font-weight:700; font-size:0.85rem; color:#0369a1;">/TTr-KTTĐ</span>
+                </div>
+
+                <!-- MỤC 3: ĐIỀN NGÀY, THÁNG PHÁT HÀNH -->
+                <div style="display:flex; align-items:center; gap:4px; background:#ffffff; padding:3px 8px; border-radius:6px; border:1px solid #cbd5e1;">
+                  <label for="currentDocDate" style="font-weight:700; font-size:0.85rem; color:#1e293b; margin:0;">Ngày ban hành:</label>
+                  <input type="date" id="currentDocDate" class="form-control" style="width:135px; height:28px; padding:2px 6px; font-size:0.85rem;" onchange="onDocDateChange(this.value)">
+                  <span id="currentDocDateText" style="font-size:0.82rem; font-style:italic; color:#0f172a; font-weight:600; margin-left:4px;">ngày 03 tháng 09 năm 2026</span>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:0.4rem;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="syncDateToAllDocs()" style="font-size:0.8rem; padding:4px 8px;" title="Áp dụng ngày này cho toàn bộ 07 văn bản">
+                  Đồng bộ ngày cho cả 7 VB
+                </button>
+              </div>
+            </div>
+
             <!-- Paper Sheet with Zoom Scaling Wrapper -->
             <div class="paper-container" id="paperContainer">
               <div class="a4-wrapper" id="paperWrapper">
@@ -1358,6 +1399,113 @@
       "6. Quyết định phê duyệt kết quả lựa chọn nhà thầu (Chủ đầu tư ký)",
       "7. Hợp đồng kinh tế trọn gói (Chuẩn theo biểu mẫu Bộ Xây dựng)"
     ];
+
+    // =========================================================================
+    // QUẢN LÝ SỐ VĂN BẢN VÀ NGÀY PHÁT HÀNH TỪNG VĂN BẢN (MỤC SỐ 2 & SỐ 3)
+    // TỰ ĐỘNG LIÊN KẾT THÔNG MINH GIỮA 07 VĂN BẢN THEO HỒ SƠ THỰC TẾ
+    // =========================================================================
+
+    let docCustomMeta = [
+      { number: "378", date: "2026-09-03" }, // 1. Tờ trình KHLCNT
+      { number: "490", date: "2026-09-03" }, // 2. Quyết định KHLCNT
+      { number: "125", date: "2026-09-04" }, // 3. Thư mời thương thảo
+      { number: "06",  date: "2026-09-04" }, // 4. Biên bản thương thảo
+      { number: "382", date: "2026-09-05" }, // 5. Tờ trình kết quả
+      { number: "431", date: "2026-09-05" }, // 6. Quyết định kết quả
+      { number: "08",  date: "2026-09-06" }  // 7. Hợp đồng kinh tế
+    ];
+
+    function getSuffixForDoc(idx, d) {
+      if (idx === 0 || idx === 4) return `/${d.techSign}`;
+      if (idx === 1 || idx === 5) return `/QĐ-${d.ownerSign}`;
+      if (idx === 2) return `/CV-${d.ownerSign}`;
+      if (idx === 3) return `/BB-${d.ownerSign}`;
+      if (idx === 6) {
+        const year = (docCustomMeta[6].date ? docCustomMeta[6].date.split("-")[0] : new Date().getFullYear());
+        return `/${year}/HĐ-${d.ownerSign}`;
+      }
+      return "";
+    }
+
+    function formatDateToVietnamese(dateStr) {
+      if (!dateStr) {
+        const now = new Date();
+        const d = String(now.getDate()).padStart(2, '0');
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const y = now.getFullYear();
+        return `ngày ${d} tháng ${m} năm ${y}`;
+      }
+      const parts = dateStr.split("-");
+      if (parts.length === 3) {
+        return `ngày ${parts[2]} tháng ${parts[1]} năm ${parts[0]}`;
+      }
+      return dateStr;
+    }
+
+    function formatDateShort(dateStr) {
+      if (!dateStr) return "";
+      const parts = dateStr.split("-");
+      if (parts.length === 3) {
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+      }
+      return dateStr;
+    }
+
+    function onDocNumberChange(val) {
+      docCustomMeta[activeDocIndex].number = val.trim();
+      saveDocMetaToStorage();
+      renderCurrentDoc();
+    }
+
+    function onDocDateChange(val) {
+      docCustomMeta[activeDocIndex].date = val;
+      const previewEl = document.getElementById("currentDocDateText");
+      if (previewEl) previewEl.innerText = formatDateToVietnamese(val);
+      saveDocMetaToStorage();
+      renderCurrentDoc();
+    }
+
+    function syncDateToAllDocs() {
+      const curDate = docCustomMeta[activeDocIndex].date;
+      for (let i = 0; i < docCustomMeta.length; i++) {
+        docCustomMeta[i].date = curDate;
+      }
+      saveDocMetaToStorage();
+      renderCurrentDoc();
+      alert(`Đã đồng bộ ngày "${formatDateToVietnamese(curDate)}" cho toàn bộ 07 văn bản!`);
+    }
+
+    function saveDocMetaToStorage() {
+      localStorage.setItem("chidinhthau_doc_meta", JSON.stringify(docCustomMeta));
+    }
+
+    function loadDocMetaFromStorage() {
+      const saved = localStorage.getItem("chidinhthau_doc_meta");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length >= 7) {
+            docCustomMeta = parsed;
+          }
+        } catch (e) {}
+      }
+    }
+
+    function syncMetaToolbarToActiveDoc() {
+      const d = getFormData();
+      const meta = docCustomMeta[activeDocIndex];
+      const numBadge = document.getElementById("currentDocNumBadge");
+      const numInput = document.getElementById("currentDocNumber");
+      const suffixSpan = document.getElementById("currentDocSignSuffix");
+      const dateInput = document.getElementById("currentDocDate");
+      const datePreview = document.getElementById("currentDocDateText");
+
+      if (numBadge) numBadge.innerText = activeDocIndex + 1;
+      if (numInput) numInput.value = meta.number || "";
+      if (suffixSpan) suffixSpan.innerText = getSuffixForDoc(activeDocIndex, d);
+      if (dateInput) dateInput.value = meta.date || "";
+      if (datePreview) datePreview.innerText = formatDateToVietnamese(meta.date);
+    }
 
     const docTemplates = [
       generateDoc1_ToTrinhKHLCNT,
@@ -1693,11 +1841,13 @@
         el.classList.toggle('active', i === idx);
       });
       document.getElementById('currentDocLabel').innerText = docTitles[idx];
+      syncMetaToolbarToActiveDoc();
       renderCurrentDoc();
     }
 
     function renderCurrentDoc() {
       const data = getFormData();
+      syncMetaToolbarToActiveDoc();
       const fn = docTemplates[activeDocIndex];
       if (fn) {
         document.getElementById('paperContent').innerHTML = fn(data);
@@ -1713,87 +1863,183 @@
     // TRÍCH XUẤT VÀ CHUẨN HÓA THEO HỒ SƠ THỰC TẾ BAN QLDA ĐTXD XÃ TÂN PHÚ
     // =========================================================================
 
+    // =========================================================================
+    // 07 VĂN BẢN CHUẨN ĐIỀU 80 NĐ 214/2025/NĐ-CP & THỂ THỨC NGHỊ ĐỊNH 30/2020
+    // ĐƯỢC CHUẨN HÓA TRỰC TIẾP TỪ 02 HỒ SƠ GỐC (TTr 378 & QĐ 490 CỦA BAN QLDA XÃ TÂN PHÚ)
+    // TỰ ĐỘNG KẾT NỐI SỐ VĂN BẢN VÀ NGÀY THÁNG PHÁT HÀNH XUYÊN SUỐT
+    // =========================================================================
+
     function generateDoc1_ToTrinhKHLCNT(d) {
+      const meta = docCustomMeta[0];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const shortDate = formatDateShort(meta.date);
+
       return `
         <table class="doc-header-table">
           <tr>
             <td class="col-left">
               <div class="co-quan-cha">${d.ownerOrg}</div>
               <div class="co-quan-ban-hanh">${d.techDept}</div>
-              <div class="so-ky-hieu">Số: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/${d.techSign}</div>
+              <div class="line-co-quan"></div>
+              <div class="so-ky-hieu">Số: ${docNoStr}/${d.techSign}</div>
             </td>
             <td class="col-right">
               <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
               <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
-              <div class="dia-danh-ngay">${d.docLocation}, ${d.currentDateStr}</div>
+              <div class="line-tieu-ngu"></div>
+              <div class="dia-danh-ngay">${d.docLocation}, ${dateStr}</div>
             </td>
           </tr>
         </table>
 
         <div class="doc-main-title">
           <h3>TỜ TRÌNH</h3>
-          <p>Về việc phê duyệt Kế hoạch lựa chọn nhà thầu dự án/công trình:<br>${d.projectName}</p>
+          <p>Kế hoạch lựa chọn nhà thầu<br>Dự án: ${d.projectName}</p>
         </div>
 
         <div class="doc-content">
           <p style="text-indent: 0; text-align: center; font-weight: bold; margin-bottom: 1rem;">
-            Kính gửi: Lãnh đạo ${d.ownerOrg} (Chủ đầu tư)
+            Kính gửi: Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú
           </p>
 
-          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23 tháng 6 năm 2023 của Quốc hội;</p>
-          <p>Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật sửa đổi, bổ sung một số điều của Luật Xây dựng số 62/2020/QH14;</p>
-          <p>Căn cứ Nghị định số 214/2025/NĐ-CP của Chính phủ quy định chi tiết một số điều và biện pháp thi hành Luật Đấu thầu về lựa chọn nhà thầu (thay thế Nghị định số 24/2024/NĐ-CP);</p>
-          <p>Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ về việc quy định và điều chỉnh hạn mức chỉ định thầu;</p>
-          <p>Căn cứ Nghị định số 207/2026/NĐ-CP của Chính phủ về quản lý chất lượng, thi công xây dựng và bảo trì công trình xây dựng;</p>
-          <p>Căn cứ Nghị định số 217/2026/NĐ-CP của Chính phủ về quản lý dự án đầu tư xây dựng;</p>
-          <p>Căn cứ Quyết định số 43/2026/QĐ-UBND của Ủy ban nhân dân tỉnh Tây Ninh ban hành Quy định phân cấp quản lý và thực hiện dự án đầu tư công trên địa bàn tỉnh Tây Ninh;</p>
-          <p>Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng/dự toán công trình: ${d.projectName};</p>
+          <p>Bộ phận Kỹ thuật – Thẩm định thuộc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, phê duyệt kế hoạch lựa chọn nhà thầu trên cơ sở những nội dung dưới đây:</p>
 
-          <p>${d.techDept} kính trình Lãnh đạo ${d.ownerOrg} xem xét, phê duyệt Kế hoạch lựa chọn nhà thầu cho công trình nêu trên với các nội dung chi tiết như sau:</p>
+          <p><strong>I. Mô tả tóm tắt dự án:</strong></p>
+          <p>- Tên dự án: <strong>${d.projectName}</strong></p>
+          <p>- Tổng mức đầu tư (làm tròn): <strong>${formatNumber(d.totalInvestment)} đồng</strong>. (Bằng chữ: <em>${docSoThanhChu(d.totalInvestment)}</em>).</p>
+          <p>- Tên chủ đầu tư: Ban Quản lý dự án đầu tư xây dựng xã Tân Phú</p>
+          <p>- Nguồn vốn: ${d.capitalSource}.</p>
+          <p>- Thời gian thực hiện dự án: Năm ${new Date().getFullYear()} – ${new Date().getFullYear() + 1}.</p>
+          <p>- Địa điểm: ${d.projectLocation}.</p>
+          <p>- Quy mô dự án: Đầu tư cải tạo, sửa chữa, nâng cấp theo đúng Báo cáo kinh tế - kỹ thuật được duyệt.</p>
+          <p>- Các thông tin khác (nếu có): Theo quyết định phê duyệt dự án của cấp có thẩm quyền.</p>
 
-          <p><strong>I. MÔ TẢ TÓM TẮT DỰ ÁN VÀ KHÁI TOÁN KINH PHÍ:</strong></p>
-          <p>1. Tên dự án/công trình: ${d.projectName}.</p>
-          <p>2. Chủ đầu tư: ${d.ownerOrg}.</p>
-          <p>3. Địa điểm xây dựng: ${d.projectLocation}.</p>
-          <p>4. Nguồn vốn đầu tư: ${d.capitalSource}.</p>
-          <p>5. Tổng mức đầu tư/Dự toán công trình: <strong>${formatNumber(d.totalInvestment)} đồng</strong> (${docSoThanhChu(d.totalInvestment)}).</p>
+          <p><strong>II. Căn cứ pháp lý:</strong></p>
+          <p>Luật Đấu thầu số 22/2023/QH15 ngày 23 tháng 06 năm 2023, được sửa đổi bổ sung tại Luật số 57/2024/QH15, Luật số 90/2025/QH15;</p>
+          <p>Luật Xây dựng số 50/2014/QH13 và Luật sửa đổi, bổ sung một số điều của Luật Xây dựng số 62/2020/QH14;</p>
+          <p>Nghị định số 214/2025/NĐ-CP ngày 04 tháng 8 năm 2025 quy định chi tiết một số điều và biện pháp thi hành Luật Đấu thầu về lựa chọn nhà thầu;</p>
+          <p>Nghị định số 349/2026/NĐ-CP của Chính phủ về việc quy định và điều chỉnh hạn mức chỉ định thầu;</p>
+          <p>Nghị định số 207/2026/NĐ-CP của Chính phủ về quản lý chất lượng, thi công xây dựng và bảo trì công trình xây dựng;</p>
+          <p>Nghị định số 217/2026/NĐ-CP của Chính phủ về quản lý dự án đầu tư xây dựng;</p>
+          <p>Thông tư số 79/2025/TT-BTC ngày 04 tháng 8 năm 2025 của Bộ trưởng Bộ Tài chính hướng dẫn mẫu hồ sơ đấu thầu;</p>
+          <p>Quyết định số 43/2026/QĐ-UBND ngày 24/3/2026 của UBND tỉnh Tây Ninh về việc ban hành quy định về phân cấp, phân công trách nhiệm quản lý và thực hiện dự án đầu tư công, dự án đầu tư xây dựng công trình, quản lý chất lượng công trình xây dựng trên địa bàn tỉnh Tây Ninh;</p>
+          <p>Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng công trình: ${d.projectName};</p>
 
-          <p><strong>II. PHẦN KẾ HOẠCH LỰA CHỌN NHÀ THẦU (PHÂN CHIA GÓI THẦU):</strong></p>
-          <table style="width:100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.9rem;" border="1" cellpadding="6">
+          <p><strong>III. Phần công việc đã thực hiện:</strong> (Bảng số 1)</p>
+          <table style="width:100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.88rem;" border="1" cellpadding="5">
             <thead>
               <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
-                <th style="width:5%;">STT</th>
-                <th style="width:30%;">Tên gói thầu</th>
-                <th style="width:18%;">Giá gói thầu (VNĐ)</th>
-                <th style="width:17%;">Hình thức & Phương thức LCNT</th>
-                <th style="width:15%;">Thời gian tổ chức LCNT</th>
-                <th style="width:15%;">Loại hợp đồng & Thời gian</th>
+                <th style="width:6%;">STT</th>
+                <th style="width:30%;">Nội dung công việc hoặc tên gói thầu</th>
+                <th style="width:28%;">Đơn vị thực hiện</th>
+                <th style="width:18%;">Giá trị (đồng)</th>
+                <th style="width:18%;">Văn bản phê duyệt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center;">1</td>
+                <td>Lập Báo cáo KT-KT</td>
+                <td>Đơn vị Tư vấn thiết kế</td>
+                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.054))}</td>
+                <td>Quyết định phê duyệt của CĐT</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">2</td>
+                <td>Thẩm tra thiết kế - dự toán</td>
+                <td>Công ty CP Đầu tư TDIF</td>
+                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.0035))}</td>
+                <td>Quyết định chỉ định thầu của CĐT</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong>IV. Phần công việc không áp dụng được một trong các hình thức lựa chọn nhà thầu:</strong> (Bảng số 2)</p>
+          <table style="width:100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.88rem;" border="1" cellpadding="5">
+            <thead>
+              <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
+                <th style="width:6%;">STT</th>
+                <th style="width:44%;">Nội dung công việc</th>
+                <th style="width:30%;">Đơn vị thực hiện</th>
+                <th style="width:20%;">Giá trị (đồng)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td style="text-align:center;">01</td>
-                <td><strong>${d.packageName}</strong></td>
-                <td style="text-align:right;"><strong>${formatNumber(d.packagePrice)}</strong></td>
-                <td>Chỉ định thầu rút gọn (Điều 80 NĐ 214/2025; Hạn mức NĐ 349/2026)</td>
-                <td style="text-align:center;">Quý ${Math.floor((new Date().getMonth()+3)/3)} năm ${new Date().getFullYear()}</td>
-                <td>${d.contractType}<br>(${d.duration})</td>
+                <td>Chi phí Quản lý dự án</td>
+                <td>Chủ đầu tư tự thực hiện</td>
+                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.026))}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">02</td>
+                <td>Chi phí thẩm tra phê duyệt quyết toán</td>
+                <td>Phòng Kinh tế</td>
+                <td style="text-align:right;">1.000.000</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">03</td>
+                <td>Chi phí dự phòng phát sinh khối lượng</td>
+                <td>-</td>
+                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.05))}</td>
               </tr>
             </tbody>
           </table>
 
-          <p>1. Tên gói thầu: <strong>${d.packageName}</strong>.</p>
-          <p>2. Giá gói thầu: <strong>${formatNumber(d.packagePrice)} đồng</strong> (${docSoThanhChu(d.packagePrice)}).</p>
-          <p>3. Nguồn vốn: ${d.capitalSource}.</p>
-          <p>4. Hình thức lựa chọn nhà thầu: <strong>Chỉ định thầu rút gọn</strong> (áp dụng quy trình rút gọn theo Điều 80 Nghị định số 214/2025/NĐ-CP và hạn mức theo Nghị định số 349/2026/NĐ-CP).</p>
-          <p>5. Phương thức lựa chọn nhà thầu: Không áp dụng.</p>
-          <p>6. Thời gian bắt đầu tổ chức lựa chọn nhà thầu: Quý ${Math.floor((new Date().getMonth()+3)/3)} năm ${new Date().getFullYear()}.</p>
-          <p>7. Loại hợp đồng: <strong>${d.contractType}</strong> (theo biểu mẫu chuẩn quy định của Bộ Xây dựng).</p>
-          <p>8. Thời gian thực hiện hợp đồng: <strong>${d.duration}</strong>.</p>
-          <p>9. Thời hạn bảo hành công trình: <strong>${d.warrantyDuration}</strong>.</p>
+          <p><strong>V. Phần công việc thuộc kế hoạch lựa chọn nhà thầu:</strong></p>
+          <p><strong>1. Bảng tổng hợp phần công việc thuộc kế hoạch lựa chọn nhà thầu:</strong> (Bảng số 3 chuẩn 12 cột)</p>
+          <div style="overflow-x: auto;">
+            <table style="width:100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.82rem;" border="1" cellpadding="4">
+              <thead>
+                <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
+                  <th style="width:4%;">STT</th>
+                  <th style="width:12%;">Tên chủ đầu tư</th>
+                  <th style="width:22%;">Tên gói thầu</th>
+                  <th style="width:13%;">Giá gói thầu (đồng)</th>
+                  <th style="width:12%;">Nguồn vốn</th>
+                  <th style="width:10%;">Hình thức LCNT</th>
+                  <th style="width:7%;">Thời gian TC</th>
+                  <th style="width:8%;">Bắt đầu LCNT</th>
+                  <th style="width:7%;">Loại HĐ</th>
+                  <th style="width:7%;">Thời gian TH</th>
+                  <th style="width:5%;">Tùy chọn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:center;">01</td>
+                  <td>Ban QLDA ĐTXD xã Tân Phú</td>
+                  <td><strong>${d.packageName}</strong><br><span style="font-size:0.75rem; color:#475569;">${d.warrantyDuration}</span></td>
+                  <td style="text-align:right; font-weight:bold;">${formatNumber(d.packagePrice)}</td>
+                  <td>${d.capitalSource}</td>
+                  <td>Chỉ định thầu rút gọn</td>
+                  <td style="text-align:center;">15 ngày</td>
+                  <td style="text-align:center;">Quý ${Math.floor((new Date().getMonth()+3)/3)}/${new Date().getFullYear()}</td>
+                  <td style="text-align:center;">${d.contractType}</td>
+                  <td style="text-align:center;">${d.duration}</td>
+                  <td style="text-align:center;">Không áp dụng</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-          <p><strong>III. KIẾN NGHỊ:</strong></p>
-          <p>${d.techDept} kính trình Lãnh đạo ${d.ownerOrg} xem xét, ký ban hành Quyết định phê duyệt Kế hoạch lựa chọn nhà thầu làm căn cứ triển khai các bước tiếp theo theo đúng quy định./.</p>
+          <p><strong>2. Giải trình nội dung kế hoạch lựa chọn nhà thầu:</strong></p>
+          <p><strong>a. Cơ sở phân chia các gói thầu:</strong> Việc phân chia dự án thành gói thầu căn cứ vào tính chất kỹ thuật của từng hạng mục công việc, bảo đảm khi tổ chức đấu thầu và thực hiện hợp đồng phù hợp với tiến độ và nâng cao hiệu quả đầu tư công trình.</p>
+          <p><strong>b. Giá gói thầu:</strong> Giá gói thầu được xác định căn cứ theo Quyết định số ${d.approvePackageEstimateNo} với tổng giá trị là <strong>${formatNumber(d.packagePrice)} đồng</strong> (${docSoThanhChu(d.packagePrice)}).</p>
+          <p><strong>c. Nguồn vốn:</strong> ${d.capitalSource}.</p>
+          <p><strong>d. Hình thức và phương thức LCNT:</strong> Gói thầu có giá trị nằm trong hạn mức chỉ định thầu quy định tại Nghị định số 349/2026/NĐ-CP và điểm m khoản 1 Điều 23 Luật Đấu thầu số 22/2023/QH15. Bộ phận Kỹ thuật – Thẩm định kính đề nghị Giám đốc Ban QLDA ĐTXD xã Tân Phú xem xét phê duyệt hình thức lựa chọn nhà thầu là <strong>Chỉ định thầu rút gọn</strong> (theo quy trình tại Điều 80 Nghị định số 214/2025/NĐ-CP). Phương thức LCNT: Không áp dụng.</p>
+          <p><strong>đ. Thời gian tổ chức LCNT:</strong> 15 ngày cho gói thầu kể từ ngày phê duyệt KHLCNT.</p>
+          <p><strong>e. Thời gian bắt đầu tổ chức LCNT:</strong> Quý ${Math.floor((new Date().getMonth()+3)/3)} năm ${new Date().getFullYear()}.</p>
+          <p><strong>g. Loại hợp đồng:</strong> <strong>${d.contractType}</strong>. Giá gói thầu đã bao gồm chi phí dự phòng rủi ro và thuế GTGT theo đúng quy định tại Điều 64 Luật Đấu thầu số 22/2023/QH15.</p>
+          <p><strong>h. Thời gian thực hiện gói thầu:</strong> <strong>${d.duration}</strong>. Thời hạn bảo hành công trình: <strong>${d.warrantyDuration}</strong>.</p>
+          <p><strong>i. Tùy chọn mua thêm:</strong> Không áp dụng.</p>
+
+          <p><strong>VI. Phần công việc chưa đủ điều kiện lập kế hoạch lựa chọn nhà thầu:</strong> Không có.</p>
+
+          <p><strong>VII. Kiến nghị:</strong></p>
+          <p>Trên cơ sở những nội dung phân tích nêu trên, Bộ phận Kỹ thuật – Thẩm định thuộc Ban QLDA ĐTXD xã kính đề nghị Giám đốc Ban QLDA ĐTXD xã Tân Phú phê duyệt kế hoạch lựa chọn nhà thầu để làm cơ sở cho việc triển khai thực hiện các công việc tiếp theo của quy trình XDCB.</p>
+          <p>Kính trình Giám đốc Ban QLDA ĐTXD xã Tân Phú xem xét, quyết định./.</p>
         </div>
 
         <table class="doc-footer-table">
@@ -1802,68 +2048,110 @@
               <strong>Nơi nhận:</strong>
               <ul>
                 <li>- Như trên;</li>
-                <li>- Lưu: ${d.techSign}.</li>
+                <li>- Lưu: VT, ${d.techSign}.</li>
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">CÁN BỘ KỸ THUẬT</div>
+              <div class="chuc-vu">TM. BP KỸ THUẬT – THẨM ĐỊNH</div>
               <div class="ho-ten">${d.techLeader}</div>
             </td>
           </tr>
         </table>
+
+        <!-- PHỤ LỤC TỜ TRÌNH -->
+        <div style="margin-top: 2rem; border-top: 1.5px dashed #cbd5e1; padding-top: 1rem; page-break-before: always;">
+          <div style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">
+            <div style="font-size: 13pt;">PHỤ LỤC TỜ TRÌNH</div>
+            <div style="font-size: 11pt; font-style: italic;">(Kèm theo Tờ trình số ${docNoStr}/${d.techSign} ngày ${shortDate})</div>
+            <div style="font-size: 12pt; margin-top: 4px;">BẢNG TÀI LIỆU KÈM THEO VĂN BẢN TRÌNH DUYỆT</div>
+          </div>
+          <table style="width:100%; border-collapse: collapse; margin-top: 0.6rem; font-size: 0.88rem;" border="1" cellpadding="6">
+            <thead>
+              <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
+                <th style="width:8%;">STT</th>
+                <th style="width:72%;">Nội dung tài liệu</th>
+                <th style="width:20%;">Ghi chú</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center;">1</td>
+                <td>Quyết định phê duyệt Báo cáo KT-KT/Dự án đầu tư xây dựng công trình</td>
+                <td style="text-align:center;">Bản chụp</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">2</td>
+                <td>Quyết định phân bổ/phân khai kế hoạch vốn đầu tư xây dựng năm ${new Date().getFullYear()}</td>
+                <td style="text-align:center;">Bản chụp</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">3</td>
+                <td>Quyết định phê duyệt Dự toán gói thầu số ${d.approvePackageEstimateNo}</td>
+                <td style="text-align:center;">Bản chính</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">4</td>
+                <td>Hồ sơ thiết kế bản vẽ thi công và dự toán được duyệt</td>
+                <td style="text-align:center;">Bản chính</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       `;
     }
 
     function generateDoc2_QDPheDuyetKHLCNT(d) {
+      const meta = docCustomMeta[1];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const shortDate = formatDateShort(meta.date);
+      const ttrMeta = docCustomMeta[0];
+      const ttrNoStr = ttrMeta.number ? ttrMeta.number : ".....";
+      const ttrShortDate = formatDateShort(ttrMeta.date);
+
       return `
         <table class="doc-header-table">
           <tr>
             <td class="col-left">
               <div class="co-quan-cha">${d.parentOrg}</div>
               <div class="co-quan-ban-hanh">${d.ownerOrg}</div>
-              <div class="so-ky-hieu">Số: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/QĐ-${d.ownerSign}</div>
+              <div class="line-co-quan"></div>
+              <div class="so-ky-hieu">Số: ${docNoStr}/QĐ-${d.ownerSign}</div>
             </td>
             <td class="col-right">
               <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
               <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
-              <div class="dia-danh-ngay">${d.docLocation}, ${d.currentDateStr}</div>
+              <div class="line-tieu-ngu"></div>
+              <div class="dia-danh-ngay">${d.docLocation}, ${dateStr}</div>
             </td>
           </tr>
         </table>
 
         <div class="doc-main-title">
           <h3>QUYẾT ĐỊNH</h3>
-          <p>Về việc phê duyệt Kế hoạch lựa chọn nhà thầu công trình:<br>${d.projectName}</p>
+          <p>Về việc phê duyệt kế hoạch lựa chọn nhà thầu<br>Dự án: ${d.projectName}</p>
         </div>
 
         <div class="doc-content">
           <p style="text-indent: 0; text-align: center; font-weight: bold; margin-bottom: 0.8rem;">
-            GIÁM ĐỐC ${d.ownerOrg} (CHỦ ĐẦU TƯ)
+            GIÁM ĐỐC BAN QUẢN LÝ DỰ ÁN ĐTXD XÃ TÂN PHÚ
           </p>
-          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23 tháng 6 năm 2023 của Quốc hội;</p>
+
+          <p>Căn cứ Luật Đấu thầu ngày 23 tháng 6 năm 2023, được sửa đổi bổ sung tại Luật số 57/2024/QH15, Luật số 90/2025/QH15;</p>
           <p>Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật sửa đổi, bổ sung một số điều của Luật Xây dựng số 62/2020/QH14;</p>
-          <p>Căn cứ Nghị định số 214/2025/NĐ-CP của Chính phủ quy định chi tiết một số điều và biện pháp thi hành Luật Đấu thầu về lựa chọn nhà thầu;</p>
+          <p>Căn cứ Nghị định số 214/2025/NĐ-CP ngày 04 tháng 8 năm 2025 quy định chi tiết một số điều và biện pháp thi hành Luật Đấu thầu về lựa chọn nhà thầu;</p>
           <p>Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ về việc quy định hạn mức chỉ định thầu;</p>
-          <p>Căn cứ Quyết định số 43/2026/QĐ-UBND của Ủy ban nhân dân tỉnh Tây Ninh ban hành Quy định phân cấp quản lý dự án đầu tư công trên địa bàn tỉnh Tây Ninh;</p>
-          <p>Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng/dự toán công trình: ${d.projectName};</p>
-          <p>Xét Tờ trình số &nbsp;&nbsp;&nbsp;/${d.techSign} của ${d.techDept} về việc đề nghị phê duyệt Kế hoạch lựa chọn nhà thầu công trình: ${d.projectName},</p>
+          <p>Căn cứ Thông tư số 79/2025/TT-BTC ngày 04 tháng 8 năm 2025 của Bộ trưởng Bộ Tài chính hướng dẫn mẫu hồ sơ đấu thầu;</p>
+          <p>Căn cứ Quyết định số 43/2026/QĐ-UBND ngày 24/3/2026 của UBND tỉnh Tây Ninh về việc ban hành quy định về phân cấp, phân công trách nhiệm quản lý và thực hiện dự án đầu tư công, dự án đầu tư xây dựng công trình, quản lý chất lượng công trình xây dựng trên địa bàn tỉnh Tây Ninh;</p>
+          <p>Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng/dự án: ${d.projectName};</p>
+          <p>Căn cứ Quyết định số ${d.approvePackageEstimateNo} về việc phê duyệt Dự toán gói thầu: ${d.packageName};</p>
+          <p>Theo đề nghị của Bộ phận Kỹ thuật – Thẩm định thuộc Ban QLDA ĐTXD xã tại Tờ trình số ${ttrNoStr}/${d.techSign} ngày ${ttrShortDate},</p>
 
           <p style="text-align: center; font-weight: bold; margin: 1rem 0;">QUYẾT ĐỊNH:</p>
 
-          <p><strong>Điều 1.</strong> Phê duyệt Kế hoạch lựa chọn nhà thầu công trình: <strong>${d.projectName}</strong> với nội dung chi tiết như sau:</p>
-          <p>1. Tên gói thầu: <strong>${d.packageName}</strong>.</p>
-          <p>2. Giá gói thầu: <strong>${formatNumber(d.packagePrice)} đồng</strong> (${docSoThanhChu(d.packagePrice)}).</p>
-          <p>3. Nguồn vốn đầu tư: ${d.capitalSource}.</p>
-          <p>4. Hình thức lựa chọn nhà thầu: <strong>Chỉ định thầu rút gọn</strong> (theo Điều 80 Nghị định số 214/2025/NĐ-CP và hạn mức quy định tại Nghị định số 349/2026/NĐ-CP).</p>
-          <p>5. Phương thức lựa chọn nhà thầu: Không áp dụng.</p>
-          <p>6. Thời gian bắt đầu tổ chức lựa chọn nhà thầu: Quý ${Math.floor((new Date().getMonth()+3)/3)} năm ${new Date().getFullYear()}.</p>
-          <p>7. Loại hợp đồng: <strong>${d.contractType}</strong> (áp dụng mẫu hợp đồng chuẩn của Bộ Xây dựng).</p>
-          <p>8. Thời gian thực hiện hợp đồng: <strong>${d.duration}</strong>.</p>
-          <p>9. Thời hạn bảo hành công trình: <strong>${d.warrantyDuration}</strong>.</p>
+          <p><strong>Điều 1.</strong> Phê duyệt kế hoạch lựa chọn nhà thầu dự án: <strong>${d.projectName}</strong>, với nội dung chi tiết theo phụ lục đính kèm.</p>
 
-          <p><strong>Điều 2.</strong> Giao ${d.techDept} căn cứ Kế hoạch lựa chọn nhà thầu được duyệt có trách nhiệm xác định nhà thầu có đủ năng lực, kinh nghiệm; phát hành Thư mời thương thảo kèm Dự thảo hợp đồng và tổ chức thương thảo, hoàn thiện hợp đồng theo đúng trình tự rút gọn quy định tại Điều 80 Nghị định số 214/2025/NĐ-CP.</p>
-
-          <p><strong>Điều 3.</strong> Bộ phận Kỹ thuật - Thẩm định, Bộ phận Kế toán của ${d.ownerOrg} và các bộ phận, cá nhân có liên quan chịu trách nhiệm thi hành Quyết định này kể từ ngày ký./.</p>
+          <p><strong>Điều 2.</strong> Quyết định này có hiệu lực thi hành kể từ ngày ký. Các bộ phận thuộc Ban QLDA ĐTXD xã Tân Phú chịu trách nhiệm thi hành Quyết định này./.</p>
         </div>
 
         <table class="doc-footer-table">
@@ -1871,40 +2159,93 @@
             <td class="noi-nhan" style="width: 50%;">
               <strong>Nơi nhận:</strong>
               <ul>
-                <li>- Như Điều 3;</li>
-                <li>- ${d.parentOrg} (để b/c);</li>
+                <li>- Như Điều 2;</li>
+                <li>- UBND xã Tân Phú (để b/c);</li>
                 <li>- Lưu: VT, ${d.ownerSign}.</li>
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">GIÁM ĐỐC / ĐẠI DIỆN CHỦ ĐẦU TƯ</div>
+              <div class="chuc-vu">GIÁM ĐỐC</div>
               <div class="ho-ten">${d.signerName}</div>
             </td>
           </tr>
         </table>
+
+        <!-- PHỤ LỤC QUYẾT ĐỊNH KHLCNT -->
+        <div style="margin-top: 2rem; border-top: 1.5px dashed #cbd5e1; padding-top: 1rem; page-break-before: always;">
+          <div style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">
+            <div style="font-size: 13pt;">Phụ lục</div>
+            <div style="font-size: 14pt; text-transform: uppercase;">KẾ HOẠCH LỰA CHỌN NHÀ THẦU</div>
+            <div style="font-size: 12pt;">Dự án: ${d.projectName}</div>
+            <div style="font-size: 11pt; font-style: italic;">(Kèm theo Quyết định số ${docNoStr}/QĐ-${d.ownerSign} ngày ${shortDate} của Ban QLDA ĐTXD xã Tân Phú)</div>
+          </div>
+          <div style="overflow-x: auto; margin-top: 0.6rem;">
+            <table style="width:100%; border-collapse: collapse; font-size: 0.82rem;" border="1" cellpadding="5">
+              <thead>
+                <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
+                  <th style="width:4%;">STT</th>
+                  <th style="width:13%;">Tên chủ đầu tư</th>
+                  <th style="width:22%;">Tên gói thầu & Tóm tắt công việc chính</th>
+                  <th style="width:13%;">Giá gói thầu (đồng)</th>
+                  <th style="width:11%;">Nguồn vốn</th>
+                  <th style="width:10%;">Hình thức LCNT</th>
+                  <th style="width:7%;">Thời gian TC</th>
+                  <th style="width:8%;">Bắt đầu LCNT</th>
+                  <th style="width:7%;">Loại HĐ</th>
+                  <th style="width:7%;">Thời gian TH</th>
+                  <th style="width:5%;">Tùy chọn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align:center;">1</td>
+                  <td>Ban QLDA ĐTXD xã Tân Phú</td>
+                  <td><strong>${d.packageName}</strong><br><span style="font-size:0.75rem; color:#475569;">Bảo hành: ${d.warrantyDuration}</span></td>
+                  <td style="text-align:right; font-weight:bold;">${formatNumber(d.packagePrice)}</td>
+                  <td>${d.capitalSource}</td>
+                  <td>Chỉ định thầu rút gọn</td>
+                  <td style="text-align:center;">15 ngày</td>
+                  <td style="text-align:center;">Quý ${Math.floor((new Date().getMonth()+3)/3)}/${new Date().getFullYear()}</td>
+                  <td style="text-align:center;">${d.contractType}</td>
+                  <td style="text-align:center;">${d.duration}</td>
+                  <td style="text-align:center;">Không áp dụng</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       `;
     }
 
     function generateDoc3_ThuMoiThuongThao(d) {
+      const meta = docCustomMeta[2];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const qdKhlcnt = docCustomMeta[1];
+      const qdNoStr = qdKhlcnt.number ? qdKhlcnt.number : ".....";
+      const qdShortDate = formatDateShort(qdKhlcnt.date);
+
       return `
         <table class="doc-header-table">
           <tr>
             <td class="col-left">
               <div class="co-quan-cha">${d.parentOrg}</div>
               <div class="co-quan-ban-hanh">${d.ownerOrg}</div>
-              <div class="so-ky-hieu">Số: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/CV-${d.ownerSign}</div>
+              <div class="line-co-quan"></div>
+              <div class="so-ky-hieu">Số: ${docNoStr}/CV-${d.ownerSign}</div>
             </td>
             <td class="col-right">
               <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
               <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
-              <div class="dia-danh-ngay">${d.docLocation}, ${d.currentDateStr}</div>
+              <div class="line-tieu-ngu"></div>
+              <div class="dia-danh-ngay">${d.docLocation}, ${dateStr}</div>
             </td>
           </tr>
         </table>
 
         <div class="doc-main-title">
           <h3>THƯ MỜI THƯƠNG THẢO VÀ GỬI DỰ THẢO HỢP ĐỒNG</h3>
-          <p>V/v thực hiện: ${d.packageName}<br>Thuộc công trình: ${d.projectName}</p>
+          <p>V/v thực hiện: ${d.packageName}<br>Thuộc dự án: ${d.projectName}</p>
         </div>
 
         <div class="doc-content">
@@ -1912,8 +2253,8 @@
             Kính gửi: ${d.contractorName}
           </p>
 
-          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23/6/2023 của Quốc hội;</p>
-          <p>Căn cứ Quyết định phê duyệt Kế hoạch lựa chọn nhà thầu công trình: ${d.projectName};</p>
+          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23/6/2023, được sửa đổi bổ sung tại Luật số 57/2024/QH15 và Luật số 90/2025/QH15;</p>
+          <p>Căn cứ Quyết định số ${qdNoStr}/QĐ-${d.ownerSign} ngày ${qdShortDate} của Giám đốc ${d.ownerOrg} về việc phê duyệt Kế hoạch lựa chọn nhà thầu dự án: ${d.projectName};</p>
           <p>Căn cứ Quyết định số ${d.approvePackageEstimateNo} về việc phê duyệt Dự toán gói thầu: ${d.packageName};</p>
           <p>Căn cứ quy định về quy trình chỉ định thầu rút gọn tại Điều 80 Nghị định số 214/2025/NĐ-CP và hạn mức theo Nghị định số 349/2026/NĐ-CP của Chính phủ;</p>
           <p>Qua rà soát năng lực hoạt động xây dựng, chứng chỉ hành nghề và tư cách pháp nhân hợp lệ trên Hệ thống mạng đấu thầu quốc gia của Quý Công ty (Mã định danh e-GP: <strong>${d.contractorEgpId}</strong>);</p>
@@ -1941,7 +2282,7 @@
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">GIÁM ĐỐC / ĐẠI DIỆN CHỦ ĐẦU TƯ</div>
+              <div class="chuc-vu">GIÁM ĐỐC</div>
               <div class="ho-ten">${d.signerName}</div>
             </td>
           </tr>
@@ -1950,18 +2291,27 @@
     }
 
     function generateDoc4_BienBanThuongThao(d) {
+      const meta = docCustomMeta[3];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const cvMeta = docCustomMeta[2];
+      const cvNoStr = cvMeta.number ? cvMeta.number : ".....";
+      const cvShortDate = formatDateShort(cvMeta.date);
+
       return `
         <table class="doc-header-table">
           <tr>
             <td class="col-left">
               <div class="co-quan-cha">${d.parentOrg}</div>
               <div class="co-quan-ban-hanh">${d.ownerOrg}</div>
-              <div class="so-ky-hieu">Số: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/BB-${d.ownerSign}</div>
+              <div class="line-co-quan"></div>
+              <div class="so-ky-hieu">Số: ${docNoStr}/BB-${d.ownerSign}</div>
             </td>
             <td class="col-right">
               <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
               <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
-              <div class="dia-danh-ngay">${d.docLocation}, ${d.currentDateStr}</div>
+              <div class="line-tieu-ngu"></div>
+              <div class="dia-danh-ngay">${d.docLocation}, ${dateStr}</div>
             </td>
           </tr>
         </table>
@@ -1972,10 +2322,10 @@
         </div>
 
         <div class="doc-content">
-          <p>Hôm nay, vào hồi 09 giờ 00 phút, ${d.currentDateStr}, tại Văn phòng ${d.ownerOrg}, hai bên gồm có:</p>
+          <p>Hôm nay, vào hồi 09 giờ 00 phút, ${dateStr}, tại Văn phòng ${d.ownerOrg}, hai bên gồm có:</p>
 
           <p><strong>I. ĐẠI DIỆN BÊN GIAO THẦU (CHỦ ĐẦU TƯ): ${d.ownerOrg}</strong></p>
-          <p>- Ông/Bà: <strong>${d.signerName}</strong> - Chức vụ: Giám đốc / Đại diện Chủ đầu tư.</p>
+          <p>- Ông/Bà: <strong>${d.signerName}</strong> - Chức vụ: Giám đốc.</p>
           <p>- Ông/Bà: <strong>${d.techLeader}</strong> - Chức vụ: Cán bộ kỹ thuật.</p>
           <p>- Địa chỉ: ${d.docLocation}, Tỉnh Tây Ninh.</p>
 
@@ -1985,7 +2335,7 @@
           <p>- Địa chỉ trụ sở: ${d.contractorAddress}.</p>
           <p>- Điện thoại liên hệ: ${d.contractorPhone || "Đang cập nhật"}.</p>
 
-          <p>Căn cứ Thư mời thương thảo và Dự thảo hợp đồng, hai bên đã cùng nhau trao đổi, rà soát và thống nhất các nội dung sau:</p>
+          <p>Căn cứ Thư mời thương thảo số ${cvNoStr}/CV-${d.ownerSign} ngày ${cvShortDate} và Dự thảo hợp đồng, hai bên đã cùng nhau trao đổi, rà soát và thống nhất các nội dung sau:</p>
           
           <p><strong>1. Về nội dung và phạm vi công việc:</strong></p>
           <p>Bên nhận thầu cam kết thực hiện đầy đủ khối lượng, đúng thiết kế bản vẽ thi công, quy chuẩn, tiêu chuẩn kỹ thuật xây dựng hiện hành đối với <strong>${d.packageName}</strong> thuộc công trình ${d.projectName}.</p>
@@ -2025,41 +2375,53 @@
     }
 
     function generateDoc5_ToTrinhKetQua(d) {
+      const meta = docCustomMeta[4];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const qdKhlcnt = docCustomMeta[1];
+      const qdNoStr = qdKhlcnt.number ? qdKhlcnt.number : ".....";
+      const qdShortDate = formatDateShort(qdKhlcnt.date);
+      const bbMeta = docCustomMeta[3];
+      const bbNoStr = bbMeta.number ? bbMeta.number : ".....";
+      const bbShortDate = formatDateShort(bbMeta.date);
+
       return `
         <table class="doc-header-table">
           <tr>
             <td class="col-left">
               <div class="co-quan-cha">${d.ownerOrg}</div>
               <div class="co-quan-ban-hanh">${d.techDept}</div>
-              <div class="so-ky-hieu">Số: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/${d.techSign}</div>
+              <div class="line-co-quan"></div>
+              <div class="so-ky-hieu">Số: ${docNoStr}/${d.techSign}</div>
             </td>
             <td class="col-right">
               <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
               <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
-              <div class="dia-danh-ngay">${d.docLocation}, ${d.currentDateStr}</div>
+              <div class="line-tieu-ngu"></div>
+              <div class="dia-danh-ngay">${d.docLocation}, ${dateStr}</div>
             </td>
           </tr>
         </table>
 
         <div class="doc-main-title">
           <h3>TỜ TRÌNH</h3>
-          <p>Về việc phê duyệt kết quả lựa chọn nhà thầu (Chỉ định thầu rút gọn)<br>${d.packageName}<br>Công trình: ${d.projectName}</p>
+          <p>Về việc phê duyệt kết quả lựa chọn nhà thầu (Chỉ định thầu rút gọn)<br>${d.packageName}<br>Dự án: ${d.projectName}</p>
         </div>
 
         <div class="doc-content">
           <p style="text-indent: 0; text-align: center; font-weight: bold; margin-bottom: 1rem;">
-            Kính gửi: Lãnh đạo ${d.ownerOrg} (Chủ đầu tư)
+            Kính gửi: Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú
           </p>
 
-          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23/6/2023 của Quốc hội;</p>
+          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23/6/2023, được sửa đổi bổ sung tại Luật số 57/2024/QH15 và Luật số 90/2025/QH15;</p>
           <p>Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật sửa đổi, bổ sung Luật Xây dựng số 62/2020/QH14;</p>
           <p>Căn cứ Nghị định số 214/2025/NĐ-CP của Chính phủ về quy trình chỉ định thầu rút gọn (Điều 80);</p>
           <p>Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ về hạn mức chỉ định thầu;</p>
-          <p>Căn cứ Quyết định phê duyệt Kế hoạch lựa chọn nhà thầu số &nbsp;&nbsp;&nbsp;/QĐ-${d.ownerSign} của ${d.ownerOrg};</p>
+          <p>Căn cứ Quyết định phê duyệt Kế hoạch lựa chọn nhà thầu số ${qdNoStr}/QĐ-${d.ownerSign} ngày ${qdShortDate} của Giám đốc ${d.ownerOrg};</p>
           <p>Căn cứ Quyết định số ${d.approvePackageEstimateNo} về việc phê duyệt Dự toán gói thầu: ${d.packageName};</p>
-          <p>Căn cứ Biên bản hoàn thiện và thương thảo hợp đồng ngày ${d.currentDateStr} giữa ${d.ownerOrg} và ${d.contractorName};</p>
+          <p>Căn cứ Biên bản hoàn thiện và thương thảo hợp đồng số ${bbNoStr}/BB-${d.ownerSign} ngày ${bbShortDate} giữa ${d.ownerOrg} và ${d.contractorName};</p>
 
-          <p>${d.techDept} đã rà soát tư cách pháp nhân hợp lệ, năng lực hành nghề trên Hệ thống mạng đấu thầu quốc gia (e-GP: <strong>${d.contractorEgpId}</strong>) và kết quả thương thảo, kính trình Lãnh đạo ${d.ownerOrg} xem xét, phê duyệt kết quả chỉ định thầu gói thầu với các nội dung sau:</p>
+          <p>${d.techDept} đã rà soát tư cách pháp nhân hợp lệ, năng lực hành nghề trên Hệ thống mạng đấu thầu quốc gia (e-GP: <strong>${d.contractorEgpId}</strong>) và kết quả thương thảo, kính trình Giám đốc ${d.ownerOrg} xem xét, phê duyệt kết quả chỉ định thầu gói thầu với các nội dung sau:</p>
 
           <p><strong>1. Tên gói thầu:</strong> <strong>${d.packageName}</strong>.</p>
           <p><strong>2. Nhà thầu được đề nghị chỉ định thầu:</strong> <strong>${d.contractorName}</strong>.</p>
@@ -2074,7 +2436,7 @@
           <p><strong>6. Thời gian thực hiện hợp đồng:</strong> <strong>${d.duration}</strong>.</p>
           <p><strong>7. Thời hạn bảo hành công trình:</strong> <strong>${d.warrantyDuration}</strong>.</p>
 
-          <p>${d.techDept} kính trình Lãnh đạo ${d.ownerOrg} xem xét, ký ban hành Quyết định phê duyệt kết quả chỉ định thầu làm cơ sở ký kết hợp đồng và triển khai thực hiện./.</p>
+          <p>${d.techDept} kính trình Giám đốc ${d.ownerOrg} xem xét, ký ban hành Quyết định phê duyệt kết quả chỉ định thầu làm cơ sở ký kết hợp đồng và triển khai thực hiện./.</p>
         </div>
 
         <table class="doc-footer-table">
@@ -2087,7 +2449,7 @@
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">CÁN BỘ KỸ THUẬT</div>
+              <div class="chuc-vu">TM. BP KỸ THUẬT – THẨM ĐỊNH</div>
               <div class="ho-ten">${d.techLeader}</div>
             </td>
           </tr>
@@ -2096,18 +2458,32 @@
     }
 
     function generateDoc6_QDPheDuyetKetQua(d) {
+      const meta = docCustomMeta[5];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const qdKhlcnt = docCustomMeta[1];
+      const qdNoStr = qdKhlcnt.number ? qdKhlcnt.number : ".....";
+      const ttrMeta = docCustomMeta[4];
+      const ttrNoStr = ttrMeta.number ? ttrMeta.number : ".....";
+      const ttrShortDate = formatDateShort(ttrMeta.date);
+      const bbMeta = docCustomMeta[3];
+      const bbNoStr = bbMeta.number ? bbMeta.number : ".....";
+      const bbShortDate = formatDateShort(bbMeta.date);
+
       return `
         <table class="doc-header-table">
           <tr>
             <td class="col-left">
               <div class="co-quan-cha">${d.parentOrg}</div>
               <div class="co-quan-ban-hanh">${d.ownerOrg}</div>
-              <div class="so-ky-hieu">Số: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/QĐ-${d.ownerSign}</div>
+              <div class="line-co-quan"></div>
+              <div class="so-ky-hieu">Số: ${docNoStr}/QĐ-${d.ownerSign}</div>
             </td>
             <td class="col-right">
               <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
               <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
-              <div class="dia-danh-ngay">${d.docLocation}, ${d.currentDateStr}</div>
+              <div class="line-tieu-ngu"></div>
+              <div class="dia-danh-ngay">${d.docLocation}, ${dateStr}</div>
             </td>
           </tr>
         </table>
@@ -2119,21 +2495,21 @@
 
         <div class="doc-content">
           <p style="text-indent: 0; text-align: center; font-weight: bold; margin-bottom: 0.8rem;">
-            GIÁM ĐỐC ${d.ownerOrg} (CHỦ ĐẦU TƯ)
+            GIÁM ĐỐC BAN QUẢN LÝ DỰ ÁN ĐTXD XÃ TÂN PHÚ
           </p>
 
-          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23 tháng 6 năm 2023 của Quốc hội;</p>
+          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23 tháng 6 năm 2023 của Quốc hội, được sửa đổi bổ sung tại Luật số 57/2024/QH15 và Luật số 90/2025/QH15;</p>
           <p>Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật sửa đổi, bổ sung một số điều của Luật Xây dựng số 62/2020/QH14;</p>
           <p>Căn cứ Nghị định số 214/2025/NĐ-CP của Chính phủ quy định chi tiết một số điều và biện pháp thi hành Luật Đấu thầu về lựa chọn nhà thầu;</p>
           <p>Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ về việc quy định hạn mức chỉ định thầu;</p>
           <p>Căn cứ Nghị định số 207/2026/NĐ-CP của Chính phủ về quản lý chất lượng, thi công xây dựng và bảo trì công trình xây dựng;</p>
           <p>Căn cứ Nghị định số 217/2026/NĐ-CP của Chính phủ về quản lý dự án đầu tư xây dựng;</p>
           <p>Căn cứ Quyết định số 43/2026/QĐ-UBND của Ủy ban nhân dân tỉnh Tây Ninh ban hành Quy định phân cấp quản lý dự án đầu tư công trên địa bàn tỉnh Tây Ninh;</p>
-          <p>Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng/dự toán công trình: ${d.projectName};</p>
-          <p>Căn cứ Quyết định phê duyệt Kế hoạch lựa chọn nhà thầu số &nbsp;&nbsp;&nbsp;/QĐ-${d.ownerSign} của Giám đốc ${d.ownerOrg};</p>
+          <p>Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng: ${d.projectName};</p>
+          <p>Căn cứ Quyết định phê duyệt Kế hoạch lựa chọn nhà thầu số ${qdNoStr}/QĐ-${d.ownerSign} của Giám đốc ${d.ownerOrg};</p>
           <p>Căn cứ Quyết định số ${d.approvePackageEstimateNo} về việc phê duyệt Dự toán gói thầu: ${d.packageName};</p>
-          <p>Căn cứ Biên bản hoàn thiện và thương thảo hợp đồng ngày ${d.currentDateStr} giữa ${d.ownerOrg} và ${d.contractorName};</p>
-          <p>Xét Tờ trình số &nbsp;&nbsp;&nbsp;/${d.techSign} của ${d.techDept} về việc đề nghị phê duyệt kết quả lựa chọn nhà thầu gói thầu: ${d.packageName},</p>
+          <p>Căn cứ Biên bản hoàn thiện và thương thảo hợp đồng số ${bbNoStr}/BB-${d.ownerSign} ngày ${bbShortDate} giữa ${d.ownerOrg} và ${d.contractorName};</p>
+          <p>Xét Tờ trình số ${ttrNoStr}/${d.techSign} ngày ${ttrShortDate} của ${d.techDept} về việc đề nghị phê duyệt kết quả lựa chọn nhà thầu gói thầu: ${d.packageName},</p>
 
           <p style="text-align: center; font-weight: bold; margin: 1rem 0;">QUYẾT ĐỊNH:</p>
 
@@ -2164,7 +2540,7 @@
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">GIÁM ĐỐC / ĐẠI DIỆN CHỦ ĐẦU TƯ</div>
+              <div class="chuc-vu">GIÁM ĐỐC</div>
               <div class="ho-ten">${d.signerName}</div>
             </td>
           </tr>
@@ -2173,20 +2549,29 @@
     }
 
     function generateDoc7_HopDongBoXayDung(d) {
+      const meta = docCustomMeta[6];
+      const docNoStr = meta.number ? meta.number : ".....";
+      const dateStr = formatDateToVietnamese(meta.date);
+      const year = (meta.date ? meta.date.split("-")[0] : new Date().getFullYear());
+      const qdResultMeta = docCustomMeta[5];
+      const qdResultNo = qdResultMeta.number ? qdResultMeta.number : ".....";
+      const qdResultShortDate = formatDateShort(qdResultMeta.date);
+
       return `
         <table class="doc-header-table">
           <tr>
             <td class="col-left" style="width: 100%; text-align: center;">
               <div class="quoc-hieu">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
               <div class="tieu-ngu">Độc lập - Tự do - Hạnh phúc</div>
-              <div class="dia-danh-ngay" style="margin-top: 4px;">${d.docLocation}, ${d.currentDateStr}</div>
+              <div class="line-tieu-ngu" style="width: 45%;"></div>
+              <div class="dia-danh-ngay" style="margin-top: 4px;">${d.docLocation}, ${dateStr}</div>
             </td>
           </tr>
         </table>
 
         <div class="doc-main-title">
           <h3>HỢP ĐỒNG KINH TẾ</h3>
-          <p>(Soạn thảo chuẩn theo biểu mẫu quy định của Bộ Xây dựng)<br>Số: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2026/HĐ-${d.ownerSign}<br>V/v thực hiện: ${d.packageName}<br>Thuộc công trình: ${d.projectName}</p>
+          <p>(Soạn thảo chuẩn theo biểu mẫu quy định của Bộ Xây dựng)<br>Số: ${docNoStr}/${year}/HĐ-${d.ownerSign}<br>V/v thực hiện: ${d.packageName}<br>Thuộc công trình: ${d.projectName}</p>
         </div>
 
         <div class="doc-content">
@@ -2196,12 +2581,12 @@
           <p>Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ về hạn mức chỉ định thầu;</p>
           <p>Căn cứ Nghị định số 207/2026/NĐ-CP của Chính phủ về quản lý chất lượng và thi công xây dựng;</p>
           <p>Căn cứ các Thông tư hướng dẫn về mẫu hợp đồng trong hoạt động đầu tư xây dựng của Bộ Xây dựng;</p>
-          <p>Căn cứ Quyết định số &nbsp;&nbsp;&nbsp;/QĐ-${d.ownerSign} của Giám đốc ${d.ownerOrg} về việc phê duyệt kết quả chỉ định thầu gói thầu: ${d.packageName};</p>
+          <p>Căn cứ Quyết định số ${qdResultNo}/QĐ-${d.ownerSign} ngày ${qdResultShortDate} của Giám đốc ${d.ownerOrg} về việc phê duyệt kết quả chỉ định thầu gói thầu: ${d.packageName};</p>
 
-          <p>Hôm nay, ngày ${d.currentDateStr}, tại Văn phòng ${d.ownerOrg}, chúng tôi gồm các bên:</p>
+          <p>Hôm nay, ${dateStr}, tại Văn phòng ${d.ownerOrg}, chúng tôi gồm các bên:</p>
           
           <p><strong>BÊN GIAO THẦU (BÊN A - CHỦ ĐẦU TƯ): ${d.ownerOrg}</strong></p>
-          <p>- Đại diện: Ông/Bà <strong>${d.signerName}</strong> - Chức vụ: Giám đốc / Đại diện Chủ đầu tư.</p>
+          <p>- Đại diện: Ông/Bà <strong>${d.signerName}</strong> - Chức vụ: Giám đốc.</p>
           <p>- Địa chỉ: ${d.docLocation}, Tỉnh Tây Ninh.</p>
           <p>- Ký hiệu cơ quan: ${d.ownerSign}.</p>
 
@@ -2510,7 +2895,9 @@
     // Init App
     window.addEventListener("DOMContentLoaded", () => {
       loadSavedData();
+      loadDocMetaFromStorage();
       calcDiscount();
+      syncMetaToolbarToActiveDoc();
       renderCurrentDoc();
       window.addEventListener("resize", zoomFitScreen);
     });
