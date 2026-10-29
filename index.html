@@ -1055,7 +1055,7 @@
               </div>
               <div class="form-group">
                 <label>Bộ phận chuyên môn lập hồ sơ: <span class="req">*</span></label>
-                <input type="text" id="techDept" class="form-control" value="BỘ PHẬN KỸ THUẬT - THẨM ĐỊNH">
+                <input type="text" id="techDept" class="form-control" value="TỔ QUẢN LÝ DỰ ÁN">
                 <div class="help-text">Đơn vị lập Tờ trình gửi Lãnh đạo Chủ đầu tư</div>
               </div>
               <div class="form-group">
@@ -1070,7 +1070,7 @@
               <div class="form-group">
                 <label>Phụ trách bộ phận chuyên môn: <span class="req">*</span></label>
                 <input type="text" id="techLeader" class="form-control" value="Nguyễn Văn A">
-                <div class="help-text">Chức danh: Cán bộ kỹ thuật</div>
+                <div class="help-text">Chức danh: Tổ trưởng / Phụ trách Tổ Quản lý dự án</div>
               </div>
               <div class="form-group">
                 <label>Ký hiệu văn bản của Chủ đầu tư: <span class="req">*</span></label>
@@ -1079,8 +1079,8 @@
               </div>
               <div class="form-group">
                 <label>Ký hiệu văn bản Bộ phận tham mưu trình: <span class="req">*</span></label>
-                <input type="text" id="techSign" class="form-control" value="TTr-KTTĐ">
-                <div class="help-text">Ký hiệu Tờ trình tham mưu (Ví dụ: TTr-KTTĐ)</div>
+                <input type="text" id="techSign" class="form-control" value="TTr-QLDA">
+                <div class="help-text">Ký hiệu Tờ trình tham mưu (Ví dụ: TTr-QLDA)</div>
               </div>
             </div>
           </div>
@@ -1139,7 +1139,7 @@
               </div>
               <div class="form-group">
                 <label>Hình thức lựa chọn nhà thầu: <span class="req">*</span></label>
-                <input type="text" class="form-control" value="Chỉ định thầu rút gọn (Điều 80 Nghị định 214/2025/NĐ-CP)" readonly style="background:#f8fafc; font-weight:600;">
+                <input type="text" class="form-control" value="Chỉ định thầu rút gọn (Điều 80 Nghị định 214/2025/NĐ-CP và Khoản 5 Điều 4 Nghị định 349/2026/NĐ-CP)" readonly style="background:#f8fafc; font-weight:600;">
               </div>
               <div class="form-group">
                 <label>Giá gói thầu được duyệt (VNĐ): <span class="req">*</span></label>
@@ -2078,7 +2078,7 @@
         signerName: document.getElementById("signerName").value.trim(),
         techLeader: document.getElementById("techLeader").value.trim(),
         ownerSign: (document.getElementById("ownerSign") ? document.getElementById("ownerSign").value.trim() : "BQLDA") || "BQLDA",
-        techSign: (document.getElementById("techSign") ? document.getElementById("techSign").value.trim() : "TTr-KTTĐ") || "TTr-KTTĐ",
+        techSign: (document.getElementById("techSign") ? document.getElementById("techSign").value.trim() : "TTr-QLDA") || "TTr-QLDA",
         projectName: document.getElementById("projectName").value.trim(),
         projectLocation: document.getElementById("projectLocation").value.trim(),
         capitalSource: document.getElementById("capitalSource").value.trim(),
@@ -2660,7 +2660,7 @@
             Kính gửi: Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú
           </p>
 
-          <p>Bộ phận Kỹ thuật – Thẩm định thuộc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, phê duyệt kế hoạch lựa chọn nhà thầu trên cơ sở những nội dung dưới đây:</p>
+          <p>Tổ Quản lý dự án thuộc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, phê duyệt kế hoạch lựa chọn nhà thầu trên cơ sở những nội dung dưới đây:</p>
 
           <p><strong>I. Mô tả tóm tắt dự án:</strong></p>
           <p>- Tên dự án: <strong>${d.projectName}</strong></p>
@@ -2806,7 +2806,7 @@
           ${table3Data.map(r => `<p>- ${escapeHtml(r.packageName)}: <strong>${formatNumber(r.price)} đồng</strong></p>`).join('')}
 
           <p><strong>c. Nguồn vốn:</strong> Nguồn vốn: ${d.capitalSource}.</p>
-          <p><strong>d. Hình thức và phương thức lựa chọn nhà thầu:</strong> Áp dụng hình thức Chỉ định thầu rút gọn theo quy định tại điểm m khoản 1 Điều 23 Luật Đấu thầu 2023 và Điều 80 Nghị định 214/2025/NĐ-CP; Phương thức lựa chọn nhà thầu: Không áp dụng.</p>
+          <p><strong>d. Hình thức và phương thức lựa chọn nhà thầu:</strong> Áp dụng hình thức Chỉ định thầu rút gọn theo quy định tại điểm m khoản 1 Điều 23 Luật Đấu thầu 2023, Điều 80 Nghị định 214/2025/NĐ-CP và Khoản 5 Điều 4 Nghị định 349/2026/NĐ-CP; Phương thức lựa chọn nhà thầu: Không áp dụng.</p>
           <p><strong>e. Thời gian tổ chức lựa chọn nhà thầu:</strong> 15 ngày kể từ ngày phê duyệt KHLCNT.</p>
           <p><strong>g. Loại hợp đồng:</strong> Hợp đồng trọn gói (hoặc theo tỷ lệ phần trăm đối với gói thầu bảo hiểm công trình).</p>
           <p><strong>h. Thời gian thực hiện gói thầu:</strong></p>
@@ -2847,7 +2847,7 @@
             </tbody>
           </table>
 
-          <p>Bộ phận Kỹ thuật – Thẩm định kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, quyết định phê duyệt kế hoạch lựa chọn nhà thầu dự án nêu trên./.</p>
+          <p>Tổ Quản lý dự án kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, quyết định phê duyệt kế hoạch lựa chọn nhà thầu dự án nêu trên./.</p>
         </div>
 
         <table class="doc-footer-table">
@@ -2860,9 +2860,8 @@
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">ĐẠI DIỆN BỘ PHẬN KỸ THUẬT – THẨM ĐỊNH</div>
-              <div class="chuc-danh-phu">(Cán bộ kỹ thuật)</div>
-              <div class="ho-ten">${d.techLeader}</div>
+              <div class="chuc-vu">ĐẠI DIỆN TỔ QUẢN LÝ DỰ ÁN</div>
+              <div class="ho-ten" style="margin-top: 50px;">${d.techLeader}</div>
             </td>
           </tr>
         </table>
@@ -2915,7 +2914,7 @@
           <p>Căn cứ Thông tư số 79/2025/TT-BTC ngày 04 tháng 8 năm 2025 của Bộ trưởng Bộ Tài chính hướng dẫn mẫu hồ sơ đấu thầu;</p>
           <p>Căn cứ Quyết định số 43/2026/QĐ-UBND ngày 24/3/2026 của UBND tỉnh Tây Ninh về việc ban hành quy định về phân cấp, phân công trách nhiệm quản lý và thực hiện dự án đầu tư công, dự án đầu tư xây dựng công trình, quản lý chất lượng công trình xây dựng trên địa bàn tỉnh Tây Ninh;</p>
           <p>Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng/dự án: ${d.projectName};</p>
-          <p>Theo đề nghị của Bộ phận Kỹ thuật – Thẩm định thuộc Ban QLDA ĐTXD xã tại Tờ trình số ${ttrNoStr}/${d.techSign} ngày ${ttrShortDate},</p>
+          <p>Theo đề nghị của Tổ Quản lý dự án thuộc Ban QLDA ĐTXD xã tại Tờ trình số ${ttrNoStr}/${d.techSign} ngày ${ttrShortDate},</p>
 
           <p style="text-align: center; font-weight: bold; margin: 1rem 0;">QUYẾT ĐỊNH:</p>
 
@@ -3106,7 +3105,7 @@
 
         <div class="doc-main-title">
           <h3>BIÊN BẢN HOÀN THIỆN VÀ THƯƠNG THẢO HỢP ĐỒNG</h3>
-          <p>(Quy trình chỉ định thầu rút gọn theo Điều 80 Nghị định số 214/2025/NĐ-CP)<br>Gói thầu: ${d.packageName}<br>Thuộc công trình: ${d.projectName}</p>
+          <p>(Quy trình chỉ định thầu rút gọn theo Điều 80 Nghị định số 214/2025/NĐ-CP và Khoản 5 Điều 4 Nghị định 349/2026/NĐ-CP)<br>Gói thầu: ${d.packageName}<br>Thuộc công trình: ${d.projectName}</p>
         </div>
 
         <div class="doc-content">
@@ -3114,7 +3113,7 @@
 
           <p><strong>I. ĐẠI DIỆN BÊN GIAO THẦU (CHỦ ĐẦU TƯ): ${d.ownerOrg}</strong></p>
           <p>- Ông/Bà: <strong>${d.signerName}</strong> - Chức vụ: Giám đốc.</p>
-          <p>- Ông/Bà: <strong>${d.techLeader}</strong> - Chức vụ: Cán bộ kỹ thuật.</p>
+          <p>- Ông/Bà: <strong>${d.techLeader}</strong> - Chức vụ: Tổ trưởng Tổ Quản lý dự án.</p>
           <p>- Địa chỉ: ${d.docLocation}, Tỉnh Tây Ninh.</p>
 
           <p><strong>II. ĐẠI DIỆN BÊN NHẬN THẦU (NHÀ THẦU): ${d.contractorName}</strong></p>
@@ -3203,7 +3202,7 @@
 
           <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 ngày 23/6/2023, được sửa đổi bổ sung tại Luật số 57/2024/QH15 và Luật số 90/2025/QH15;</p>
           <p>Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật sửa đổi, bổ sung Luật Xây dựng số 62/2020/QH14;</p>
-          <p>Căn cứ Nghị định số 214/2025/NĐ-CP của Chính phủ về quy trình chỉ định thầu rút gọn (Điều 80);</p>
+          <p>Căn cứ Nghị định số 214/2025/NĐ-CP của Chính phủ về quy trình chỉ định thầu rút gọn (Điều 80) và Khoản 5 Điều 4 Nghị định số 349/2026/NĐ-CP;</p>
           <p>Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ về hạn mức chỉ định thầu;</p>
           <p>Căn cứ Quyết định phê duyệt Kế hoạch lựa chọn nhà thầu số ${qdNoStr}/QĐ-${d.ownerSign} ngày ${qdShortDate} của Giám đốc ${d.ownerOrg};</p>
           <p>Căn cứ Quyết định số ${d.approvePackageEstimateNo} về việc phê duyệt Dự toán gói thầu: ${d.packageName};</p>
@@ -3237,7 +3236,7 @@
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">TM. BP KỸ THUẬT – THẨM ĐỊNH</div>
+              <div class="chuc-vu">TM. TỔ QUẢN LÝ DỰ ÁN</div>
               <div class="ho-ten">${d.techLeader}</div>
             </td>
           </tr>
@@ -3314,7 +3313,7 @@
 
           <p><strong>Điều 2.</strong> Giao ${d.techDept} chủ trì, phối hợp với đơn vị trúng thầu tiến hành ký kết Hợp đồng kinh tế theo đúng quy định; tổ chức quản lý, giám sát và thực hiện theo đúng trình tự quản lý đầu tư xây dựng hiện hành; thực hiện đăng tải kết quả lựa chọn nhà thầu lên Hệ thống mạng đấu thầu quốc gia theo đúng thời gian quy định tại Điều 80 Nghị định số 214/2025/NĐ-CP.</p>
 
-          <p><strong>Điều 3.</strong> Bộ phận Kỹ thuật - Thẩm định, Bộ phận Kế toán của ${d.ownerOrg}, đơn vị có tên tại Điều 1 và các đơn vị, cá nhân có liên quan chịu trách nhiệm thi hành Quyết định này kể từ ngày ký./.</p>
+          <p><strong>Điều 3.</strong> Tổ Quản lý dự án, Bộ phận Kế toán của ${d.ownerOrg}, đơn vị có tên tại Điều 1 và các đơn vị, cá nhân có liên quan chịu trách nhiệm thi hành Quyết định này kể từ ngày ký./.</p>
         </div>
 
         <table class="doc-footer-table">
@@ -3365,7 +3364,7 @@
         <div class="doc-content">
           <p>Căn cứ Bộ luật Dân sự số 91/2015/QH13 ngày 24 tháng 11 năm 2015 của Quốc hội;</p>
           <p>Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật Xây dựng sửa đổi, bổ sung số 62/2020/QH14;</p>
-          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15 và Điều 80 Nghị định số 214/2025/NĐ-CP của Chính phủ;</p>
+          <p>Căn cứ Luật Đấu thầu số 22/2023/QH15, Điều 80 Nghị định số 214/2025/NĐ-CP và Khoản 5 Điều 4 Nghị định số 349/2026/NĐ-CP của Chính phủ;</p>
           <p>Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ về hạn mức chỉ định thầu;</p>
           <p>Căn cứ Nghị định số 207/2026/NĐ-CP của Chính phủ về quản lý chất lượng và thi công xây dựng;</p>
           <p>Căn cứ các Thông tư hướng dẫn về mẫu hợp đồng trong hoạt động đầu tư xây dựng của Bộ Xây dựng;</p>
@@ -3483,7 +3482,7 @@
           <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Kế hoạch lựa chọn nhà thầu dự án: ${escapeXml(d.projectName)}</w:t></w:r></w:p>
           <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Kính gửi: Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú</w:t></w:r></w:p>
           
-          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Bộ phận Kỹ thuật – Thẩm định thuộc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, phê duyệt kế hoạch lựa chọn nhà thầu trên cơ sở những nội dung dưới đây:</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Tổ Quản lý dự án thuộc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, phê duyệt kế hoạch lựa chọn nhà thầu trên cơ sở những nội dung dưới đây:</w:t></w:r></w:p>
           
           <w:p><w:pPr><w:spacing w:before="120" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>I. Mô tả tóm tắt dự án:</w:t></w:r></w:p>
           <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>- Tên dự án: ${escapeXml(d.projectName)}</w:t></w:r></w:p>
@@ -3562,7 +3561,7 @@
           <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Về việc phê duyệt kế hoạch lựa chọn nhà thầu dự án: ${escapeXml(d.projectName)}</w:t></w:r></w:p>
           <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>GIÁM ĐỐC BAN QUẢN LÝ DỰ ÁN ĐTXD XÃ TÂN PHÚ</w:t></w:r></w:p>
           
-          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Căn cứ Luật Đấu thầu số 22/2023/QH15; Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật số 62/2020/QH14; Căn cứ Nghị định số 214/2025/NĐ-CP; Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ; Căn cứ Quyết định số ${escapeXml(d.approveDecisionNo)}; Theo đề nghị của Bộ phận Kỹ thuật – Thẩm định tại Tờ trình số ${escapeXml(docCustomMeta[0].number || '.....')}/${escapeXml(d.techSign)} ngày ${formatDateShort(docCustomMeta[0].date)},</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Căn cứ Luật Đấu thầu số 22/2023/QH15; Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật số 62/2020/QH14; Căn cứ Nghị định số 214/2025/NĐ-CP; Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ; Căn cứ Quyết định số ${escapeXml(d.approveDecisionNo)}; Theo đề nghị của Tổ Quản lý dự án tại Tờ trình số ${escapeXml(docCustomMeta[0].number || '.....')}/${escapeXml(d.techSign)} ngày ${formatDateShort(docCustomMeta[0].date)},</w:t></w:r></w:p>
           <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="120" w:after="120"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t>QUYẾT ĐỊNH:</w:t></w:r></w:p>
           <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Điều 1. </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Phê duyệt kế hoạch lựa chọn nhà thầu dự án: ${escapeXml(d.projectName)}, với nội dung chi tiết theo phụ lục đính kèm.</w:t></w:r></w:p>
           <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="120"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Điều 2. </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Quyết định này có hiệu lực kể từ ngày ký. Các bộ phận thuộc Ban QLDA ĐTXD xã Tân Phú chịu trách nhiệm thi hành Quyết định này./.</w:t></w:r></w:p>
@@ -3675,7 +3674,7 @@
           <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>a. Cơ sở phân chia các gói thầu: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Việc phân chia gói thầu căn cứ tính chất kỹ thuật và tiến độ thực hiện dự án.</w:t></w:r></w:p>
           <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>b. Giá gói thầu: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Tổng giá gói thầu: ${formatNumber(t3Total)} đồng.</w:t></w:r></w:p>
           <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>c. Nguồn vốn: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>${escapeXml(d.capitalSource)}.</w:t></w:r></w:p>
-          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>d. Hình thức và phương thức LCNT: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Chỉ định thầu rút gọn theo quy định Điều 80 Nghị định 214/2025/NĐ-CP.</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>d. Hình thức và phương thức LCNT: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Chỉ định thầu rút gọn theo quy định Điều 80 Nghị định 214/2025/NĐ-CP và Khoản 5 Điều 4 Nghị định 349/2026/NĐ-CP.</w:t></w:r></w:p>
           
           <w:p><w:pPr><w:spacing w:before="120" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>VII. Tổng giá trị các phần công việc: (Bảng số 5)</w:t></w:r></w:p>
           <w:tbl>
@@ -3717,8 +3716,8 @@
                 <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>- Lưu: VT, ${escapeXml(d.techSign)}.</w:t></w:r></w:p>
               </w:tc>
               <w:tc><w:tcPr><w:tcW w:w="4677" w:type="dxa"/></w:tcPr>
-                <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>ĐẠI DIỆN BỘ PHẬN KỸ THUẬT – THẨM ĐỊNH</w:t></w:r></w:p>
-                <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:i/><w:sz w:val="24"/></w:rPr><w:t>(Cán bộ kỹ thuật)</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>ĐẠI DIỆN TỔ QUẢN LÝ DỰ ÁN</w:t></w:r></w:p>
+                
                 <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="600"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>${escapeXml(d.techLeader)}</w:t></w:r></w:p>
               </w:tc>
             </w:tr>
