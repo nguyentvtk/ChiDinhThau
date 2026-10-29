@@ -638,6 +638,145 @@
       .a4-wrapper { transform: none !important; }
       .a4-paper { box-shadow: none; margin: 0; width: 100%; min-height: auto; padding: 0; }
     }
+  
+    /* BẢNG SỐ 3 VÀ TRANG A4 NẰM NGANG (LANDSCAPE) THEO HỒ SƠ THỰC TẾ */
+    .a4-landscape-page {
+      width: 297mm;
+      min-height: 210mm;
+      max-width: 100%;
+      margin: 1.5rem auto;
+      padding: 20mm 15mm 20mm 25mm; /* Chuẩn A4 ngang: Trên 20, Dưới 20, Phải 15, Trái 25 */
+      background: #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      border: 1px solid #cbd5e1;
+      font-family: var(--font-serif);
+      font-size: 11pt;
+      line-height: 1.35;
+      color: #000000;
+      box-sizing: border-box;
+      position: relative;
+      page-break-before: always;
+      page-break-after: always;
+      overflow-x: auto;
+    }
+
+    .landscape-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eff6ff;
+      border: 1px solid #93c5fd;
+      color: #1e40af;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .table3-landscape-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      table-layout: fixed;
+      word-break: break-word;
+      font-family: var(--font-serif);
+    }
+    .table3-landscape-tbl th, .table3-landscape-tbl td {
+      border: 1px solid #000;
+      padding: 5px 4px;
+      vertical-align: middle;
+      font-size: 9.5pt;
+      line-height: 1.25;
+    }
+    .table3-landscape-tbl thead th {
+      background-color: #f8fafc;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .doc-custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.6rem 0;
+      font-size: 11.5pt;
+      font-family: var(--font-serif);
+    }
+    .doc-custom-table th, .doc-custom-table td {
+      border: 1px solid #000;
+      padding: 6px 8px;
+      vertical-align: middle;
+      font-size: 11.5pt;
+    }
+    .doc-custom-table thead th {
+      background-color: #f8fafc;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Sub-tab chuyển đổi quản lý 3 bảng */
+    .table-subtabs {
+      display: flex;
+      gap: 6px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .table-subtab-btn {
+      padding: 8px 16px;
+      border: none;
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 600;
+      font-size: 0.88rem;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .table-subtab-btn.active {
+      background: #1b365d;
+      color: #ffffff;
+    }
+    .table-subtab-pane {
+      display: none;
+    }
+    .table-subtab-pane.active {
+      display: block;
+    }
+
+    .table-editor-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.8rem;
+      font-size: 0.85rem;
+    }
+    .table-editor-tbl th, .table-editor-tbl td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 8px;
+      vertical-align: middle;
+    }
+    .table-editor-tbl thead th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #1e293b;
+      text-align: center;
+    }
+    .table-editor-tbl input, .table-editor-tbl textarea, .table-editor-tbl select {
+      width: 100%;
+      padding: 4px 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+    .table-editor-tbl input:focus, .table-editor-tbl textarea:focus {
+      border-color: #1b365d;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(27, 54, 93, 0.15);
+    }
+
   </style>
 </head>
 <body>
@@ -1041,6 +1180,172 @@
             </div>
           </div>
         </div>
+      
+        <!-- CARD 4: QUẢN LÝ CHI PHÍ CÁC BẢNG KHLCNT (BẢNG 1, BẢNG 2, BẢNG 3) -->
+        <div class="card" style="border: 2px solid #1b365d; margin-top: 1.5rem;">
+          <div class="card-header" style="background: linear-gradient(135deg, #1b365d 0%, #0f203b 100%); color: #fff;">
+            <div>
+              <h2 style="color: #fff; font-size: 1.05rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+                4. QUẢN LÝ CHI PHÍ CÁC BẢNG KHLCNT (BẢNG 1, BẢNG 2, BẢNG 3)
+              </h2>
+              <div style="font-size: 0.8rem; color: #93c5fd; margin-top: 3px;">
+                Tùy biến số lượng chi phí thành phần từng dự án • Tự động tính dòng "Tổng cộng" • Bảng số 3 chuẩn 13 cột trang A4 ngang
+              </div>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button type="button" class="btn btn-sm btn-light" onclick="resetTablesToDefault()" title="Khôi phục mẫu chuẩn hồ sơ xã Tân Phú">
+                🔄 Nạp Mẫu Hồ Sơ Thực Tế
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            
+            <!-- Sub-tabs chọn bảng -->
+            <div class="table-subtabs">
+              <button type="button" class="table-subtab-btn active" onclick="switchTableSubtab(1, this)">
+                📋 Bảng 1: Đã thực hiện (<span id="t1-count-badge">2</span>)
+              </button>
+              <button type="button" class="table-subtab-btn" onclick="switchTableSubtab(2, this)">
+                ⚙️ Bảng 2: Không áp dụng LCNT (<span id="t2-count-badge">4</span>)
+              </button>
+              <button type="button" class="table-subtab-btn" onclick="switchTableSubtab(3, this)">
+                📊 Bảng 3: Gói thầu KHLCNT - 13 Cột A4 Ngang (<span id="t3-count-badge">4</span>)
+              </button>
+            </div>
+
+            <!-- BẢNG 1 SUBTAB -->
+            <div id="subtab-pane-1" class="table-subtab-pane active">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div style="font-size:0.88rem; color:#475569;">
+                  <strong>Phần công việc đã thực hiện:</strong> Các công việc tư vấn, thẩm tra, chuẩn bị đầu tư đã ký hợp đồng hoặc phê duyệt.
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" onclick="addTable1Row()">
+                  + Thêm chi phí Bảng 1
+                </button>
+              </div>
+              <div style="overflow-x:auto;">
+                <table class="table-editor-tbl">
+                  <thead>
+                    <tr>
+                      <th style="width:50px;">STT</th>
+                      <th style="min-width:200px;">Nội dung công việc hoặc tên gói thầu</th>
+                      <th style="min-width:180px;">Đơn vị thực hiện</th>
+                      <th style="width:140px;">Giá trị (đồng)</th>
+                      <th style="min-width:200px;">Văn bản phê duyệt</th>
+                      <th style="width:50px;">Xóa</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table1-editor-body">
+                    <!-- Dynamic Rows -->
+                  </tbody>
+                  <tfoot>
+                    <tr style="background:#f8fafc; font-weight:bold;">
+                      <td colspan="3" style="text-align:right; color:#1e293b;">TỔNG GIÁ TRỊ (BẢNG 1):</td>
+                      <td style="text-align:right; color:#0284c7; font-size:0.95rem;" id="t1-total-display">0 VNĐ</td>
+                      <td colspan="2"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <!-- BẢNG 2 SUBTAB -->
+            <div id="subtab-pane-2" class="table-subtab-pane">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div style="font-size:0.88rem; color:#475569;">
+                  <strong>Phần công việc không áp dụng LCNT:</strong> Chi phí quản lý dự án, thẩm tra quyết toán, thẩm duyệt PCCC, chi phí dự phòng...
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" onclick="addTable2Row()">
+                  + Thêm chi phí Bảng 2
+                </button>
+              </div>
+              <div style="overflow-x:auto;">
+                <table class="table-editor-tbl">
+                  <thead>
+                    <tr>
+                      <th style="width:50px;">STT</th>
+                      <th style="min-width:240px;">Nội dung công việc</th>
+                      <th style="min-width:200px;">Đơn vị thực hiện</th>
+                      <th style="width:160px;">Giá trị (đồng)</th>
+                      <th style="width:50px;">Xóa</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table2-editor-body">
+                    <!-- Dynamic Rows -->
+                  </tbody>
+                  <tfoot>
+                    <tr style="background:#f8fafc; font-weight:bold;">
+                      <td colspan="3" style="text-align:right; color:#1e293b;">TỔNG GIÁ TRỊ THỰC HIỆN (BẢNG 2):</td>
+                      <td style="text-align:right; color:#059669; font-size:0.95rem;" id="t2-total-display">0 VNĐ</td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <!-- BẢNG 3 SUBTAB -->
+            <div id="subtab-pane-3" class="table-subtab-pane">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <div>
+                  <div style="font-size:0.88rem; color:#475569;">
+                    <strong>Phần công việc thuộc KHLCNT (Chuẩn 13 cột - Trang A4 nằm ngang):</strong> Danh mục toàn bộ các gói thầu thi công, tư vấn giám sát, thẩm định giá, bảo hiểm...
+                  </div>
+                  <div style="font-size:0.8rem; color:#0284c7; margin-top:2px;">
+                    💡 Xuất ra trang riêng khổ A4 xoay ngang (Landscape) trong cả bản in ấn lẫn file Word .docx!
+                  </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" onclick="addTable3Row()">
+                  + Thêm gói thầu Bảng 3
+                </button>
+              </div>
+              <div style="overflow-x:auto;">
+                <table class="table-editor-tbl" style="min-width:1100px;">
+                  <thead>
+                    <tr>
+                      <th style="width:40px;">STT</th>
+                      <th style="width:140px;">Tên CĐT</th>
+                      <th style="width:160px;">Tên gói thầu</th>
+                      <th style="width:200px;">Tóm tắt công việc chính</th>
+                      <th style="width:130px;">Giá gói thầu (VNĐ)</th>
+                      <th style="width:130px;">Nguồn vốn</th>
+                      <th style="width:110px;">Hình thức LCNT</th>
+                      <th style="width:80px;">Phương thức</th>
+                      <th style="width:80px;">Tổ chức</th>
+                      <th style="width:90px;">Bắt đầu</th>
+                      <th style="width:90px;">Loại HĐ</th>
+                      <th style="width:80px;">Thời gian TH</th>
+                      <th style="width:90px;">Tùy chọn</th>
+                      <th style="width:45px;">Xóa</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table3-editor-body">
+                    <!-- Dynamic Rows -->
+                  </tbody>
+                  <tfoot>
+                    <tr style="background:#f8fafc; font-weight:bold;">
+                      <td colspan="4" style="text-align:right; color:#1e293b;">TỔNG GIÁ GÓI THẦU (BẢNG 3):</td>
+                      <td style="text-align:right; color:#b3261e; font-size:0.95rem;" id="t3-total-display">0 VNĐ</td>
+                      <td colspan="9"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 0.75rem;">
+              <div style="font-size: 0.85rem; color: #475569;">
+                Tổng mức đầu tư khớp 3 bảng: <strong id="all-tables-total-display" style="color: #1b365d;">0 VNĐ</strong>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="saveAllTablesData()">
+                💾 Lưu & Cập Nhật Lên Toàn Bộ Văn Bản
+              </button>
+            </div>
+
+          </div>
+        </div>
+
       </section>
 
             <!-- TAB 3: NHÀ THẦU ĐƯỢC CHỈ ĐỊNH (LIÊN KẾT GOOGLE SHEETS & TÌM KIẾM TỰ ĐỘNG) -->
@@ -1869,11 +2174,463 @@
     // TỰ ĐỘNG KẾT NỐI SỐ VĂN BẢN VÀ NGÀY THÁNG PHÁT HÀNH XUYÊN SUỐT
     // =========================================================================
 
-    function generateDoc1_ToTrinhKHLCNT(d) {
+    
+    // ==========================================
+    // DỮ LIỆU ĐỘNG CHO 03 BẢNG KHLCNT (CHUẨN HỒ SƠ TÂN PHÚ)
+    // ==========================================
+    let table1Data = [
+      {
+        stt: 1,
+        name: "Lập Báo cáo KT-KT",
+        unit: "Công ty TNHH MTV Bảo hộ Lao động Môi Trường Xanh",
+        price: 64682709,
+        doc: "Quyết định số 3945/QĐ-UBND ngày 27/08/2026 của Chủ tịch UBND xã Tân Phú"
+      },
+      {
+        stt: 2,
+        name: "Thẩm tra thiết kế - dự toán",
+        unit: "Công ty CP Đầu tư TDIF",
+        price: 4429752,
+        doc: "Quyết định chỉ định thầu của CĐT"
+      }
+    ];
+
+    let table2Data = [
+      {
+        stt: "01",
+        name: "Chi phí Quản lý dự án",
+        unit: "Chủ đầu tư tự thực hiện",
+        price: 32751655
+      },
+      {
+        stt: "02",
+        name: "Chi phí thẩm tra phê duyệt quyết toán",
+        unit: "Phòng Kinh tế",
+        price: 1000000
+      },
+      {
+        stt: "03",
+        name: "Chi phí thẩm duyệt PCCC",
+        unit: "Phòng Cảnh Sát PCCC & CNCH - CA tỉnh Tây Ninh",
+        price: 500000
+      },
+      {
+        stt: "04",
+        name: "Chi phí dự phòng phát sinh khối lượng",
+        unit: "-",
+        price: 56668876
+      }
+    ];
+
+    let table3Data = [
+      {
+        stt: 1,
+        owner: "Ban QLDA ĐTXD xã Tân Phú",
+        packageName: "Thi công xây dựng + thiết bị",
+        summary: "* Cộng giá gói thầu: 995.118.607\n- Xây dựng: 871.998.607\n- Thiết bị: 123.120.000",
+        price: 995118607,
+        capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+        method: "Chỉ định thầu rút gọn",
+        proc: "-",
+        timeOrganize: "15 ngày",
+        timeStart: "Quý III/2026",
+        contractType: "Trọn gói",
+        duration: "90 ngày",
+        option: "Không áp dụng"
+      },
+      {
+        stt: 2,
+        owner: "Ban QLDA ĐTXD xã Tân Phú",
+        packageName: "Tư vấn giám sát thi công XD + TB",
+        summary: "Kiểm tra, giám sát chất lượng thi công công trình xây dựng",
+        price: 29684286,
+        capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+        method: "Chỉ định thầu rút gọn",
+        proc: "-",
+        timeOrganize: "15 ngày",
+        timeStart: "Quý III/2026",
+        contractType: "Trọn gói",
+        duration: "90 ngày",
+        option: "Không áp dụng"
+      },
+      {
+        stt: 3,
+        owner: "Ban QLDA ĐTXD xã Tân Phú",
+        packageName: "Thẩm định giá thiết bị",
+        summary: "Thẩm định giá thiết bị",
+        price: 5500000,
+        capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+        method: "Chỉ định thầu rút gọn",
+        proc: "-",
+        timeOrganize: "15 ngày",
+        timeStart: "Quý III/2026",
+        contractType: "Trọn gói",
+        duration: "20 ngày",
+        option: "Không áp dụng"
+      },
+      {
+        stt: 4,
+        owner: "Ban QLDA ĐTXD xã Tân Phú",
+        packageName: "Bảo hiểm công trình",
+        summary: "Bảo hiểm rủi ro về xây dựng",
+        price: 710517,
+        capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+        method: "Chỉ định thầu rút gọn",
+        proc: "-",
+        timeOrganize: "15 ngày",
+        timeStart: "Quý III/2026",
+        contractType: "Theo tỷ lệ %",
+        duration: "90 ngày",
+        option: "Không áp dụng"
+      }
+    ];
+
+    function getTable1Total() {
+      return table1Data.reduce((acc, row) => acc + (Number(row.price) || 0), 0);
+    }
+    function getTable2Total() {
+      return table2Data.reduce((acc, row) => acc + (Number(row.price) || 0), 0);
+    }
+    function getTable3Total() {
+      return table3Data.reduce((acc, row) => acc + (Number(row.price) || 0), 0);
+    }
+
+    function switchTableSubtab(tabNo, btnEl) {
+      document.querySelectorAll('.table-subtab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.table-subtab-pane').forEach(p => p.classList.remove('active'));
+      btnEl.classList.add('active');
+      const pane = document.getElementById(`subtab-pane-${tabNo}`);
+      if (pane) pane.classList.add('active');
+    }
+
+    function renderTableEditors() {
+      // 1. Render Table 1
+      const tb1 = document.getElementById("table1-editor-body");
+      if (tb1) {
+        tb1.innerHTML = table1Data.map((row, idx) => `
+          <tr>
+            <td style="text-align:center;"><input type="text" value="${row.stt || idx + 1}" oninput="updateTable1Row(${idx}, 'stt', this.value)" style="text-align:center;"></td>
+            <td><input type="text" value="${escapeHtml(row.name || '')}" oninput="updateTable1Row(${idx}, 'name', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.unit || '')}" oninput="updateTable1Row(${idx}, 'unit', this.value)"></td>
+            <td><input type="number" value="${row.price || 0}" oninput="updateTable1Row(${idx}, 'price', Number(this.value))" style="text-align:right;"></td>
+            <td><input type="text" value="${escapeHtml(row.doc || '')}" oninput="updateTable1Row(${idx}, 'doc', this.value)"></td>
+            <td style="text-align:center;"><button type="button" class="btn btn-sm btn-danger" onclick="removeTable1Row(${idx})" title="Xóa dòng" style="padding:2px 6px;">🗑️</button></td>
+          </tr>
+        `).join("");
+      }
+
+      // 2. Render Table 2
+      const tb2 = document.getElementById("table2-editor-body");
+      if (tb2) {
+        tb2.innerHTML = table2Data.map((row, idx) => `
+          <tr>
+            <td style="text-align:center;"><input type="text" value="${row.stt || '0' + (idx + 1)}" oninput="updateTable2Row(${idx}, 'stt', this.value)" style="text-align:center;"></td>
+            <td><input type="text" value="${escapeHtml(row.name || '')}" oninput="updateTable2Row(${idx}, 'name', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.unit || '')}" oninput="updateTable2Row(${idx}, 'unit', this.value)"></td>
+            <td><input type="number" value="${row.price || 0}" oninput="updateTable2Row(${idx}, 'price', Number(this.value))" style="text-align:right;"></td>
+            <td style="text-align:center;"><button type="button" class="btn btn-sm btn-danger" onclick="removeTable2Row(${idx})" title="Xóa dòng" style="padding:2px 6px;">🗑️</button></td>
+          </tr>
+        `).join("");
+      }
+
+      // 3. Render Table 3 (13 cột)
+      const tb3 = document.getElementById("table3-editor-body");
+      if (tb3) {
+        tb3.innerHTML = table3Data.map((row, idx) => `
+          <tr>
+            <td style="text-align:center;"><input type="text" value="${row.stt || idx + 1}" oninput="updateTable3Row(${idx}, 'stt', this.value)" style="text-align:center;"></td>
+            <td><input type="text" value="${escapeHtml(row.owner || '')}" oninput="updateTable3Row(${idx}, 'owner', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.packageName || '')}" oninput="updateTable3Row(${idx}, 'packageName', this.value)" style="font-weight:600;"></td>
+            <td><textarea rows="2" oninput="updateTable3Row(${idx}, 'summary', this.value)">${escapeHtml(row.summary || '')}</textarea></td>
+            <td><input type="number" value="${row.price || 0}" oninput="updateTable3Row(${idx}, 'price', Number(this.value))" style="text-align:right; font-weight:600;"></td>
+            <td><input type="text" value="${escapeHtml(row.capital || '')}" oninput="updateTable3Row(${idx}, 'capital', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.method || '')}" oninput="updateTable3Row(${idx}, 'method', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.proc || '')}" oninput="updateTable3Row(${idx}, 'proc', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.timeOrganize || '')}" oninput="updateTable3Row(${idx}, 'timeOrganize', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.timeStart || '')}" oninput="updateTable3Row(${idx}, 'timeStart', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.contractType || '')}" oninput="updateTable3Row(${idx}, 'contractType', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.duration || '')}" oninput="updateTable3Row(${idx}, 'duration', this.value)"></td>
+            <td><input type="text" value="${escapeHtml(row.option || '')}" oninput="updateTable3Row(${idx}, 'option', this.value)"></td>
+            <td style="text-align:center;"><button type="button" class="btn btn-sm btn-danger" onclick="removeTable3Row(${idx})" title="Xóa dòng" style="padding:2px 6px;">🗑️</button></td>
+          </tr>
+        `).join("");
+      }
+
+      // Cập nhật badges và dòng tổng
+      updateTableTotalsDisplay();
+    }
+
+    function updateTableTotalsDisplay() {
+      const t1Total = getTable1Total();
+      const t2Total = getTable2Total();
+      const t3Total = getTable3Total();
+      const allTotal = t1Total + t2Total + t3Total;
+
+      const t1Badge = document.getElementById("t1-count-badge");
+      if (t1Badge) t1Badge.innerText = table1Data.length;
+      const t2Badge = document.getElementById("t2-count-badge");
+      if (t2Badge) t2Badge.innerText = table2Data.length;
+      const t3Badge = document.getElementById("t3-count-badge");
+      if (t3Badge) t3Badge.innerText = table3Data.length;
+
+      const t1Disp = document.getElementById("t1-total-display");
+      if (t1Disp) t1Disp.innerText = formatNumber(t1Total) + " VNĐ";
+      const t2Disp = document.getElementById("t2-total-display");
+      if (t2Disp) t2Disp.innerText = formatNumber(t2Total) + " VNĐ";
+      const t3Disp = document.getElementById("t3-total-display");
+      if (t3Disp) t3Disp.innerText = formatNumber(t3Total) + " VNĐ";
+
+      const allDisp = document.getElementById("all-tables-total-display");
+      if (allDisp) allDisp.innerText = formatNumber(allTotal) + " VNĐ (" + docSoThanhChu(allTotal) + ")";
+    }
+
+    // CRUD Bảng 1
+    function addTable1Row() {
+      table1Data.push({
+        stt: table1Data.length + 1,
+        name: "Công việc tư vấn / chuẩn bị mới",
+        unit: "Đơn vị thực hiện",
+        price: 0,
+        doc: "Quyết định phê duyệt của CĐT"
+      });
+      renderTableEditors();
+      renderCurrentDoc();
+    }
+    function removeTable1Row(idx) {
+      if (table1Data.length <= 1) {
+        alert("Bảng 1 cần giữ lại ít nhất 1 dòng!");
+        return;
+      }
+      table1Data.splice(idx, 1);
+      renderTableEditors();
+      renderCurrentDoc();
+    }
+    function updateTable1Row(idx, field, val) {
+      if (table1Data[idx]) {
+        table1Data[idx][field] = val;
+        updateTableTotalsDisplay();
+        renderCurrentDoc();
+      }
+    }
+
+    // CRUD Bảng 2
+    function addTable2Row() {
+      table2Data.push({
+        stt: "0" + (table2Data.length + 1),
+        name: "Chi phí thành phần không LCNT",
+        unit: "-",
+        price: 0
+      });
+      renderTableEditors();
+      renderCurrentDoc();
+    }
+    function removeTable2Row(idx) {
+      if (table2Data.length <= 1) {
+        alert("Bảng 2 cần giữ lại ít nhất 1 dòng!");
+        return;
+      }
+      table2Data.splice(idx, 1);
+      renderTableEditors();
+      renderCurrentDoc();
+    }
+    function updateTable2Row(idx, field, val) {
+      if (table2Data[idx]) {
+        table2Data[idx][field] = val;
+        updateTableTotalsDisplay();
+        renderCurrentDoc();
+      }
+    }
+
+    // CRUD Bảng 3
+    function addTable3Row() {
+      const ownerVal = (document.getElementById("ownerOrg") ? document.getElementById("ownerOrg").value : "Ban QLDA ĐTXD xã Tân Phú");
+      const capitalVal = (document.getElementById("capitalSource") ? document.getElementById("capitalSource").value : "Vốn ngân sách nhà nước");
+      table3Data.push({
+        stt: table3Data.length + 1,
+        owner: ownerVal,
+        packageName: "Gói thầu số 0" + (table3Data.length + 1) + ": Tên gói thầu mới",
+        summary: "Mô tả tóm tắt nội dung gói thầu",
+        price: 0,
+        capital: capitalVal,
+        method: "Chỉ định thầu rút gọn",
+        proc: "-",
+        timeOrganize: "15 ngày",
+        timeStart: "Quý " + Math.floor((new Date().getMonth()+3)/3) + "/" + new Date().getFullYear(),
+        contractType: "Trọn gói",
+        duration: "60 ngày",
+        option: "Không áp dụng"
+      });
+      renderTableEditors();
+      renderCurrentDoc();
+    }
+    function removeTable3Row(idx) {
+      if (table3Data.length <= 1) {
+        alert("Bảng 3 cần giữ lại ít nhất 1 gói thầu!");
+        return;
+      }
+      table3Data.splice(idx, 1);
+      renderTableEditors();
+      renderCurrentDoc();
+    }
+    function updateTable3Row(idx, field, val) {
+      if (table3Data[idx]) {
+        table3Data[idx][field] = val;
+        updateTableTotalsDisplay();
+        renderCurrentDoc();
+      }
+    }
+
+    function saveAllTablesData() {
+      const tablesConfig = {
+        table1: table1Data,
+        table2: table2Data,
+        table3: table3Data
+      };
+      localStorage.setItem("chidinhthau_tables_data", JSON.stringify(tablesConfig));
+      alert("Đã lưu dữ liệu 03 bảng thành công! Toàn bộ văn bản đã được cập nhật đồng bộ.");
+      renderCurrentDoc();
+    }
+
+    function resetTablesToDefault() {
+      if (confirm("Khôi phục danh mục chi phí 3 bảng theo mẫu hồ sơ thực tế xã Tân Phú (Công trình Trường MG Tân Hưng)?")) {
+        table1Data = [
+          {
+            stt: 1,
+            name: "Lập Báo cáo KT-KT",
+            unit: "Công ty TNHH MTV Bảo hộ Lao động Môi Trường Xanh",
+            price: 64682709,
+            doc: "Quyết định số 3945/QĐ-UBND ngày 27/08/2026 của Chủ tịch UBND xã Tân Phú"
+          },
+          {
+            stt: 2,
+            name: "Thẩm tra thiết kế - dự toán",
+            unit: "Công ty CP Đầu tư TDIF",
+            price: 4429752,
+            doc: "Quyết định chỉ định thầu của CĐT"
+          }
+        ];
+
+        table2Data = [
+          {
+            stt: "01",
+            name: "Chi phí Quản lý dự án",
+            unit: "Chủ đầu tư tự thực hiện",
+            price: 32751655
+          },
+          {
+            stt: "02",
+            name: "Chi phí thẩm tra phê duyệt quyết toán",
+            unit: "Phòng Kinh tế",
+            price: 1000000
+          },
+          {
+            stt: "03",
+            name: "Chi phí thẩm duyệt PCCC",
+            unit: "Phòng Cảnh Sát PCCC & CNCH - CA tỉnh Tây Ninh",
+            price: 500000
+          },
+          {
+            stt: "04",
+            name: "Chi phí dự phòng phát sinh khối lượng",
+            unit: "-",
+            price: 56668876
+          }
+        ];
+
+        table3Data = [
+          {
+            stt: 1,
+            owner: "Ban QLDA ĐTXD xã Tân Phú",
+            packageName: "Thi công xây dựng + thiết bị",
+            summary: "* Cộng giá gói thầu: 995.118.607\n- Xây dựng: 871.998.607\n- Thiết bị: 123.120.000",
+            price: 995118607,
+            capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+            method: "Chỉ định thầu rút gọn",
+            proc: "-",
+            timeOrganize: "15 ngày",
+            timeStart: "Quý III/2026",
+            contractType: "Trọn gói",
+            duration: "90 ngày",
+            option: "Không áp dụng"
+          },
+          {
+            stt: 2,
+            owner: "Ban QLDA ĐTXD xã Tân Phú",
+            packageName: "Tư vấn giám sát thi công XD + TB",
+            summary: "Kiểm tra, giám sát chất lượng thi công công trình xây dựng",
+            price: 29684286,
+            capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+            method: "Chỉ định thầu rút gọn",
+            proc: "-",
+            timeOrganize: "15 ngày",
+            timeStart: "Quý III/2026",
+            contractType: "Trọn gói",
+            duration: "90 ngày",
+            option: "Không áp dụng"
+          },
+          {
+            stt: 3,
+            owner: "Ban QLDA ĐTXD xã Tân Phú",
+            packageName: "Thẩm định giá thiết bị",
+            summary: "Thẩm định giá thiết bị",
+            price: 5500000,
+            capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+            method: "Chỉ định thầu rút gọn",
+            proc: "-",
+            timeOrganize: "15 ngày",
+            timeStart: "Quý III/2026",
+            contractType: "Trọn gói",
+            duration: "20 ngày",
+            option: "Không áp dụng"
+          },
+          {
+            stt: 4,
+            owner: "Ban QLDA ĐTXD xã Tân Phú",
+            packageName: "Bảo hiểm công trình",
+            summary: "Bảo hiểm rủi ro về xây dựng",
+            price: 710517,
+            capital: "Vốn ngân sách tỉnh hỗ trợ mục tiêu",
+            method: "Chỉ định thầu rút gọn",
+            proc: "-",
+            timeOrganize: "15 ngày",
+            timeStart: "Quý III/2026",
+            contractType: "Theo tỷ lệ %",
+            duration: "90 ngày",
+            option: "Không áp dụng"
+          }
+        ];
+
+        renderTableEditors();
+        saveAllTablesData();
+      }
+    }
+
+    function loadSavedTablesData() {
+      const saved = localStorage.getItem("chidinhthau_tables_data");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed.table1) && parsed.table1.length > 0) table1Data = parsed.table1;
+          if (Array.isArray(parsed.table2) && parsed.table2.length > 0) table2Data = parsed.table2;
+          if (Array.isArray(parsed.table3) && parsed.table3.length > 0) table3Data = parsed.table3;
+        } catch (e) {
+          console.error("Lỗi parse tables data:", e);
+        }
+      }
+      renderTableEditors();
+    }
+
+
+        function generateDoc1_ToTrinhKHLCNT(d) {
       const meta = docCustomMeta[0];
       const docNoStr = meta.number ? meta.number : ".....";
       const dateStr = formatDateToVietnamese(meta.date);
       const shortDate = formatDateShort(meta.date);
+
+      const t1Total = getTable1Total();
+      const t2Total = getTable2Total();
+      const t3Total = getTable3Total();
+      const totalAll = t1Total + t2Total + t3Total;
 
       return `
         <table class="doc-header-table">
@@ -1907,8 +2664,8 @@
 
           <p><strong>I. Mô tả tóm tắt dự án:</strong></p>
           <p>- Tên dự án: <strong>${d.projectName}</strong></p>
-          <p>- Tổng mức đầu tư (làm tròn): <strong>${formatNumber(d.totalInvestment)} đồng</strong>. (Bằng chữ: <em>${docSoThanhChu(d.totalInvestment)}</em>).</p>
-          <p>- Tên chủ đầu tư: Ban Quản lý dự án đầu tư xây dựng xã Tân Phú</p>
+          <p>- Tổng mức đầu tư (làm tròn): <strong>${formatNumber(totalAll > 0 ? totalAll : d.totalInvestment)} đồng</strong>. (Bằng chữ: <em>${docSoThanhChu(totalAll > 0 ? totalAll : d.totalInvestment)}</em>).</p>
+          <p>- Tên chủ đầu tư: ${d.ownerOrg}</p>
           <p>- Nguồn vốn: ${d.capitalSource}.</p>
           <p>- Thời gian thực hiện dự án: Năm ${new Date().getFullYear()} – ${new Date().getFullYear() + 1}.</p>
           <p>- Địa điểm: ${d.projectLocation}.</p>
@@ -1927,119 +2684,170 @@
           <p>Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng công trình: ${d.projectName};</p>
 
           <p><strong>III. Phần công việc đã thực hiện:</strong> (Bảng số 1)</p>
-          <table style="width:100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.88rem;" border="1" cellpadding="5">
+          <table class="doc-custom-table">
             <thead>
               <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
                 <th style="width:6%;">STT</th>
-                <th style="width:30%;">Nội dung công việc hoặc tên gói thầu</th>
-                <th style="width:28%;">Đơn vị thực hiện</th>
-                <th style="width:18%;">Giá trị (đồng)</th>
+                <th style="width:34%;">Nội dung công việc hoặc tên gói thầu</th>
+                <th style="width:26%;">Đơn vị thực hiện</th>
+                <th style="width:16%;">Giá trị (đồng)</th>
                 <th style="width:18%;">Văn bản phê duyệt</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td style="text-align:center;">1</td>
-                <td>Lập Báo cáo KT-KT</td>
-                <td>Đơn vị Tư vấn thiết kế</td>
-                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.054))}</td>
-                <td>Quyết định phê duyệt của CĐT</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">2</td>
-                <td>Thẩm tra thiết kế - dự toán</td>
-                <td>Công ty CP Đầu tư TDIF</td>
-                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.0035))}</td>
-                <td>Quyết định chỉ định thầu của CĐT</td>
+              ${table1Data.map(r => `
+                <tr>
+                  <td style="text-align:center;">${r.stt}</td>
+                  <td>${escapeHtml(r.name || '')}</td>
+                  <td>${escapeHtml(r.unit || '')}</td>
+                  <td style="text-align:right;">${formatNumber(r.price || 0)}</td>
+                  <td>${escapeHtml(r.doc || '')}</td>
+                </tr>
+              `).join('')}
+              <tr style="background:#fafafa; font-weight:bold;">
+                <td colspan="3" style="text-align:right; padding-right:12px;">Tổng giá trị:</td>
+                <td style="text-align:right; font-weight:bold;">${formatNumber(t1Total)}</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
 
           <p><strong>IV. Phần công việc không áp dụng được một trong các hình thức lựa chọn nhà thầu:</strong> (Bảng số 2)</p>
-          <table style="width:100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.88rem;" border="1" cellpadding="5">
+          <table class="doc-custom-table">
             <thead>
               <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
-                <th style="width:6%;">STT</th>
-                <th style="width:44%;">Nội dung công việc</th>
+                <th style="width:8%;">STT</th>
+                <th style="width:42%;">Nội dung công việc</th>
                 <th style="width:30%;">Đơn vị thực hiện</th>
                 <th style="width:20%;">Giá trị (đồng)</th>
               </tr>
             </thead>
             <tbody>
+              ${table2Data.map(r => `
+                <tr>
+                  <td style="text-align:center;">${r.stt}</td>
+                  <td>${escapeHtml(r.name || '')}</td>
+                  <td>${escapeHtml(r.unit || '')}</td>
+                  <td style="text-align:right;">${formatNumber(r.price || 0)}</td>
+                </tr>
+              `).join('')}
+              <tr style="background:#fafafa; font-weight:bold;">
+                <td colspan="3" style="text-align:right; padding-right:12px;">Tổng giá trị thực hiện:</td>
+                <td style="text-align:right; font-weight:bold;">${formatNumber(t2Total)}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-weight:bold; margin: 4px 0 1rem 0;">Tổng giá trị thực hiện: ${formatNumber(t2Total)} đồng</p>
+
+          <p><strong>V. Phần công việc thuộc kế hoạch lựa chọn nhà thầu:</strong></p>
+          <p><strong>1. Bảng tổng hợp phần công việc thuộc kế hoạch lựa chọn nhà thầu:</strong></p>
+        </div>
+
+        <!-- BẢNG SỐ 3: TRANG A4 NẰM NGANG (LANDSCAPE) BỐ TRÍ ĐỦ 13 CỘT -->
+        <div class="a4-landscape-page" id="page-table3-khlcnt">
+          <div class="landscape-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            TRANG A4 NẰM NGANG (LANDSCAPE) — BẢNG SỐ 3 (CHUẨN 13 CỘT THEO NGHỊ ĐỊNH 214/2025/NĐ-CP & HỒ SƠ THỰC TẾ)
+          </div>
+          <div style="text-align: right; font-weight: bold; font-size: 11pt; margin-bottom: 4px;">Bảng số 3</div>
+          <table class="table3-landscape-tbl">
+            <thead>
               <tr>
-                <td style="text-align:center;">01</td>
-                <td>Chi phí Quản lý dự án</td>
-                <td>Chủ đầu tư tự thực hiện</td>
-                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.026))}</td>
+                <th rowspan="2" style="width: 3.2%;">S<br>T<br>T</th>
+                <th rowspan="2" style="width: 10%;">Tên chủ đầu tư</th>
+                <th colspan="2" style="width: 27%;">Tên gói thầu</th>
+                <th rowspan="2" style="width: 10.5%;">Giá gói thầu<br>(đồng)</th>
+                <th rowspan="2" style="width: 9%;">Nguồn vốn</th>
+                <th rowspan="2" style="width: 8%;">Hình thức LCNT</th>
+                <th rowspan="2" style="width: 6%;">Phương thức LCNT</th>
+                <th rowspan="2" style="width: 6%;">Thời gian tổ chức LCNT</th>
+                <th rowspan="2" style="width: 6.5%;">Thời gian bắt đầu tổ chức LCNT</th>
+                <th rowspan="2" style="width: 5%;">Loại hợp đồng</th>
+                <th rowspan="2" style="width: 5.5%;">Thời gian thực hiện gói thầu</th>
+                <th rowspan="2" style="width: 5.3%;">Tùy chọn mua thêm</th>
               </tr>
               <tr>
-                <td style="text-align:center;">02</td>
-                <td>Chi phí thẩm tra phê duyệt quyết toán</td>
-                <td>Phòng Kinh tế</td>
-                <td style="text-align:right;">1.000.000</td>
+                <th style="width: 13%;">Tên gói thầu</th>
+                <th style="width: 14%;">Tóm tắt công việc chính của gói thầu</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${table3Data.map(r => `
+                <tr>
+                  <td style="text-align:center;">${r.stt}</td>
+                  <td>${escapeHtml(r.owner || d.ownerOrg)}</td>
+                  <td style="font-weight:600;">${escapeHtml(r.packageName || '')}</td>
+                  <td style="font-size:8.5pt;">${escapeHtml(r.summary || '').replace(/\n/g, '<br>')}</td>
+                  <td style="text-align:right; font-weight:600;">${formatNumber(r.price || 0)}</td>
+                  <td style="text-align:center;">${escapeHtml(r.capital || d.capitalSource)}</td>
+                  <td style="text-align:center;">${escapeHtml(r.method || 'Chỉ định thầu rút gọn')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.proc || '-')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.timeOrganize || '15 ngày')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.timeStart || 'Quý III/2026')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.contractType || 'Trọn gói')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.duration || '90 ngày')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.option || 'Không áp dụng')}</td>
+                </tr>
+              `).join('')}
+              <tr style="background:#fafafa; font-weight:bold;">
+                <td colspan="4" style="text-align:right; padding-right:12px;">Tổng giá gói thầu:</td>
+                <td style="text-align:right; font-weight:bold;">${formatNumber(t3Total)}</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-content" style="margin-top: 1.5rem;">
+          <p><strong>2. Giải trình nội dung kế hoạch lựa chọn nhà thầu:</strong></p>
+          <p><strong>a. Cơ sở phân chia các gói thầu:</strong> Việc phân chia dự án thành các gói thầu nêu trên căn cứ vào tính chất kỹ thuật, trình tự thực hiện của từng hạng mục công việc, bảo đảm tính đồng bộ của dự án và quy mô gói thầu hợp lý, tuân thủ đúng quy định của Luật Đấu thầu số 22/2023/QH15 và Nghị định số 214/2025/NĐ-CP.</p>
+          
+          <p><strong>b. Giá gói thầu:</strong> Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật dự án: ${d.projectName}. Giá các gói thầu cụ thể như sau:</p>
+          ${table3Data.map(r => `<p>- ${escapeHtml(r.packageName)}: <strong>${formatNumber(r.price)} đồng</strong></p>`).join('')}
+
+          <p><strong>c. Nguồn vốn:</strong> Nguồn vốn: ${d.capitalSource}.</p>
+          <p><strong>d. Hình thức và phương thức lựa chọn nhà thầu:</strong> Áp dụng hình thức Chỉ định thầu rút gọn theo quy định tại điểm m khoản 1 Điều 23 Luật Đấu thầu 2023 và Điều 80 Nghị định 214/2025/NĐ-CP; Phương thức lựa chọn nhà thầu: Không áp dụng.</p>
+          <p><strong>e. Thời gian tổ chức lựa chọn nhà thầu:</strong> 15 ngày kể từ ngày phê duyệt KHLCNT.</p>
+          <p><strong>g. Loại hợp đồng:</strong> Hợp đồng trọn gói (hoặc theo tỷ lệ phần trăm đối với gói thầu bảo hiểm công trình).</p>
+          <p><strong>h. Thời gian thực hiện gói thầu:</strong></p>
+          ${table3Data.map(r => `<p>- ${escapeHtml(r.packageName)}: <strong>${escapeHtml(r.duration)}</strong></p>`).join('')}
+          <p><strong>i. Tùy chọn mua thêm (nếu có):</strong> Không áp dụng.</p>
+
+          <p><strong>VI. Phần công việc chưa đủ điều kiện lập kế hoạch lựa chọn nhà thầu:</strong> Không có.</p>
+
+          <p><strong>VII. Tổng giá trị các phần công việc:</strong> (Bảng số 5)</p>
+          <table class="doc-custom-table" style="width:90%; margin:0.6rem auto;">
+            <thead>
+              <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
+                <th style="width:10%;">STT</th>
+                <th style="width:65%;">Nội dung</th>
+                <th style="width:25%;">Giá trị (đồng)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center;">1</td>
+                <td>Tổng giá trị phần công việc đã thực hiện (Bảng số 1)</td>
+                <td style="text-align:right;">${formatNumber(t1Total)}</td>
               </tr>
               <tr>
-                <td style="text-align:center;">03</td>
-                <td>Chi phí dự phòng phát sinh khối lượng</td>
-                <td>-</td>
-                <td style="text-align:right;">${formatNumber(Math.round(d.totalInvestment * 0.05))}</td>
+                <td style="text-align:center;">2</td>
+                <td>Tổng giá trị phần công việc không áp dụng LCNT (Bảng số 2)</td>
+                <td style="text-align:right;">${formatNumber(t2Total)}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">3</td>
+                <td>Tổng giá trị phần công việc thuộc kế hoạch LCNT (Bảng số 3)</td>
+                <td style="text-align:right;">${formatNumber(t3Total)}</td>
+              </tr>
+              <tr style="font-weight:bold; background:#fafafa;">
+                <td colspan="2" style="text-align:right; padding-right:12px;">Tổng cộng:</td>
+                <td style="text-align:right; font-weight:bold;">${formatNumber(totalAll)}</td>
               </tr>
             </tbody>
           </table>
 
-          <p><strong>V. Phần công việc thuộc kế hoạch lựa chọn nhà thầu:</strong></p>
-          <p><strong>1. Bảng tổng hợp phần công việc thuộc kế hoạch lựa chọn nhà thầu:</strong> (Bảng số 3 chuẩn 12 cột)</p>
-          <div style="overflow-x: auto;">
-            <table style="width:100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.82rem;" border="1" cellpadding="4">
-              <thead>
-                <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
-                  <th style="width:4%;">STT</th>
-                  <th style="width:12%;">Tên chủ đầu tư</th>
-                  <th style="width:22%;">Tên gói thầu</th>
-                  <th style="width:13%;">Giá gói thầu (đồng)</th>
-                  <th style="width:12%;">Nguồn vốn</th>
-                  <th style="width:10%;">Hình thức LCNT</th>
-                  <th style="width:7%;">Thời gian TC</th>
-                  <th style="width:8%;">Bắt đầu LCNT</th>
-                  <th style="width:7%;">Loại HĐ</th>
-                  <th style="width:7%;">Thời gian TH</th>
-                  <th style="width:5%;">Tùy chọn</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="text-align:center;">01</td>
-                  <td>Ban QLDA ĐTXD xã Tân Phú</td>
-                  <td><strong>${d.packageName}</strong><br><span style="font-size:0.75rem; color:#475569;">${d.warrantyDuration}</span></td>
-                  <td style="text-align:right; font-weight:bold;">${formatNumber(d.packagePrice)}</td>
-                  <td>${d.capitalSource}</td>
-                  <td>Chỉ định thầu rút gọn</td>
-                  <td style="text-align:center;">15 ngày</td>
-                  <td style="text-align:center;">Quý ${Math.floor((new Date().getMonth()+3)/3)}/${new Date().getFullYear()}</td>
-                  <td style="text-align:center;">${d.contractType}</td>
-                  <td style="text-align:center;">${d.duration}</td>
-                  <td style="text-align:center;">Không áp dụng</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p><strong>2. Giải trình nội dung kế hoạch lựa chọn nhà thầu:</strong></p>
-          <p><strong>a. Cơ sở phân chia các gói thầu:</strong> Việc phân chia dự án thành gói thầu căn cứ vào tính chất kỹ thuật của từng hạng mục công việc, bảo đảm khi tổ chức đấu thầu và thực hiện hợp đồng phù hợp với tiến độ và nâng cao hiệu quả đầu tư công trình.</p>
-          <p><strong>b. Giá gói thầu:</strong> Giá gói thầu được xác định căn cứ theo Quyết định số ${d.approvePackageEstimateNo} với tổng giá trị là <strong>${formatNumber(d.packagePrice)} đồng</strong> (${docSoThanhChu(d.packagePrice)}).</p>
-          <p><strong>c. Nguồn vốn:</strong> ${d.capitalSource}.</p>
-          <p><strong>d. Hình thức và phương thức LCNT:</strong> Gói thầu có giá trị nằm trong hạn mức chỉ định thầu quy định tại Nghị định số 349/2026/NĐ-CP và điểm m khoản 1 Điều 23 Luật Đấu thầu số 22/2023/QH15. Bộ phận Kỹ thuật – Thẩm định kính đề nghị Giám đốc Ban QLDA ĐTXD xã Tân Phú xem xét phê duyệt hình thức lựa chọn nhà thầu là <strong>Chỉ định thầu rút gọn</strong> (theo quy trình tại Điều 80 Nghị định số 214/2025/NĐ-CP). Phương thức LCNT: Không áp dụng.</p>
-          <p><strong>đ. Thời gian tổ chức LCNT:</strong> 15 ngày cho gói thầu kể từ ngày phê duyệt KHLCNT.</p>
-          <p><strong>e. Thời gian bắt đầu tổ chức LCNT:</strong> Quý ${Math.floor((new Date().getMonth()+3)/3)} năm ${new Date().getFullYear()}.</p>
-          <p><strong>g. Loại hợp đồng:</strong> <strong>${d.contractType}</strong>. Giá gói thầu đã bao gồm chi phí dự phòng rủi ro và thuế GTGT theo đúng quy định tại Điều 64 Luật Đấu thầu số 22/2023/QH15.</p>
-          <p><strong>h. Thời gian thực hiện gói thầu:</strong> <strong>${d.duration}</strong>. Thời hạn bảo hành công trình: <strong>${d.warrantyDuration}</strong>.</p>
-          <p><strong>i. Tùy chọn mua thêm:</strong> Không áp dụng.</p>
-
-          <p><strong>VI. Phần công việc chưa đủ điều kiện lập kế hoạch lựa chọn nhà thầu:</strong> Không có.</p>
-
-          <p><strong>VII. Kiến nghị:</strong></p>
-          <p>Trên cơ sở những nội dung phân tích nêu trên, Bộ phận Kỹ thuật – Thẩm định thuộc Ban QLDA ĐTXD xã kính đề nghị Giám đốc Ban QLDA ĐTXD xã Tân Phú phê duyệt kế hoạch lựa chọn nhà thầu để làm cơ sở cho việc triển khai thực hiện các công việc tiếp theo của quy trình XDCB.</p>
-          <p>Kính trình Giám đốc Ban QLDA ĐTXD xã Tân Phú xem xét, quyết định./.</p>
+          <p>Bộ phận Kỹ thuật – Thẩm định kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, quyết định phê duyệt kế hoạch lựa chọn nhà thầu dự án nêu trên./.</p>
         </div>
 
         <table class="doc-footer-table">
@@ -2052,51 +2860,12 @@
               </ul>
             </td>
             <td class="chu-ky-box" style="width: 50%;">
-              <div class="chuc-vu">TM. BP KỸ THUẬT – THẨM ĐỊNH</div>
+              <div class="chuc-vu">ĐẠI DIỆN BỘ PHẬN KỸ THUẬT – THẨM ĐỊNH</div>
+              <div class="chuc-danh-phu">(Cán bộ kỹ thuật)</div>
               <div class="ho-ten">${d.techLeader}</div>
             </td>
           </tr>
         </table>
-
-        <!-- PHỤ LỤC TỜ TRÌNH -->
-        <div style="margin-top: 2rem; border-top: 1.5px dashed #cbd5e1; padding-top: 1rem; page-break-before: always;">
-          <div style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">
-            <div style="font-size: 13pt;">PHỤ LỤC TỜ TRÌNH</div>
-            <div style="font-size: 11pt; font-style: italic;">(Kèm theo Tờ trình số ${docNoStr}/${d.techSign} ngày ${shortDate})</div>
-            <div style="font-size: 12pt; margin-top: 4px;">BẢNG TÀI LIỆU KÈM THEO VĂN BẢN TRÌNH DUYỆT</div>
-          </div>
-          <table style="width:100%; border-collapse: collapse; margin-top: 0.6rem; font-size: 0.88rem;" border="1" cellpadding="6">
-            <thead>
-              <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
-                <th style="width:8%;">STT</th>
-                <th style="width:72%;">Nội dung tài liệu</th>
-                <th style="width:20%;">Ghi chú</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="text-align:center;">1</td>
-                <td>Quyết định phê duyệt Báo cáo KT-KT/Dự án đầu tư xây dựng công trình</td>
-                <td style="text-align:center;">Bản chụp</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">2</td>
-                <td>Quyết định phân bổ/phân khai kế hoạch vốn đầu tư xây dựng năm ${new Date().getFullYear()}</td>
-                <td style="text-align:center;">Bản chụp</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">3</td>
-                <td>Quyết định phê duyệt Dự toán gói thầu số ${d.approvePackageEstimateNo}</td>
-                <td style="text-align:center;">Bản chính</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">4</td>
-                <td>Hồ sơ thiết kế bản vẽ thi công và dự toán được duyệt</td>
-                <td style="text-align:center;">Bản chính</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       `;
     }
 
@@ -2108,6 +2877,8 @@
       const ttrMeta = docCustomMeta[0];
       const ttrNoStr = ttrMeta.number ? ttrMeta.number : ".....";
       const ttrShortDate = formatDateShort(ttrMeta.date);
+
+      const t3Total = getTable3Total();
 
       return `
         <table class="doc-header-table">
@@ -2144,7 +2915,6 @@
           <p>Căn cứ Thông tư số 79/2025/TT-BTC ngày 04 tháng 8 năm 2025 của Bộ trưởng Bộ Tài chính hướng dẫn mẫu hồ sơ đấu thầu;</p>
           <p>Căn cứ Quyết định số 43/2026/QĐ-UBND ngày 24/3/2026 của UBND tỉnh Tây Ninh về việc ban hành quy định về phân cấp, phân công trách nhiệm quản lý và thực hiện dự án đầu tư công, dự án đầu tư xây dựng công trình, quản lý chất lượng công trình xây dựng trên địa bàn tỉnh Tây Ninh;</p>
           <p>Căn cứ Quyết định số ${d.approveDecisionNo} về việc phê duyệt Báo cáo kinh tế - kỹ thuật đầu tư xây dựng/dự án: ${d.projectName};</p>
-          <p>Căn cứ Quyết định số ${d.approvePackageEstimateNo} về việc phê duyệt Dự toán gói thầu: ${d.packageName};</p>
           <p>Theo đề nghị của Bộ phận Kỹ thuật – Thẩm định thuộc Ban QLDA ĐTXD xã tại Tờ trình số ${ttrNoStr}/${d.techSign} ngày ${ttrShortDate},</p>
 
           <p style="text-align: center; font-weight: bold; margin: 1rem 0;">QUYẾT ĐỊNH:</p>
@@ -2171,48 +2941,66 @@
           </tr>
         </table>
 
-        <!-- PHỤ LỤC QUYẾT ĐỊNH KHLCNT -->
-        <div style="margin-top: 2rem; border-top: 1.5px dashed #cbd5e1; padding-top: 1rem; page-break-before: always;">
-          <div style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">
-            <div style="font-size: 13pt;">Phụ lục</div>
-            <div style="font-size: 14pt; text-transform: uppercase;">KẾ HOẠCH LỰA CHỌN NHÀ THẦU</div>
-            <div style="font-size: 12pt;">Dự án: ${d.projectName}</div>
-            <div style="font-size: 11pt; font-style: italic;">(Kèm theo Quyết định số ${docNoStr}/QĐ-${d.ownerSign} ngày ${shortDate} của Ban QLDA ĐTXD xã Tân Phú)</div>
+        <!-- PHỤ LỤC QUYẾT ĐỊNH KHLCNT (TRANG A4 NẰM NGANG LANDSCAPE) -->
+        <div class="a4-landscape-page" style="margin-top: 2rem;">
+          <div class="landscape-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            TRANG A4 NẰM NGANG (LANDSCAPE) — PHỤ LỤC BẢNG SỐ 3 KÈM THEO QUYẾT ĐỊNH KHLCNT (13 CỘT)
           </div>
-          <div style="overflow-x: auto; margin-top: 0.6rem;">
-            <table style="width:100%; border-collapse: collapse; font-size: 0.82rem;" border="1" cellpadding="5">
-              <thead>
-                <tr style="background:#f1f5f9; text-align:center; font-weight:bold;">
-                  <th style="width:4%;">STT</th>
-                  <th style="width:13%;">Tên chủ đầu tư</th>
-                  <th style="width:22%;">Tên gói thầu & Tóm tắt công việc chính</th>
-                  <th style="width:13%;">Giá gói thầu (đồng)</th>
-                  <th style="width:11%;">Nguồn vốn</th>
-                  <th style="width:10%;">Hình thức LCNT</th>
-                  <th style="width:7%;">Thời gian TC</th>
-                  <th style="width:8%;">Bắt đầu LCNT</th>
-                  <th style="width:7%;">Loại HĐ</th>
-                  <th style="width:7%;">Thời gian TH</th>
-                  <th style="width:5%;">Tùy chọn</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div style="text-align: right; font-weight: bold; font-size: 11pt; margin-bottom: 2px;">Bảng số 3</div>
+          <div style="text-align: center; font-weight: bold; margin-bottom: 0.6rem;">
+            <div style="font-size: 12pt;">Phụ lục</div>
+            <div style="font-size: 13pt; text-transform: uppercase;">KẾ HOẠCH LỰA CHỌN NHÀ THẦU</div>
+            <div style="font-size: 11pt;">Dự án: ${d.projectName}</div>
+            <div style="font-size: 10.5pt; font-style: italic; font-weight: normal;">(Kèm theo Quyết định số ${docNoStr}/QĐ-${d.ownerSign} ngày ${shortDate} của Ban QLDA ĐTXD xã Tân Phú)</div>
+          </div>
+          
+          <table class="table3-landscape-tbl">
+            <thead>
+              <tr>
+                <th rowspan="2" style="width: 3.2%;">S<br>T<br>T</th>
+                <th rowspan="2" style="width: 10%;">Tên chủ đầu tư</th>
+                <th colspan="2" style="width: 27%;">Tên gói thầu</th>
+                <th rowspan="2" style="width: 10.5%;">Giá gói thầu<br>(đồng)</th>
+                <th rowspan="2" style="width: 9%;">Nguồn vốn</th>
+                <th rowspan="2" style="width: 8%;">Hình thức LCNT</th>
+                <th rowspan="2" style="width: 6%;">Phương thức LCNT</th>
+                <th rowspan="2" style="width: 6%;">Thời gian tổ chức LCNT</th>
+                <th rowspan="2" style="width: 6.5%;">Thời gian bắt đầu tổ chức LCNT</th>
+                <th rowspan="2" style="width: 5%;">Loại hợp đồng</th>
+                <th rowspan="2" style="width: 5.5%;">Thời gian thực hiện gói thầu</th>
+                <th rowspan="2" style="width: 5.3%;">Tùy chọn mua thêm</th>
+              </tr>
+              <tr>
+                <th style="width: 13%;">Tên gói thầu</th>
+                <th style="width: 14%;">Tóm tắt công việc chính của gói thầu</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${table3Data.map(r => `
                 <tr>
-                  <td style="text-align:center;">1</td>
-                  <td>Ban QLDA ĐTXD xã Tân Phú</td>
-                  <td><strong>${d.packageName}</strong><br><span style="font-size:0.75rem; color:#475569;">Bảo hành: ${d.warrantyDuration}</span></td>
-                  <td style="text-align:right; font-weight:bold;">${formatNumber(d.packagePrice)}</td>
-                  <td>${d.capitalSource}</td>
-                  <td>Chỉ định thầu rút gọn</td>
-                  <td style="text-align:center;">15 ngày</td>
-                  <td style="text-align:center;">Quý ${Math.floor((new Date().getMonth()+3)/3)}/${new Date().getFullYear()}</td>
-                  <td style="text-align:center;">${d.contractType}</td>
-                  <td style="text-align:center;">${d.duration}</td>
-                  <td style="text-align:center;">Không áp dụng</td>
+                  <td style="text-align:center;">${r.stt}</td>
+                  <td>${escapeHtml(r.owner || d.ownerOrg)}</td>
+                  <td style="font-weight:600;">${escapeHtml(r.packageName || '')}</td>
+                  <td style="font-size:8.5pt;">${escapeHtml(r.summary || '').replace(/\n/g, '<br>')}</td>
+                  <td style="text-align:right; font-weight:600;">${formatNumber(r.price || 0)}</td>
+                  <td style="text-align:center;">${escapeHtml(r.capital || d.capitalSource)}</td>
+                  <td style="text-align:center;">${escapeHtml(r.method || 'Chỉ định thầu rút gọn')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.proc || '-')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.timeOrganize || '15 ngày')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.timeStart || 'Quý III/2026')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.contractType || 'Trọn gói')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.duration || '90 ngày')}</td>
+                  <td style="text-align:center;">${escapeHtml(r.option || 'Không áp dụng')}</td>
                 </tr>
-              </tbody>
-            </table>
-          </div>
+              `).join('')}
+              <tr style="background:#fafafa; font-weight:bold;">
+                <td colspan="4" style="text-align:right; padding-right:12px;">Tổng giá gói thầu:</td>
+                <td style="text-align:right; font-weight:bold;">${formatNumber(t3Total)}</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       `;
     }
@@ -2648,54 +3436,340 @@
     // CĂN LỀ A4 CHUẨN NGHỊ ĐỊNH 30/2020: TRÁI 30MM, PHẢI 15MM, TRÊN 20MM, DƯỚI 20MM
     // =========================================================================
 
-    function buildDocxPackage(fileName, title, textLines) {
+        function buildDocxPackage(fileName, title, textLines) {
       const zip = new JSZip();
 
-      // Bóc tách text thành paragraphs OpenXML
+      // Kiểm tra xem có phải văn bản có Bảng số 3 cần xoay ngang (Doc 1 hoặc Doc 2) không
+      const isDoc1 = (activeDocIndex === 0) || title.includes("Tờ trình") || fileName.includes("01_");
+      const isDoc2 = (activeDocIndex === 1) || title.includes("Quyết định") || fileName.includes("02_");
+
       let bodyXml = "";
-      for (const line of textLines) {
-        const trimmed = line.trim();
-        if (!trimmed) continue;
 
-        const isHeading = trimmed.startsWith("TỜ TRÌNH") || trimmed.startsWith("QUYẾT ĐỊNH") || 
-                          trimmed.startsWith("THƯ MỜI") || trimmed.startsWith("BIÊN BẢN") || 
-                          trimmed.startsWith("HỢP ĐỒNG KINH TẾ");
-        const isCenter = isHeading || trimmed.startsWith("CỘNG HÒA") || trimmed.startsWith("Độc lập") || 
-                         trimmed.startsWith("GIÁM ĐỐC") || trimmed.startsWith("Kính gửi:") || 
-                         trimmed.startsWith("QUYẾT ĐỊNH:") || trimmed.startsWith("Số:");
-        const isBold = isHeading || isCenter || trimmed.startsWith("Điều ") || 
-                       trimmed.startsWith("I.") || trimmed.startsWith("II.") || trimmed.startsWith("III.") || 
-                       trimmed.startsWith("1.") || trimmed.startsWith("2.") || trimmed.startsWith("3.") ||
-                       trimmed.startsWith("BÊN GIAO THẦU") || trimmed.startsWith("BÊN NHẬN THẦU") ||
-                       trimmed.startsWith("ĐẠI DIỆN");
-        const isItalic = trimmed.startsWith("Tân Phú,") || trimmed.startsWith("ngày ") || 
-                         trimmed.startsWith("Nơi nhận:") || trimmed.startsWith("Độc lập - Tự do") || 
-                         trimmed.startsWith("(Theo") || trimmed.startsWith("(Quy") || trimmed.startsWith("(Soạn");
+      if (isDoc1 || isDoc2) {
+        // Xuất Word chuyên biệt cho KHLCNT với Bảng 1, Bảng 2 và Bảng 3 Landscape
+        const d = getFormData();
+        const t1Total = getTable1Total();
+        const t2Total = getTable2Total();
+        const t3Total = getTable3Total();
+        const totalAll = t1Total + t2Total + t3Total;
 
-        // Escape XML chars
-        const safeText = trimmed.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const meta = docCustomMeta[isDoc1 ? 0 : 1];
+        const docNoStr = meta.number ? meta.number : ".....";
+        const dateStr = formatDateToVietnamese(meta.date);
+        const shortDate = formatDateShort(meta.date);
 
-        let pPr = "<w:pPr>";
-        if (isHeading) {
-          pPr += "<w:jc w:val='center'/><w:spacing w:before='240' w:after='120'/>";
-        } else if (isCenter) {
-          pPr += "<w:jc w:val='center'/><w:spacing w:before='80' w:after='60'/>";
+        // Header Table
+        bodyXml += `
+        <w:tbl>
+          <w:tblPr><w:tblW w:w="9355" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders></w:tblPr>
+          <w:tr>
+            <w:tc><w:tcPr><w:tcW w:w="4200" w:type="dxa"/></w:tcPr>
+              <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(d.parentOrg || d.ownerOrg)}</w:t></w:r></w:p>
+              <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="25"/></w:rPr><w:t>${escapeXml(isDoc1 ? d.techDept : d.ownerOrg)}</w:t></w:r></w:p>
+              <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>Số: ${escapeXml(docNoStr)}/${isDoc1 ? escapeXml(d.techSign) : ('QĐ-' + escapeXml(d.ownerSign))}</w:t></w:r></w:p>
+            </w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="5155" w:type="dxa"/></w:tcPr>
+              <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</w:t></w:r></w:p>
+              <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Độc lập - Tự do - Hạnh phúc</w:t></w:r></w:p>
+              <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:i/><w:sz w:val="26"/></w:rPr><w:t>${escapeXml(d.docLocation)}, ${escapeXml(dateStr)}</w:t></w:r></w:p>
+            </w:tc>
+          </w:tr>
+        </w:tbl>`;
+
+        if (isDoc1) {
+          // TỜ TRÌNH
+          bodyXml += `
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="240" w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="30"/></w:rPr><w:t>TỜ TRÌNH</w:t></w:r></w:p>
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Kế hoạch lựa chọn nhà thầu dự án: ${escapeXml(d.projectName)}</w:t></w:r></w:p>
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Kính gửi: Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú</w:t></w:r></w:p>
+          
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Bộ phận Kỹ thuật – Thẩm định thuộc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, phê duyệt kế hoạch lựa chọn nhà thầu trên cơ sở những nội dung dưới đây:</w:t></w:r></w:p>
+          
+          <w:p><w:pPr><w:spacing w:before="120" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>I. Mô tả tóm tắt dự án:</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>- Tên dự án: ${escapeXml(d.projectName)}</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>- Tổng mức đầu tư: ${formatNumber(totalAll)} đồng (${docSoThanhChu(totalAll)}).</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>- Tên chủ đầu tư: ${escapeXml(d.ownerOrg)}.</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>- Nguồn vốn: ${escapeXml(d.capitalSource)}.</w:t></w:r></w:p>
+          
+          <w:p><w:pPr><w:spacing w:before="120" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>II. Căn cứ pháp lý:</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Căn cứ Luật Đấu thầu số 22/2023/QH15; Luật Xây dựng số 50/2014/QH13 và Luật số 62/2020/QH14; Nghị định số 214/2025/NĐ-CP; Nghị định số 349/2026/NĐ-CP của Chính phủ; Quyết định số ${escapeXml(d.approveDecisionNo)}.</w:t></w:r></w:p>
+          
+          <w:p><w:pPr><w:spacing w:before="120" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>III. Phần công việc đã thực hiện: (Bảng số 1)</w:t></w:r></w:p>`;
+
+          // Bảng 1 Word
+          bodyXml += `
+          <w:tbl>
+            <w:tblPr><w:tblW w:w="9355" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4"/><w:left w:val="single" w:sz="4"/><w:bottom w:val="single" w:sz="4"/><w:right w:val="single" w:sz="4"/><w:insideH w:val="single" w:sz="4"/><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>STT</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="3200" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Nội dung công việc</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Đơn vị thực hiện</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1555" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Giá trị (đồng)</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Văn bản phê duyệt</w:t></w:r></w:p></w:tc>
+            </w:tr>`;
+          for (const r of table1Data) {
+            bodyXml += `
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(String(r.stt))}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="3200" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(r.name)}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2400" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(r.unit)}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1555" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(r.price)}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(r.doc)}</w:t></w:r></w:p></w:tc>
+            </w:tr>`;
+          }
+          bodyXml += `
+            <w:tr>
+              <w:tc><w:tcPr><w:gridSpan w:val="3"/><w:tcW w:w="6200" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Tổng giá trị:</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1555" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(t1Total)}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/></w:tcPr><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>
+            </w:tr>
+          </w:tbl>`;
+
+          // Bảng 2 Word
+          bodyXml += `
+          <w:p><w:pPr><w:spacing w:before="160" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>IV. Phần công việc không áp dụng được một trong các hình thức lựa chọn nhà thầu: (Bảng số 2)</w:t></w:r></w:p>
+          <w:tbl>
+            <w:tblPr><w:tblW w:w="9355" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4"/><w:left w:val="single" w:sz="4"/><w:bottom w:val="single" w:sz="4"/><w:right w:val="single" w:sz="4"/><w:insideH w:val="single" w:sz="4"/><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>STT</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="4200" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Nội dung công việc</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2755" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Đơn vị thực hiện</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1800" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Giá trị (đồng)</w:t></w:r></w:p></w:tc>
+            </w:tr>`;
+          for (const r of table2Data) {
+            bodyXml += `
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(String(r.stt))}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="4200" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(r.name)}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2755" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${escapeXml(r.unit)}</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1800" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(r.price)}</w:t></w:r></w:p></w:tc>
+            </w:tr>`;
+          }
+          bodyXml += `
+            <w:tr>
+              <w:tc><w:tcPr><w:gridSpan w:val="3"/><w:tcW w:w="7555" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Tổng giá trị thực hiện:</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="1800" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(t2Total)}</w:t></w:r></w:p></w:tc>
+            </w:tr>
+          </w:tbl>
+          <w:p><w:pPr><w:spacing w:before="60" w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Tổng giá trị thực hiện: ${formatNumber(t2Total)} đồng</w:t></w:r></w:p>
+          <w:p><w:pPr><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>V. Phần công việc thuộc kế hoạch lựa chọn nhà thầu:</w:t></w:r></w:p>
+          <w:p><w:pPr><w:spacing w:after="120"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>1. Bảng tổng hợp phần công việc thuộc kế hoạch lựa chọn nhà thầu:</w:t></w:r></w:p>`;
+
         } else {
-          pPr += "<w:jc w:val='both'/><w:ind w:firstLine='720'/><w:spacing w:line='276' w:lineRule='auto' w:after='80'/>";
+          // QUYẾT ĐỊNH
+          bodyXml += `
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="240" w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="30"/></w:rPr><w:t>QUYẾT ĐỊNH</w:t></w:r></w:p>
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Về việc phê duyệt kế hoạch lựa chọn nhà thầu dự án: ${escapeXml(d.projectName)}</w:t></w:r></w:p>
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>GIÁM ĐỐC BAN QUẢN LÝ DỰ ÁN ĐTXD XÃ TÂN PHÚ</w:t></w:r></w:p>
+          
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Căn cứ Luật Đấu thầu số 22/2023/QH15; Căn cứ Luật Xây dựng số 50/2014/QH13 và Luật số 62/2020/QH14; Căn cứ Nghị định số 214/2025/NĐ-CP; Căn cứ Nghị định số 349/2026/NĐ-CP của Chính phủ; Căn cứ Quyết định số ${escapeXml(d.approveDecisionNo)}; Theo đề nghị của Bộ phận Kỹ thuật – Thẩm định tại Tờ trình số ${escapeXml(docCustomMeta[0].number || '.....')}/${escapeXml(d.techSign)} ngày ${formatDateShort(docCustomMeta[0].date)},</w:t></w:r></w:p>
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="120" w:after="120"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="28"/></w:rPr><w:t>QUYẾT ĐỊNH:</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Điều 1. </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Phê duyệt kế hoạch lựa chọn nhà thầu dự án: ${escapeXml(d.projectName)}, với nội dung chi tiết theo phụ lục đính kèm.</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="120"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Điều 2. </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Quyết định này có hiệu lực kể từ ngày ký. Các bộ phận thuộc Ban QLDA ĐTXD xã Tân Phú chịu trách nhiệm thi hành Quyết định này./.</w:t></w:r></w:p>
+          
+          <w:tbl>
+            <w:tblPr><w:tblW w:w="9355" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders></w:tblPr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="4677" w:type="dxa"/></w:tcPr>
+                <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Nơi nhận:</w:t></w:r></w:p>
+                <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>- Như Điều 2;</w:t></w:r></w:p>
+                <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>- Lưu: VT, ${escapeXml(d.ownerSign)}.</w:t></w:r></w:p>
+              </w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="4677" w:type="dxa"/></w:tcPr>
+                <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>GIÁM ĐỐC</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="600"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>${escapeXml(d.signerName)}</w:t></w:r></w:p>
+              </w:tc>
+            </w:tr>
+          </w:tbl>`;
         }
-        pPr += "</w:pPr>";
 
-        let rPr = "<w:rPr><w:rFonts w:ascii='Times New Roman' w:hAnsi='Times New Roman' w:cs='Times New Roman'/>";
-        if (isBold) rPr += "<w:b/>";
-        if (isItalic) rPr += "<w:i/>";
-        if (isHeading) rPr += "<w:sz w:val='28'/><w:szCs w:val='28'/>"; // 14pt
-        else rPr += "<w:sz w:val='26'/><w:szCs w:val='26'/>"; // 13pt
-        rPr += "</w:rPr>";
+        // ==========================================
+        // SECTION BREAK SANG KHỔ A4 NGANG (LANDSCAPE) CHO BẢNG SỐ 3
+        // ==========================================
+        bodyXml += `
+        <w:p>
+          <w:pPr>
+            <w:sectPr>
+              <w:pgSz w:w="11906" w:h="16838" w:orient="portrait"/>
+              <w:pgMar w:top="1134" w:right="850" w:bottom="1134" w:left="1701" w:header="720" w:footer="720" w:gutter="0"/>
+              <w:cols w:space="720"/>
+            </w:sectPr>
+          </w:pPr>
+        </w:p>`;
 
-        bodyXml += `<w:p>${pPr}<w:r>${rPr}<w:t xml:space="preserve">${safeText}</w:t></w:r></w:p>`;
+        // TIÊU ĐỀ TRANG NẰM NGANG
+        bodyXml += `
+        <w:p><w:pPr><w:jc w:val="right"/><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Bảng số 3</w:t></w:r></w:p>`;
+
+        if (isDoc2) {
+          bodyXml += `
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="40"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>Phụ lục: KẾ HOẠCH LỰA CHỌN NHÀ THẦU</w:t></w:r></w:p>
+          <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:i/><w:sz w:val="24"/></w:rPr><w:t>(Kèm theo Quyết định số ${escapeXml(docNoStr)}/QĐ-${escapeXml(d.ownerSign)} ngày ${escapeXml(shortDate)} của Ban QLDA ĐTXD xã Tân Phú)</w:t></w:r></w:p>`;
+        }
+
+        // BẢNG SỐ 3 (ĐỦ 13 CỘT, KHỔ A4 NGANG RỘNG 14287 DXA)
+        bodyXml += `
+        <w:tbl>
+          <w:tblPr>
+            <w:tblW w:w="14287" w:type="dxa"/>
+            <w:tblBorders><w:top w:val="single" w:sz="4"/><w:left w:val="single" w:sz="4"/><w:bottom w:val="single" w:sz="4"/><w:right w:val="single" w:sz="4"/><w:insideH w:val="single" w:sz="4"/><w:insideV w:val="single" w:sz="4"/></w:tblBorders>
+          </w:tblPr>
+          <w:tr>
+            <w:tc><w:tcPr><w:tcW w:w="450" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>STT</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Tên chủ đầu tư</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Tên gói thầu</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="2100" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Tóm tắt công việc chính</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Giá gói thầu</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1300" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Nguồn vốn</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1100" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Hình thức LCNT</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="850" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Phương thức</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="850" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Tổ chức LCNT</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Bắt đầu LCNT</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="700" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Loại HĐ</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="750" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Thời gian TH</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="787" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Tùy chọn</w:t></w:r></w:p></w:tc>
+          </w:tr>`;
+
+        for (const r of table3Data) {
+          bodyXml += `
+          <w:tr>
+            <w:tc><w:tcPr><w:tcW w:w="450" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="20"/></w:rPr><w:t>${escapeXml(String(r.stt))}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="20"/></w:rPr><w:t>${escapeXml(r.owner || d.ownerOrg)}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1900" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>${escapeXml(r.packageName)}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="2100" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml((r.summary || '').replace(/\n/g, ' - '))}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>${formatNumber(r.price)}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1300" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.capital || d.capitalSource)}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1100" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.method || 'Chỉ định thầu rút gọn')}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="850" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.proc || '-')}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="850" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.timeOrganize || '15 ngày')}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.timeStart || 'Quý III/2026')}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="700" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.contractType || 'Trọn gói')}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="750" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.duration || '90 ngày')}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="787" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="18"/></w:rPr><w:t>${escapeXml(r.option || 'Không áp dụng')}</w:t></w:r></w:p></w:tc>
+          </w:tr>`;
+        }
+
+        // Dòng tổng cộng Bảng 3
+        bodyXml += `
+          <w:tr>
+            <w:tc><w:tcPr><w:gridSpan w:val="4"/><w:tcW w:w="5850" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>Tổng giá gói thầu:</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="20"/></w:rPr><w:t>${formatNumber(t3Total)}</w:t></w:r></w:p></w:tc>
+            <w:tc><w:tcPr><w:gridSpan w:val="8"/><w:tcW w:w="7037" w:type="dxa"/></w:tcPr><w:p><w:r><w:t></w:t></w:r></w:p></w:tc>
+          </w:tr>
+        </w:tbl>`;
+
+        if (isDoc1) {
+          // SECTION BREAK QUAY VỀ PORTRAIT CHO THUYẾT MINH & CHỮ KÝ CỦA TỜ TRÌNH
+          bodyXml += `
+          <w:p>
+            <w:pPr>
+              <w:sectPr>
+                <w:pgSz w:w="16838" w:h="11906" w:orient="landscape"/>
+                <w:pgMar w:top="1134" w:right="850" w:bottom="1134" w:left="1701" w:header="720" w:footer="720" w:gutter="0"/>
+                <w:cols w:space="720"/>
+              </w:sectPr>
+            </w:pPr>
+          </w:p>
+          
+          <w:p><w:pPr><w:spacing w:before="160" w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>2. Giải trình nội dung kế hoạch lựa chọn nhà thầu:</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>a. Cơ sở phân chia các gói thầu: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Việc phân chia gói thầu căn cứ tính chất kỹ thuật và tiến độ thực hiện dự án.</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>b. Giá gói thầu: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Tổng giá gói thầu: ${formatNumber(t3Total)} đồng.</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>c. Nguồn vốn: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>${escapeXml(d.capitalSource)}.</w:t></w:r></w:p>
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>d. Hình thức và phương thức LCNT: </w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Chỉ định thầu rút gọn theo quy định Điều 80 Nghị định 214/2025/NĐ-CP.</w:t></w:r></w:p>
+          
+          <w:p><w:pPr><w:spacing w:before="120" w:after="60"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>VII. Tổng giá trị các phần công việc: (Bảng số 5)</w:t></w:r></w:p>
+          <w:tbl>
+            <w:tblPr><w:tblW w:w="8500" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4"/><w:left w:val="single" w:sz="4"/><w:bottom w:val="single" w:sz="4"/><w:right w:val="single" w:sz="4"/><w:insideH w:val="single" w:sz="4"/><w:insideV w:val="single" w:sz="4"/></w:tblBorders></w:tblPr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>STT</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="5900" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Nội dung</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Giá trị (đồng)</w:t></w:r></w:p></w:tc>
+            </w:tr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>1</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="5900" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>Tổng giá trị phần công việc đã thực hiện (Bảng số 1)</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(t1Total)}</w:t></w:r></w:p></w:tc>
+            </w:tr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>2</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="5900" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>Tổng giá trị phần công việc không áp dụng LCNT (Bảng số 2)</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(t2Total)}</w:t></w:r></w:p></w:tc>
+            </w:tr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="600" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>3</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="5900" w:type="dxa"/></w:tcPr><w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>Tổng giá trị phần công việc thuộc kế hoạch LCNT (Bảng số 3)</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(t3Total)}</w:t></w:r></w:p></w:tc>
+            </w:tr>
+            <w:tr>
+              <w:tc><w:tcPr><w:gridSpan w:val="2"/><w:tcW w:w="6500" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Tổng cộng:</w:t></w:r></w:p></w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>${formatNumber(totalAll)}</w:t></w:r></w:p></w:tc>
+            </w:tr>
+          </w:tbl>
+          
+          <w:p><w:pPr><w:ind w:firstLine="720"/><w:spacing w:before="120" w:after="160"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="26"/></w:rPr><w:t>Kính trình Giám đốc Ban Quản lý dự án Đầu tư xây dựng xã Tân Phú xem xét, phê duyệt./.</w:t></w:r></w:p>
+          
+          <w:tbl>
+            <w:tblPr><w:tblW w:w="9355" w:type="dxa"/><w:tblBorders><w:top w:val="none"/><w:left w:val="none"/><w:bottom w:val="none"/><w:right w:val="none"/><w:insideH w:val="none"/><w:insideV w:val="none"/></w:tblBorders></w:tblPr>
+            <w:tr>
+              <w:tc><w:tcPr><w:tcW w:w="4677" w:type="dxa"/></w:tcPr>
+                <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="24"/></w:rPr><w:t>Nơi nhận:</w:t></w:r></w:p>
+                <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>- Như trên;</w:t></w:r></w:p>
+                <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:sz w:val="24"/></w:rPr><w:t>- Lưu: VT, ${escapeXml(d.techSign)}.</w:t></w:r></w:p>
+              </w:tc>
+              <w:tc><w:tcPr><w:tcW w:w="4677" w:type="dxa"/></w:tcPr>
+                <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>ĐẠI DIỆN BỘ PHẬN KỸ THUẬT – THẨM ĐỊNH</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:i/><w:sz w:val="24"/></w:rPr><w:t>(Cán bộ kỹ thuật)</w:t></w:r></w:p>
+                <w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="600"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman"/><w:b/><w:sz w:val="26"/></w:rPr><w:t>${escapeXml(d.techLeader)}</w:t></w:r></w:p>
+              </w:tc>
+            </w:tr>
+          </w:tbl>`;
+        }
+
+      } else {
+        // CÁC VĂN BẢN KHÁC (Doc 3-7): XUẤT THEO PARAGRAPHS CHUẨN NGHỊ ĐỊNH 30/2020
+        for (const line of textLines) {
+          const trimmed = line.trim();
+          if (!trimmed) continue;
+
+          const isHeading = trimmed.startsWith("TỜ TRÌNH") || trimmed.startsWith("QUYẾT ĐỊNH") || 
+                            trimmed.startsWith("THƯ MỜI") || trimmed.startsWith("BIÊN BẢN") || 
+                            trimmed.startsWith("HỢP ĐỒNG KINH TẾ");
+          const isCenter = isHeading || trimmed.startsWith("CỘNG HÒA") || trimmed.startsWith("Độc lập") || 
+                           trimmed.startsWith("GIÁM ĐỐC") || trimmed.startsWith("Kính gửi:") || 
+                           trimmed.startsWith("QUYẾT ĐỊNH:") || trimmed.startsWith("Số:");
+          const isBold = isHeading || isCenter || trimmed.startsWith("Điều ") || 
+                         trimmed.startsWith("I.") || trimmed.startsWith("II.") || trimmed.startsWith("III.") || 
+                         trimmed.startsWith("1.") || trimmed.startsWith("2.") || trimmed.startsWith("3.") ||
+                         trimmed.startsWith("BÊN GIAO THẦU") || trimmed.startsWith("BÊN NHẬN THẦU") ||
+                         trimmed.startsWith("ĐẠI DIỆN");
+          const isItalic = trimmed.startsWith("Tân Phú,") || trimmed.startsWith("ngày ") || 
+                           trimmed.startsWith("Nơi nhận:") || trimmed.startsWith("Độc lập - Tự do") || 
+                           trimmed.startsWith("(Theo") || trimmed.startsWith("(Quy") || trimmed.startsWith("(Soạn");
+
+          const safeText = escapeXml(trimmed);
+
+          let pPr = "<w:pPr>";
+          if (isHeading) {
+            pPr += "<w:jc w:val='center'/><w:spacing w:before='240' w:after='120'/>";
+          } else if (isCenter) {
+            pPr += "<w:jc w:val='center'/><w:spacing w:before='80' w:after='60'/>";
+          } else {
+            pPr += "<w:jc w:val='both'/><w:ind w:firstLine='720'/><w:spacing w:line='276' w:lineRule='auto' w:after='80'/>";
+          }
+          pPr += "</w:pPr>";
+
+          let rPr = "<w:rPr><w:rFonts w:ascii='Times New Roman' w:hAnsi='Times New Roman' w:cs='Times New Roman'/>";
+          if (isBold) rPr += "<w:b/>";
+          if (isItalic) rPr += "<w:i/>";
+          if (isHeading) rPr += "<w:sz w:val='28'/><w:szCs w:val='28'/>"; // 14pt
+          else rPr += "<w:sz w:val='26'/><w:szCs w:val='26'/>"; // 13pt
+          rPr += "</w:rPr>";
+
+          bodyXml += `<w:p>${pPr}<w:r>${rPr}<w:t xml:space="preserve">${safeText}</w:t></w:r></w:p>`;
+        }
       }
 
-      // Khổ giấy A4 chuẩn NĐ 30/2020: 11906 x 16838 twips
+      // Khổ giấy A4 chuẩn NĐ 30/2020: 11906 x 16838 twips (Portrait)
       // Lề: Trên 1134 (20mm), Dưới 1134 (20mm), Phải 850 (15mm), Trái 1701 (30mm)
       const sectPr = `<w:sectPr>
         <w:pgSz w:w="11906" w:h="16838" w:code="9"/>
@@ -2722,28 +3796,22 @@
         <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
       </Relationships>`;
 
-      const docRelsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-      <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-      </Relationships>`;
-
       zip.file("[Content_Types].xml", contentTypesXml);
       zip.folder("_rels").file(".rels", relsXml);
-      const wordFolder = zip.folder("word");
-      wordFolder.file("document.xml", documentXml);
-      wordFolder.folder("_rels").file("document.xml.rels", docRelsXml);
+      zip.folder("word").file("document.xml", documentXml);
 
       return zip;
     }
 
-    const docFileNames = [
-      "01_To_trinh_phe_duyet_KHLCNT",
-      "02_Quyet_dinh_phe_duyet_KHLCNT",
-      "03_Thu_moi_thuong_thao_va_Du_thao_HD",
-      "04_Bien_ban_hoan_thien_thuong_thao_HD",
-      "05_To_trinh_phe_duyet_ket_qua_CDT",
-      "06_Quyet_dinh_phe_duyet_ket_qua_CDT",
-      "07_Hop_dong_kinh_te_tron_goi"
-    ];
+    function escapeXml(unsafe) {
+      if (!unsafe) return "";
+      return String(unsafe)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+    }
 
     async function downloadDocxFile() {
       if (typeof JSZip === "undefined") {
