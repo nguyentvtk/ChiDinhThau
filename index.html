@@ -777,6 +777,35 @@
       box-shadow: 0 0 0 2px rgba(27, 54, 93, 0.15);
     }
 
+    /* GRID PLACEHOLDERS CO GIÃN ĐA THIẾT BỊ */
+    .contract-placeholders-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #ffffff;
+    }
+    /* Điện thoại màn hình ngang / Tablet nhỏ: 02 cột */
+    @media (min-width: 576px) {
+      .contract-placeholders-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+    }
+    /* Màn hình Laptop / Desktop trung bình: 03 cột */
+    @media (min-width: 992px) {
+      .contract-placeholders-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+    }
+    /* Màn hình PC / Desktop tiêu chuẩn: 04 cột */
+    @media (min-width: 1366px) {
+      .contract-placeholders-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -4285,20 +4314,20 @@
             <span>${grp.icon}</span>
             <span>${grp.title}</span>
           </div>
-          <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; background: #ffffff;">
+          <div class="contract-placeholders-grid">
             ${grp.fields.map(f => `
-              <div style="display: flex; flex-direction: column; gap: 5px; padding: 12px 14px; background: #fff8f8; border: 1px solid #fecaca; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <div style="display: flex; flex-direction: column; gap: 5px; padding: 10px 12px; background: #fff8f8; border: 1px solid #fecaca; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); box-sizing: border-box;">
                 <!-- Dòng 1: Tên Placeholders -->
-                <div style="font-size: 0.88rem; font-weight: 700; color: #1e293b;">
+                <div style="font-size: 0.85rem; font-weight: 700; color: #1e293b; line-height: 1.3;">
                   ${f.label}
                 </div>
                 <!-- Dòng 2: Mã Placeholders -->
                 <div>
-                  <code style="background: #ffffff; color: #EE0000; border: 1px solid #fca5a5; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; font-family: 'Consolas', 'Monaco', monospace; display: inline-block;">{{${f.key}}}</code>
+                  <code style="background: #ffffff; color: #EE0000; border: 1px solid #fca5a5; padding: 2px 7px; border-radius: 4px; font-size: 0.78rem; font-weight: 700; font-family: 'Consolas', 'Monaco', monospace; display: inline-block;">{{${f.key}}}</code>
                 </div>
                 <!-- Dòng 3: Ô điền thông tin -->
-                <div>
-                  <input type="text" id="cph_${f.key}" class="form-control" value="${escapeHtml(contractPlaceholders[f.key] || '')}" placeholder="${escapeHtml(f.placeholder || '')}" oninput="onContractPlaceholderInput('${f.key}', this.value)" style="font-size: 0.9rem; padding: 7px 12px; color: #b91c1c; font-weight: 600; border: 1.5px solid #cbd5e1; border-radius: 6px; width: 100%; background: #ffffff;">
+                <div style="margin-top: 2px;">
+                  <input type="text" id="cph_${f.key}" class="form-control" value="${escapeHtml(contractPlaceholders[f.key] || '')}" placeholder="${escapeHtml(f.placeholder || '')}" oninput="onContractPlaceholderInput('${f.key}', this.value)" style="font-size: 0.88rem; padding: 6px 10px; color: #b91c1c; font-weight: 600; border: 1.5px solid #cbd5e1; border-radius: 6px; width: 100%; box-sizing: border-box; background: #ffffff;">
                 </div>
               </div>
             `).join("")}
