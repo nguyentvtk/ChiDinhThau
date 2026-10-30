@@ -4285,14 +4285,21 @@
             <span>${grp.icon}</span>
             <span>${grp.title}</span>
           </div>
-          <div style="padding: 12px 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(275px, 1fr)); gap: 10px; background: #ffffff;">
+          <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; background: #ffffff;">
             ${grp.fields.map(f => `
-              <div>
-                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; font-weight: 700; color: #334155; margin-bottom: 3px;">
-                  <span>${f.label}</span>
-                  <code style="background: #fef2f2; color: #EE0000; border: 1px solid #fecaca; padding: 1px 5px; border-radius: 4px; font-size: 0.7rem;">{{${f.key}}}</code>
-                </label>
-                <input type="text" id="cph_${f.key}" class="form-control" value="${escapeHtml(contractPlaceholders[f.key] || '')}" placeholder="${escapeHtml(f.placeholder || '')}" oninput="onContractPlaceholderInput('${f.key}', this.value)" style="font-size: 0.83rem; padding: 5px 8px; color: #b91c1c; font-weight: 600; border-color: #cbd5e1;">
+              <div style="display: flex; flex-direction: column; gap: 5px; padding: 12px 14px; background: #fff8f8; border: 1px solid #fecaca; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+                <!-- Dòng 1: Tên Placeholders -->
+                <div style="font-size: 0.88rem; font-weight: 700; color: #1e293b;">
+                  ${f.label}
+                </div>
+                <!-- Dòng 2: Mã Placeholders -->
+                <div>
+                  <code style="background: #ffffff; color: #EE0000; border: 1px solid #fca5a5; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; font-family: 'Consolas', 'Monaco', monospace; display: inline-block;">{{${f.key}}}</code>
+                </div>
+                <!-- Dòng 3: Ô điền thông tin -->
+                <div>
+                  <input type="text" id="cph_${f.key}" class="form-control" value="${escapeHtml(contractPlaceholders[f.key] || '')}" placeholder="${escapeHtml(f.placeholder || '')}" oninput="onContractPlaceholderInput('${f.key}', this.value)" style="font-size: 0.9rem; padding: 7px 12px; color: #b91c1c; font-weight: 600; border: 1.5px solid #cbd5e1; border-radius: 6px; width: 100%; background: #ffffff;">
+                </div>
               </div>
             `).join("")}
           </div>
